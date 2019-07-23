@@ -1,7 +1,12 @@
 #include "print_entity.h"
 
 
-char * directionToString (direction dir)
+/**
+ * Convert a direction enum to string.
+ * @param  dir (direction enum): The direction to be converted
+ * @return (const char *): The string equivalent of the direction
+ */
+const char * directionToString (direction dir)
 {
     switch (dir) {
         case IN:
@@ -11,16 +16,23 @@ char * directionToString (direction dir)
         case INOUT:
             return "INOUT";
         default:
-            return "UNEFINED";
+            return "UNDEFINED";
     }
 }
 
 
+/**
+ * Prints all the signals of an Entity in the following order: IN, OUT, INOUT.
+ * @param ent (Entity *): The Entity object whose signals are to be printed
+ */
 void printEntitySignals (Entity * ent)
 {
+    // For-loop counter
     unsigned int i = 0;
+    // Counter for the amount of spaces a name can occupy
     unsigned int spaces = ent->max_name_size > 4 ? ent->max_name_size : 4;
 
+    // Print the table header
     printf("Signal # | Name ");
     for (i = 0; i < spaces - 4; i++)
         printf(" ");
@@ -31,6 +43,8 @@ void printEntitySignals (Entity * ent)
         printf("=");
     printf("\n");
 
+
+    // Print the IN signals
     for (i = 0; i < ent->count_in; i++)
         printf("%-8d | %-*s | %-13d | %s\n", i + 1,
                                              spaces,
@@ -42,6 +56,8 @@ void printEntitySignals (Entity * ent)
         printf("-");
     printf("\n");
 
+
+    // Print the OUT signals
     for (i = 0; i < ent->count_out; i++)
         printf("%-8d | %-*s | %-13d | %s\n", i + 1,
                                              spaces,
@@ -53,6 +69,8 @@ void printEntitySignals (Entity * ent)
         printf("-");
     printf("\n");
 
+
+    // Print the INOUT signals
     for (i = 0; i < ent->count_inout; i++)
         printf("%-8d | %-*s | %-13d | %s\n", i + 1,
                                              spaces,
