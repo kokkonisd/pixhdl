@@ -1,5 +1,6 @@
 #include "minunit.h"
 #include <pixhdl/entity.h>
+#include <pixhdl/print_entity.h>
 #include <assert.h>
 
 
@@ -90,6 +91,16 @@ char * get_data_from_entity_signals ()
 }
 
 
+char * convert_directions_to_strings ()
+{
+    mu_assert(strcmp(directionToString(IN), "IN") == 0, "Wrong string for direction IN.");
+    mu_assert(strcmp(directionToString(OUT), "OUT") == 0, "Wrong string for direction OUT.");
+    mu_assert(strcmp(directionToString(INOUT), "INOUT") == 0, "Wrong string for direction INOUT.");
+
+    return NULL;
+}
+
+
 char * all_tests()
 {
     mu_suite_start();
@@ -97,6 +108,7 @@ char * all_tests()
     mu_run_test(create_and_destroy_entity);
     mu_run_test(add_signals_to_entity);
     mu_run_test(get_data_from_entity_signals);
+    mu_run_test(convert_directions_to_strings);
 
     return NULL;
 }
