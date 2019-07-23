@@ -4,7 +4,7 @@
 #include "entity.h"
 
 
-char * directionToString (Direction dir);
+char * directionToString (direction dir);
 void printEntitySignals (Entity * ent);
 
 

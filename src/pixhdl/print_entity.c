@@ -1,7 +1,7 @@
 #include "print_entity.h"
 
 
-char * directionToString (Direction dir)
+char * directionToString (direction dir)
 {
     switch (dir) {
         case IN:

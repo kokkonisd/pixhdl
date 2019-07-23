@@ -11,12 +11,12 @@ typedef enum {
     IN,
     OUT,
     INOUT
-} Direction;
+} direction;
 
 typedef struct {
-    Direction dir;
-    unsigned int length;
     char * name;
+    direction dir;
+    unsigned int length;
 } Signal;
 
 typedef struct {
@@ -27,7 +27,7 @@ typedef struct {
     unsigned int count_in;
     unsigned int count_out;
     unsigned int count_inout;
-    
+
     size_t max_name_size;
 } Entity;
 
