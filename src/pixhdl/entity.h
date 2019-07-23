@@ -20,8 +20,14 @@ typedef struct {
 } Signal;
 
 typedef struct {
-    Signal * signals;
-    unsigned int count;
+    Signal * signals_in;
+    Signal * signals_out;
+    Signal * signals_inout;
+
+    unsigned int count_in;
+    unsigned int count_out;
+    unsigned int count_inout;
+    
     size_t max_name_size;
 } Entity;
 

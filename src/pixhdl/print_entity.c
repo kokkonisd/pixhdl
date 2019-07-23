@@ -28,14 +28,35 @@ void printEntitySignals (Entity * ent)
     printf("| Length (bits) | Direction\n");
 
     for (i = 0; i < spaces + 40; i++)
-        printf("-");
-
+        printf("=");
     printf("\n");
 
-    for (i = 0; i < ent->count; i++)
+    for (i = 0; i < ent->count_in; i++)
         printf("%-8d | %-*s | %-13d | %s\n", i + 1,
                                              spaces,
-                                             ent->signals[i].name,
-                                             ent->signals[i].length,
-                                             directionToString(ent->signals[i].dir));
+                                             ent->signals_in[i].name,
+                                             ent->signals_in[i].length,
+                                             directionToString(ent->signals_in[i].dir));
+
+    for (i = 0; i < spaces + 40; i++)
+        printf("-");
+    printf("\n");
+
+    for (i = 0; i < ent->count_out; i++)
+        printf("%-8d | %-*s | %-13d | %s\n", i + 1,
+                                             spaces,
+                                             ent->signals_out[i].name,
+                                             ent->signals_out[i].length,
+                                             directionToString(ent->signals_out[i].dir));
+
+    for (i = 0; i < spaces + 40; i++)
+        printf("-");
+    printf("\n");
+
+    for (i = 0; i < ent->count_inout; i++)
+        printf("%-8d | %-*s | %-13d | %s\n", i + 1,
+                                             spaces,
+                                             ent->signals_inout[i].name,
+                                             ent->signals_inout[i].length,
+                                             directionToString(ent->signals_inout[i].dir));
 }

@@ -9,7 +9,6 @@ char * create_and_destroy_entity ()
     mu_assert(ent, "Entity could not be created.");
 
     destroyEntity(ent);
-    // mu_assert(ent == NULL, "Entity could not be destroyed.");
 
     return NULL;
 }
