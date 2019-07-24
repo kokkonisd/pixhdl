@@ -33,7 +33,9 @@ char * parseSignalName (const char * raw_txt, int start, int end)
     check_mem(name);
 
     // Copy the port name string over
-    strncpy(name, raw_txt + start, end - start + 1);
+    strncpy(name, raw_txt + start, end - start);
+    // Add a null char at the end for safety
+    name[end - start] = '\0';
 
     // Return the port name
     return name;
@@ -69,7 +71,9 @@ direction parseSignalDirection (const char * raw_txt, int start, int end)
     check_mem(dir_str);
 
     // Copy the direction over
-    strncpy(dir_str, raw_txt + start, end - start + 1);
+    strncpy(dir_str, raw_txt + start, end - start);
+    // Add a null char at the end for safety
+    dir_str[end - start] = '\0';
 
     // Parse direction based on dir_str
     if (strcmp(dir_str, "in") == 0)
@@ -116,7 +120,9 @@ int parseSignalLength (const char * raw_txt, int start, int end)
     check_mem(len_str);
 
     // Copy the length string over
-    strncpy(len_str, raw_txt + start, end - start + 1);
+    strncpy(len_str, raw_txt + start, end - start);
+    // Add a null char at the end for safety
+    len_str[end - start] = '\0';
 
     // If it's a `std_logic_vector (X downto 0)`
     if (len_str[strlen(len_str) - 1] == ')') {
@@ -138,7 +144,8 @@ int parseSignalLength (const char * raw_txt, int start, int end)
         check_mem(num);
 
         // Copy the length number over
-        strncpy(num, len_str + match_start, match_end - match_start + 1);
+        strncpy(num, len_str + match_start, match_end - match_start);
+        num[match_end - match_start] = '\0';
 
         // Length is X + 1
         length = atoi(num) + 1;
@@ -236,9 +243,11 @@ char * getRawEntityTextFromFile (const char * filename)
     res = malloc(sizeof(char) * (end - start + 2));
     check_mem(res);
     // Copy the entity definition over
-    strncpy(res, buffer + start, end - start + 2);
+    strncpy(res, buffer + start, end - start + 1);
     // End it with a semicolon to help parse ports later
     res[end - start] = ';';
+    // Add a null char at the end for safety
+    res[end - start + 1] = '\0';
 
     // Free the buffer holding the file contents
     free(buffer);
@@ -296,7 +305,9 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
             // Copy the parsed name over up to comma_index
             // If only one name is defined (no commas are found),
             // the entire name gets copied over
-            strncpy(s.name, name, comma_index + 1);
+            strncpy(s.name, name, comma_index);
+            // Add a null char at the end as a safeguard
+            s.name[comma_index] = '\0';
 
             // Parse the direction and the length of the signal
             s.dir = parseSignalDirection(cur_text, rm[2].rm_so, rm[2].rm_eo);
@@ -325,7 +336,9 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
                     // Allocate memory for the signal's name
                     s.name = malloc(sizeof(char) * (comma_index + 1));
                     // Copy the name over
-                    strncpy(s.name, name, comma_index + 1);
+                    strncpy(s.name, name, comma_index);
+                    // Add a null char safeguard at the end
+                    s.name[comma_index] = '\0';
 
                     // Parse direction & length
                     s.dir = parseSignalDirection(cur_text, rm[2].rm_so, rm[2].rm_eo);
