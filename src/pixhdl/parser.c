@@ -140,11 +140,12 @@ int parseSignalLength (const char * raw_txt, int start, int end)
         regfree(&regex);
 
         // Allocate memory for vector length number
-        char * num = malloc(sizeof(char) * (match_end - match_start));
+        char * num = malloc(sizeof(char) * (match_end - match_start + 1));
         check_mem(num);
 
         // Copy the length number over
         memcpy(num, len_str + match_start, match_end - match_start);
+        num[match_end - match_start] = '\0';
 
         // Length is X + 1
         length = atoi(num) + 1;
@@ -204,12 +205,13 @@ char * getRawEntityTextFromFile (const char * filename)
     fseek(src_file, 0, SEEK_SET);
 
     // Allocate memory to load the entire file in a buffer
-    buffer = malloc(file_length * sizeof(char));
+    buffer = malloc((file_length + 1) * sizeof(char));
     check_mem(buffer);
 
     // Read the entire file into the buffer
     chars_read = fread(buffer, 1, file_length, src_file);
     check(chars_read == file_length, "Failed to read file `%s`.", filename);
+    buffer[file_length] = '\0';
 
     // Close the file
     fclose(src_file);
