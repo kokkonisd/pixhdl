@@ -95,9 +95,9 @@ direction parseSignalDirection (const char * raw_txt, int start, int end)
     dir_str[end - start] = '\0';
 
     // Parse direction based on dir_str
-    if (strcmp(dir_str, "in") == 0)
+    if (strcmp(dir_str, "in") == 0 || strcmp(dir_str, "IN") == 0)
         dir = IN;
-    else if (strcmp(dir_str, "out") == 0)
+    else if (strcmp(dir_str, "out") == 0 || strcmp(dir_str, "OUT") == 0)
         dir = OUT;
     else
         dir = INOUT;
@@ -265,7 +265,7 @@ char * getRawEntityTextFromFile (const char * filename)
     fclose(src_file);
 
     // Look for the entity definition in the file
-    reti = regcomp(&regex, ENTITY_REGEX, REG_EXTENDED);
+    reti = regcomp(&regex, ENTITY_REGEX, REG_EXTENDED | REG_ICASE);
     check(reti == 0, "Couldn't compile raw entity regex.");
 
     reti = regexec(&regex, buffer, 3, rm, 0);
@@ -287,8 +287,8 @@ char * getRawEntityTextFromFile (const char * filename)
     // Trim thebody  match (it starts with 'entity' and ends
     // with 'end', so any char that's not a letter can
     // be chopped off)
-    while (!isalpha(*(buffer + body_start))) body_start++;
-    while (!isalpha(*(buffer + body_end - 1))) body_end--;
+    while (!isalnum(*(buffer + body_start))) body_start++;
+    while (isspace(*(buffer + body_end - 1))) body_end--;
 
     // Check if name_start and name_end are correct
     check(name_end > name_start && name_end > 0 && name_start >= 0,
@@ -326,7 +326,7 @@ char * getRawEntityTextFromFile (const char * filename)
     // Add a null char at the end for safety
     res[strlen(entity_name) + strlen(entity_body)] = '\0';
 
-    printf("%s\n", entity_name);
+    printf("%s\n", entity_body);
 
     // Free the name & body strings
     free(entity_name);
@@ -388,7 +388,7 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
 
     do {
         // Get entity port with regex
-        reti = regcomp(&regex, PORT_REGEX, REG_EXTENDED);
+        reti = regcomp(&regex, PORT_REGEX, REG_EXTENDED | REG_ICASE);
         check(reti == 0, "Couldn't compile port regex.");
         reti = regexec(&regex, cur_text, 4, rm, 0);
         check(reti == 0, "Couldn't find port regex in entity.");
