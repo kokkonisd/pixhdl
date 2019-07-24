@@ -70,6 +70,57 @@ char * parse_simple_port_directions ()
 }
 
 
+char * parse_simple_port_lengths ()
+{
+    int length = 0;
+
+    length = parseSignalLength("std_logic", 0, 9);
+    mu_assert(length == 1, "Incorrect parsing of port length 1.");
+
+    length = parseSignalLength(": std_logic_vector(10 downto 0)", 2, 31);
+    mu_assert(length == 11, "Incorrect parsing of port length 11.");
+
+    length = parseSignalLength("D : inout std_logic", 10, 19);
+    mu_assert(length == 1, "Incorrect parsing of port length 1 (2).");
+
+    length = parseSignalLength("E:in std_logic_vector(3 downto 0);", 5, 33);
+    mu_assert(length == 4, "Incorrect parsing of port length 4.");
+
+    return NULL;
+}
+
+
+char * parse_raw_text_entity_from_file ()
+{
+    char * right_entity_text = NULL;
+    char * parsed_entity_text = NULL;
+    char * filename = NULL;
+
+    filename = "tests/vhdl_sources/ALU.vhdl";
+    right_entity_text = "OP : in std_logic_vector (1 downto 0);\n\
+        A, B, C, D, E, F, G : in std_logic_vector (31 downto 0);\n\
+        O : out std_logic_vector (31 downto 0);\n\
+        N : out std_logic;";
+
+    parsed_entity_text = getRawEntityTextFromFile(filename);
+    mu_assert(strcmp(parsed_entity_text, right_entity_text) == 0,
+              "Raw entity text is wrong for the first file.");
+    free(parsed_entity_text);
+
+
+    filename = "tests/vhdl_sources/ALU_oneline.vhdl";
+    right_entity_text = "OP:in std_logic_vector (1 downto 0);A,B,C,D,E,F,G:in std_logic_vector (31 downto 0);O:out std_logic_vector (31 downto 0);N:out std_logic;";
+
+    parsed_entity_text = getRawEntityTextFromFile(filename);
+    mu_assert(strcmp(parsed_entity_text, right_entity_text) == 0,
+              "Raw entity text is wrong for the second file.");
+    free(parsed_entity_text);
+
+    return NULL;
+
+}
+
+
 char * all_tests ()
 {
     mu_suite_start();
@@ -77,6 +128,8 @@ char * all_tests ()
     mu_run_test(test_legal_port_name_characters);
     mu_run_test(parse_simple_port_names);
     mu_run_test(parse_simple_port_directions);
+    mu_run_test(parse_simple_port_lengths);
+    mu_run_test(parse_raw_text_entity_from_file);
 
     return NULL;
 }
