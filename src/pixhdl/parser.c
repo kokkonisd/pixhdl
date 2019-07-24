@@ -314,6 +314,8 @@ char * getRawEntityTextFromFile (const char * filename)
     entity_name[name_end - name_start + 1] = '\0';
     entity_body[body_end - body_start + 1] = '\0';
 
+    printf("%d, %d\n", body_start, body_end);
+
     // Free the buffer holding the file contents
     free(buffer);
 
@@ -323,6 +325,8 @@ char * getRawEntityTextFromFile (const char * filename)
     sprintf(res, "%s%s", entity_name, entity_body);
     // Add a null char at the end for safety
     res[strlen(entity_name) + strlen(entity_body)] = '\0';
+
+    printf("%s\n", entity_name);
 
     // Free the name & body strings
     free(entity_name);

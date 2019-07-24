@@ -1,7 +1,7 @@
 #ifndef __PARSER_H__
 #define __PARSER_H__
 
-#define ENTITY_REGEX "entity[ \\t\\r\\n\\f]*([a-zA-Z0-9_]+)[ \\t\\r\\n\\f]*is.*port[ \\t\\r\\n\\f]*\\([ \\t\\r\\n\\f]*(.+)[ \\t\\r\\n\\f]*\\);[^a-zA-Z]*end"
+#define ENTITY_REGEX "entity[ \\t\\r\\n\\f]+([a-zA-Z0-9_]+)[ \\t\\r\\n\\f]+is[^a-zA-Z]+port[ \\t\\r\\n\\f]*\\([ \\t\\r\\n\\f]*(.+)[ \\t\\r\\n\\f]*\\);[^a-zA-Z]*end"
 #define PORT_REGEX "([a-zA-Z0-9_, ]+)[ \\t\\r\\n\\f]*:[ \\t\\r\\n\\f]*(in|out|inout)[ \\t\\r\\n\\f]*(std_logic[^;]*);"
 #define VECTOR_LENGTH_REGEX "([0-9]+)[^0-9]+([0-9]+)"
 

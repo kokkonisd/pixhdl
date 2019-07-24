@@ -3,7 +3,7 @@
 
 int main (int argc, char * argv[])
 {
-    Entity * ent = getEntityFromFile("tests/vhdl_sources/ALU.vhdl");
+    Entity * ent = getEntityFromFile("tests/vhdl_sources/a1_poolingLayer.vhd");
     check(ent, "Couldn't get entity from file.");
 
     printEntitySignals(ent);
