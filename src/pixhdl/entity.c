@@ -32,7 +32,22 @@ Entity * createEntity ()
  */
 void destroyEntity (Entity * ent)
 {
+    size_t i = 0;
+
     if (ent) {
+
+        for (i = 0; i < ent->count_in; i++)
+            if (ent->signals_in[i].name)
+                free(ent->signals_in[i].name);
+
+        for (i = 0; i < ent->count_out; i++)
+            if (ent->signals_out[i].name)
+                free(ent->signals_out[i].name);
+
+        for (i = 0; i < ent->count_inout; i++)
+            if (ent->signals_inout[i].name)
+                free(ent->signals_inout[i].name);
+
         if (ent->signals_in) free(ent->signals_in);
         if (ent->signals_out) free(ent->signals_out);
         if (ent->signals_inout) free(ent->signals_inout);

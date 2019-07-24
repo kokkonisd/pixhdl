@@ -19,9 +19,20 @@ char * add_signals_to_entity ()
 {
     int ret = 0;
     Entity * ent = createEntity();
-    Signal sig_in = { .name = "Input signal", .length = 1, .dir = IN };
-    Signal sig_out = { .name = "Output signal", .length = 1, .dir = OUT };
-    Signal sig_inout = { .name = "Throughput signal", .length = 1, .dir = INOUT };
+    char * name_in = "Input signal";
+    char * name_out = "Output signal";
+    char * name_inout = "Throughput signal";
+    Signal sig_in = { .name = NULL, .length = 1, .dir = IN };
+    Signal sig_out = { .name = NULL, .length = 1, .dir = OUT };
+    Signal sig_inout = { .name = NULL, .length = 1, .dir = INOUT };
+
+    sig_in.name = malloc(sizeof(char) * (strlen(name_in) + 1));
+    sig_out.name = malloc(sizeof(char) * (strlen(name_out) + 1));
+    sig_inout.name = malloc(sizeof(char) * (strlen(name_inout) + 1));
+
+    strncpy(sig_in.name, name_in, strlen(name_in) + 1);
+    strncpy(sig_out.name, name_out, strlen(name_out) + 1);
+    strncpy(sig_inout.name, name_inout, strlen(name_inout) + 1);
 
     mu_assert(ent->count_in == 0, "count_in is wrong before adding input signal.");
     mu_assert(ent->count_out == 0, "count_out is wrong before adding input signal.");
@@ -59,9 +70,20 @@ char * get_data_from_entity_signals ()
     int ret = 0;
     Signal s;
     Entity * ent = createEntity();
-    Signal sig_in = { .name = "Input signal", .length = 16, .dir = IN };
-    Signal sig_out = { .name = "Output signal", .length = 16, .dir = OUT };
-    Signal sig_inout = { .name = "Throughput signal", .length = 16, .dir = INOUT };
+    char * name_in = "Input signal";
+    char * name_out = "Output signal";
+    char * name_inout = "Throughput signal";
+    Signal sig_in = { .name = NULL, .length = 16, .dir = IN };
+    Signal sig_out = { .name = NULL, .length = 16, .dir = OUT };
+    Signal sig_inout = { .name = NULL, .length = 16, .dir = INOUT };
+
+    sig_in.name = malloc(sizeof(char) * (strlen(name_in) + 1));
+    sig_out.name = malloc(sizeof(char) * (strlen(name_out) + 1));
+    sig_inout.name = malloc(sizeof(char) * (strlen(name_inout) + 1));
+
+    strncpy(sig_in.name, name_in, strlen(name_in) + 1);
+    strncpy(sig_out.name, name_out, strlen(name_out) + 1);
+    strncpy(sig_inout.name, name_inout, strlen(name_inout) + 1);
 
     ret = addSignalToEntity(ent, &sig_in);
     ret = addSignalToEntity(ent, &sig_out);
