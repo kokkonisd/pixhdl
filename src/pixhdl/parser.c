@@ -173,11 +173,11 @@ char * getRawEntityTextFromFile (const char * filename)
     // Pointer to the VHDL source file
     FILE * src_file = NULL;
     // Integer to contain file length
-    uint32_t file_length = 0;
+    size_t file_length = 0;
     // Integer to contain the chars that
     // were successfully read from the
     // .vhdl source file
-    uint32_t chars_read = 0;
+    size_t chars_read = 0;
     // Buffer for the contents of the file
     char * buffer = NULL;
     // Regex object to parse file for entity definition
