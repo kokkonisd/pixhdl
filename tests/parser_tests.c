@@ -60,7 +60,7 @@ char * parse_simple_port_directions ()
     dir = parseSignalDirection(": out", 0, 5);
     mu_assert(dir == OUT, "Incorrect parsing of port dir 'OUT'.");
 
-    dir = parseSignalDirection("D : inout std_logic", 1, 9);
+    dir = parseSignalDirection("D : INOUT std_logic", 1, 9);
     mu_assert(dir == INOUT, "Incorrect parsing of port dir 'INOUT'.");
 
     dir = parseSignalDirection("E:in std_logic_vector(3 downto 0);", 1, 4);
@@ -117,7 +117,25 @@ char * parse_raw_text_entity_from_file ()
     free(parsed_entity_text);
 
     return NULL;
+}
 
+
+char * parse_entity_from_raw_entity_text ()
+{
+    char * raw_entity_text = NULL;
+    Entity * ent = NULL;
+
+    raw_entity_text = "A:in std_logic;";
+    ent = getEntityFromRawEntityText(raw_entity_text);
+
+    mu_assert(ent, "First entity wasn't parsed correctly.");
+    mu_assert(ent->count_in == 1, "Input signal count is wrong for first entity.");
+    mu_assert(ent->signals_in[0].length == 1, "Input signal length is wrong for first entity.");
+    mu_assert(strcmp(ent->signals_in[0].name, "A") == 0, "Input signal name is wrong for first entity.");
+
+    destroyEntity(ent);
+
+    return NULL;
 }
 
 
@@ -130,6 +148,7 @@ char * all_tests ()
     mu_run_test(parse_simple_port_directions);
     mu_run_test(parse_simple_port_lengths);
     mu_run_test(parse_raw_text_entity_from_file);
+    mu_run_test(parse_entity_from_raw_entity_text);
 
     return NULL;
 }
