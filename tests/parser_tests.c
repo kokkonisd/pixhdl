@@ -83,8 +83,8 @@ char * parse_simple_port_lengths ()
     length = parseSignalLength("D : inout std_logic", 10, 19);
     mu_assert(length == 1, "Incorrect parsing of port length 1 (2).");
 
-    length = parseSignalLength("E:in std_logic_vector(3 downto 0);", 5, 33);
-    mu_assert(length == 4, "Incorrect parsing of port length 4.");
+    length = parseSignalLength("E:in std_logic_vector(3 downto 1);", 5, 33);
+    mu_assert(length == 3, "Incorrect parsing of port length 3.");
 
     return NULL;
 }

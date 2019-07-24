@@ -101,9 +101,11 @@ int parseSignalLength (const char * raw_txt, int start, int end)
     char * len_str = NULL;
     regex_t regex;
     int reti = 0;
-    regmatch_t rm[2];
-    int match_start = 0;
-    int match_end = 0;
+    regmatch_t rm[3];
+    int top_match_start = 0;
+    int top_match_end = 0;
+    int bottom_match_start = 0;
+    int bottom_match_end = 0;
 
     // Check if raw_txt is a valid pointer
     check(raw_txt, "Text pointer is NULL.");
@@ -127,31 +129,39 @@ int parseSignalLength (const char * raw_txt, int start, int end)
     // If it's a `std_logic_vector (X downto 0)`
     if (len_str[strlen(len_str) - 1] == ')') {
         // Compile regex to find vector length
-        reti = regcomp(&regex, "([0-9]+)", REG_EXTENDED);
+        reti = regcomp(&regex, "([0-9]+)[^0-9]+([0-9]+)", REG_EXTENDED);
         check(reti == 0, "Could not compile vector length regex.");
         // Look for vector length in  the length string
-        reti = regexec(&regex, len_str, 2, rm, 0);
+        reti = regexec(&regex, len_str, 3, rm, 0);
         check(reti == 0, "Vector length not found.");
 
-        // Get start and end of match
-        match_start = rm[1].rm_so;
-        match_end = rm[1].rm_eo;
+        // Get start and end of top (MSB) match
+        top_match_start = rm[1].rm_so;
+        top_match_end = rm[1].rm_eo;
+        // Get start and end of bottom (LSB) match
+        bottom_match_start = rm[2].rm_so;
+        bottom_match_end = rm[2].rm_eo;
         // Free the regex object, we're done using it
         regfree(&regex);
 
         // Allocate memory for vector length number
-        char * num = malloc(sizeof(char) * (match_end - match_start + 1));
-        check_mem(num);
+        char * top_num = malloc(sizeof(char) * (top_match_end - top_match_start + 1));
+        check_mem(top_num);
+        char * bottom_num = malloc(sizeof(char) * (bottom_match_end - bottom_match_start + 1));
+        check_mem(bottom_num);
 
-        // Copy the length number over
-        strncpy(num, len_str + match_start, match_end - match_start);
-        num[match_end - match_start] = '\0';
+        // Copy the length top_number over
+        strncpy(top_num, len_str + top_match_start, top_match_end - top_match_start);
+        top_num[top_match_end - top_match_start] = '\0';
+        strncpy(bottom_num, len_str + bottom_match_start, bottom_match_end - bottom_match_start);
+        bottom_num[bottom_match_end - bottom_match_start] = '\0';
 
-        // Length is X + 1
-        length = atoi(num) + 1;
+        // Length is MSB - LSB + 1
+        length = atoi(top_num) - atoi(bottom_num) + 1;
 
         // Free the temporary length string
-        free(num);
+        free(top_num);
+        free(bottom_num);
     // Else, the signal is a `std_logic`
     } else {
         // Thus, the length is 1 bit
