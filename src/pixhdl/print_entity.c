@@ -32,6 +32,16 @@ void printEntitySignals (Entity * ent)
     // Counter for the amount of spaces a name can occupy
     unsigned int spaces = ent->max_name_size > 4 ? ent->max_name_size : 4;
 
+    for (i = 0; i < spaces + 40; i++)
+        printf("-");
+    printf("\n");
+
+    printf("| Entity %-*s |\n", spaces + 29, ent->name);
+
+    for (i = 0; i < spaces + 40; i++)
+        printf("-");
+    printf("\n");
+
     // Print the table header
     printf("Signal # | Name ");
     for (i = 0; i < spaces - 4; i++)

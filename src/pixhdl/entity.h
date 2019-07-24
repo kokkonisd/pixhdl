@@ -23,6 +23,8 @@ typedef struct {
 
 // Define the Entity object
 typedef struct {
+    char * name;              // Name of the entity
+
     Signal * signals_in;      // Array of IN signals
     Signal * signals_out;     // Array of OUT signals
     Signal * signals_inout;   // Array of INOUT signals

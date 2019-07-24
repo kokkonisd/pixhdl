@@ -10,6 +10,9 @@ Entity * createEntity ()
     // Allocate memory for an entity
     Entity * ent = calloc(1, sizeof(Entity));
 
+    // Initialize name to NULL
+    ent->name = NULL;
+
     // Initialize all the signal pointers to NULL
     ent->signals_in = NULL;
     ent->signals_out = NULL;
@@ -51,6 +54,8 @@ void destroyEntity (Entity * ent)
         if (ent->signals_in) free(ent->signals_in);
         if (ent->signals_out) free(ent->signals_out);
         if (ent->signals_inout) free(ent->signals_inout);
+
+        if (ent->name) free(ent->name);
 
         free(ent);
     }

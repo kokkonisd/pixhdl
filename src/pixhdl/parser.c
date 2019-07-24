@@ -129,7 +129,7 @@ int parseSignalLength (const char * raw_txt, int start, int end)
     // If it's a `std_logic_vector (X downto 0)`
     if (len_str[strlen(len_str) - 1] == ')') {
         // Compile regex to find vector length
-        reti = regcomp(&regex, "([0-9]+)[^0-9]+([0-9]+)", REG_EXTENDED);
+        reti = regcomp(&regex, VECTOR_LENGTH_REGEX, REG_EXTENDED);
         check(reti == 0, "Could not compile vector length regex.");
         // Look for vector length in  the length string
         reti = regexec(&regex, len_str, 3, rm, 0);
@@ -196,13 +196,17 @@ char * getRawEntityTextFromFile (const char * filename)
     // Return value for the regex object
     int reti = 0;
     // Regex match object to capture matches
-    regmatch_t rm[2];
+    regmatch_t rm[3];
     // Resulting string containing the raw entity text
-    char * res = NULL;
+    char * entity_body = NULL;
+    char * entity_name = NULL;
+    char * res;
     // Integer variables to hold the start & end of the
     // resulting string
-    int start = 0;
-    int end = 0;
+    int body_start = 0;
+    int body_end = 0;
+    int name_start = 0;
+    int name_end = 0;
 
 
     src_file = fopen(filename, "r");
@@ -230,37 +234,54 @@ char * getRawEntityTextFromFile (const char * filename)
     reti = regcomp(&regex, ENTITY_REGEX, REG_EXTENDED);
     check(reti == 0, "Couldn't compile raw entity regex.");
 
-    reti = regexec(&regex, buffer, 2, rm, 0);
+    reti = regexec(&regex, buffer, 3, rm, 0);
     check(reti == 0, "Couldn't find an entity definition in file `%s`.", filename);
 
-    // Get the start & end points from the match found
-    start = rm[1].rm_so;
-    end = rm[1].rm_eo;
+    name_start = rm[1].rm_so;
+    name_end = rm[1].rm_eo;
+    // Get the body_start & body_end points from the match found
+    body_start = rm[2].rm_so;
+    body_end = rm[2].rm_eo;
     // Free the regex object, we don't need it anymore
     regfree(&regex);
 
+
+    while (!isLegalPortNameChar(*(buffer + name_start))) name_start++;
+    while (!isLegalPortNameChar(*(buffer + name_end - 1))) name_end--;
     // Trim the match (it starts with 'entity' and ends
     // with 'end', so any char that's not a letter can
     // be chopped off)
-    while (!isalpha(*(buffer + start))) start++;
-    while (!isalpha(*(buffer + end - 1))) end--;
+    while (!isalpha(*(buffer + body_start))) body_start++;
+    while (!isalpha(*(buffer + body_end - 1))) body_end--;
 
-    // Check if start and end are correct
-    check(end > start && end > 0 && start >= 0,
-          "File `%s` doesn't contain entity, or is wrongly formatted.", filename);
+    // Check if body_start and body_end are correct
+    // check(body_end > body_start && body_end > 0 && body_start >= 0,
+          // "File `%s` doesn't contain entity, or is wrongly formatted.", filename);
 
     // Allocate memory for the resulting string
-    res = malloc(sizeof(char) * (end - start + 2));
-    check_mem(res);
+    entity_name = malloc(sizeof(char) * (name_end - name_start + 2));
+    check_mem(entity_name);
+    entity_body = malloc(sizeof(char) * (body_end - body_start + 2));
+    check_mem(entity_body);
     // Copy the entity definition over
-    strncpy(res, buffer + start, end - start + 1);
+    strncpy(entity_name, buffer + name_start, name_end - name_start + 1);
+    strncpy(entity_body, buffer + body_start, body_end - body_start + 1);
     // End it with a semicolon to help parse ports later
-    res[end - start] = ';';
+    entity_name[name_end - name_start] = ';';
+    entity_body[body_end - body_start] = ';';
     // Add a null char at the end for safety
-    res[end - start + 1] = '\0';
+    entity_name[name_end - name_start + 1] = '\0';
+    entity_body[body_end - body_start + 1] = '\0';
 
     // Free the buffer holding the file contents
     free(buffer);
+
+    res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_body) + 1));
+    sprintf(res, "%s%s", entity_name, entity_body);
+    res[strlen(entity_name) + strlen(entity_body)] = '\0';
+
+    free(entity_name);
+    free(entity_body);
 
     // Return the result
     return res;
@@ -292,6 +313,14 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
     check_mem(ent);
     // Start at the beginning of entity_text
     cur_text = entity_text;
+
+    char * tmp = strstr(cur_text, ";");
+    int len = tmp - cur_text;
+    ent->name = malloc(sizeof(char) * (len + 1));
+    strncpy(ent->name, cur_text, len);
+    ent->name[len] = '\0';
+
+    cur_text += len + 1;
 
     do {
         // Get entity port with regex

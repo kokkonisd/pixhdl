@@ -97,7 +97,7 @@ char * parse_raw_text_entity_from_file ()
     char * filename = NULL;
 
     filename = "tests/vhdl_sources/ALU.vhdl";
-    right_entity_text = "OP : in std_logic_vector (1 downto 0);\n\
+    right_entity_text = "ALU;OP : in std_logic_vector (1 downto 0);\n\
         A, B, C, D, E, F, G : in std_logic_vector (31 downto 0);\n\
         O : out std_logic_vector (31 downto 0);\n\
         N : out std_logic;";
@@ -109,7 +109,7 @@ char * parse_raw_text_entity_from_file ()
 
 
     filename = "tests/vhdl_sources/ALU_oneline.vhdl";
-    right_entity_text = "OP:in std_logic_vector (1 downto 0);A,B,C,D,E,F,G:in std_logic_vector (31 downto 0);O:out std_logic_vector (31 downto 0);N:out std_logic;";
+    right_entity_text = "ALU;OP:in std_logic_vector (1 downto 0);A,B,C,D,E,F,G:in std_logic_vector (31 downto 0);O:out std_logic_vector (31 downto 0);N:out std_logic;";
 
     parsed_entity_text = getRawEntityTextFromFile(filename);
     mu_assert(strcmp(parsed_entity_text, right_entity_text) == 0,
@@ -125,30 +125,33 @@ char * parse_entity_from_raw_entity_text ()
     char * raw_entity_text = NULL;
     Entity * ent = NULL;
 
-    raw_entity_text = "A:in std_logic;";
+    raw_entity_text = "CPU;A:in std_logic;";
     ent = getEntityFromRawEntityText(raw_entity_text);
 
     mu_assert(ent, "First entity wasn't parsed correctly.");
+    mu_assert(strcmp(ent->name, "CPU") == 0, "First entity's name is wrong.");
     mu_assert(ent->count_in == 1, "Input signal count is wrong for first entity.");
     mu_assert(ent->signals_in[0].length == 1, "Input signal length is wrong for first entity.");
     mu_assert(strcmp(ent->signals_in[0].name, "A") == 0, "Input signal name is wrong for first entity.");
 
     destroyEntity(ent);
 
-    raw_entity_text = "B:in std_logic_vector(5 downto 0);";
+    raw_entity_text = "MMU;B:in std_logic_vector(5 downto 0);";
     ent = getEntityFromRawEntityText(raw_entity_text);
 
-    mu_assert(ent, "First entity wasn't parsed correctly.");
+    mu_assert(ent, "Second entity wasn't parsed correctly.");
+    mu_assert(strcmp(ent->name, "MMU") == 0, "Second entity's name is wrong.");
     mu_assert(ent->count_in == 1, "Input signal count is wrong for second entity.");
     mu_assert(ent->signals_in[0].length == 6, "Input signal length is wrong for second entity.");
     mu_assert(strcmp(ent->signals_in[0].name, "B") == 0, "Input signal name is wrong for second entity.");
 
     destroyEntity(ent);
 
-    raw_entity_text = "C:in std_logic;D:out std_logic_vector(3 downto 0);";
+    raw_entity_text = "FlipFlop;C:in std_logic;D:out std_logic_vector(3 downto 0);";
     ent = getEntityFromRawEntityText(raw_entity_text);
 
-    mu_assert(ent, "First entity wasn't parsed correctly.");
+    mu_assert(ent, "Second entity wasn't parsed correctly.");
+    mu_assert(strcmp(ent->name, "FlipFlop") == 0, "Third entity's name is wrong.");
     mu_assert(ent->count_in == 1, "Input signal count is wrong for third entity.");
     mu_assert(ent->count_out == 1, "Output signal count is wrong for third entity.");
     mu_assert(ent->signals_in[0].length == 1, "Input signal length is wrong for third entity.");
@@ -176,6 +179,7 @@ char * parse_entity_from_file ()
     ent = getEntityFromFile(filename);
 
     mu_assert(ent, "First entity wasn't parsed correctly.");
+    mu_assert(strcmp(ent->name, "ALU") == 0, "First entity's name is wrong.");
     mu_assert(ent->count_in == 8, "Input signal count is wrong for the first entity.");
     mu_assert(ent->count_out == 2, "Output signal count is wrong for the first entity.");
 
@@ -196,6 +200,7 @@ char * parse_entity_from_file ()
     ent = getEntityFromFile(filename);
 
     mu_assert(ent, "Second entity wasn't parsed correctly.");
+    mu_assert(strcmp(ent->name, "ALU") == 0, "Second entity's name is wrong.");
     mu_assert(ent->count_in == 8, "Input signal count is wrong for the second entity.");
     mu_assert(ent->count_out == 2, "Output signal count is wrong for the second entity.");
 
