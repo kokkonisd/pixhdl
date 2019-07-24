@@ -1,7 +1,6 @@
 #include "minunit.h"
 #include <pixhdl/entity.h>
 #include <pixhdl/print_entity.h>
-#include <assert.h>
 
 
 char * create_and_destroy_entity ()
@@ -123,7 +122,7 @@ char * convert_directions_to_strings ()
 }
 
 
-char * all_tests()
+char * all_tests ()
 {
     mu_suite_start();
 

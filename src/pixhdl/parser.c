@@ -59,8 +59,8 @@ direction parseSignalDirection (const char * raw_txt, int start, int end)
           "Start and end indices are incorrect.");
 
     // Trim the spaces around the direction string
-    while (isspace(*(raw_txt + start))) start++;
-    while (isspace(*(raw_txt + end - 1))) end--;
+    while (!isalpha(*(raw_txt + start))) start++;
+    while (!isalpha(*(raw_txt + end - 1))) end--;
 
     // Check if start and end are still correct
     check(end > start && end > 0 && start >= 0,

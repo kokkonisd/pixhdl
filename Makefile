@@ -42,12 +42,12 @@ tests: $(TESTS)
 
 # Explicitly tell the compiler to add the .a file at the end
 # because Linux doesn't like it if it's not in that order
-$(TESTS): $(TEST_SRC)
-	$(CC) $(CFLAGS) $(TEST_SRC) -o $(TESTS) $(TARGET)
+%_tests: %_tests.c
+	$(CC) $(CFLAGS) $< -o $@ $(TARGET)
 
 # The Cleaner
 clean:
-	rm -rf build bin $(OBJECTS) $(TESTS)
+	rm -rf build $(OBJECTS) $(TESTS)
 	rm -f tests/tests.log
 	find . -name "*.gc*" -exec rm {} \;
 	rm -rf `find . -name "*.dSYM" -print`
