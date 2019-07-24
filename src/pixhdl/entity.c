@@ -66,7 +66,7 @@ void destroyEntity (Entity * ent)
  * Adds a Signal object to an Entity object.
  * @param  ent (Entity *): Entity object to add Signal object to
  * @param  sig (Signal *): Signal object to be added to Entity object
- * @return 0 if successful, 1 if not successful
+ * @return          (int): 0 if successful, 1 if not successful
  */
 int addSignalToEntity (Entity * ent, const Signal * sig)
 {

@@ -1,14 +1,26 @@
 #include "parser.h"
 
 
-int isLegalPortNameChar (const char portname)
+/**
+ * Check if a given character is a legal port name in VHDL.
+ * @param  portname_char (const char): A portname character
+ * @return                      (int): 1 if the char is valid, 0 otherwise
+ */
+int isLegalPortNameChar (const char portname_char)
 {
     // Port names can only contain:
     // a-z, A-Z, 0-9 and '_'
-    return isalnum(portname) || portname == '_';
+    return isalnum(portname_char) || portname_char == '_';
 }
 
 
+/**
+ * Parses the name of a signal given some raw entity text, a start and an end index.
+ * @param  raw_txt (const char *): The raw entity text
+ * @param  start            (int): The beginning index for the raw entity text
+ * @param  end              (int): The ending index for the raw entity text
+ * @return               (char *): The resulting signal name
+ */
 char * parseSignalName (const char * raw_txt, int start, int end)
 {
     // Name of the signal to be returned
@@ -45,6 +57,13 @@ error:
 }
 
 
+/**
+ * Parses the direction of a signal given some raw entity text, a start and an end index.
+ * @param  raw_txt (const char *): The raw entity text
+ * @param  start            (int): The beginning index for the raw entity text
+ * @param  end              (int): The ending index for the raw entity text
+ * @return       (direction enum): The resulting direction
+ */
 direction parseSignalDirection (const char * raw_txt, int start, int end)
 {
     // Resulting direction
@@ -94,6 +113,13 @@ error:
 }
 
 
+/**
+ * Parses the length of a signal (in bits) given some raw entity text, a start and an end index.
+ * @param  raw_txt (const char *): The raw entity text
+ * @param  start            (int): The beginning index for the raw entity text
+ * @param  end              (int): The ending index for the raw entity text
+ * @return                  (int): The resulting length (in bits)
+ */
 int parseSignalLength (const char * raw_txt, int start, int end)
 {
     // Resulting signal length (in bits)
@@ -179,6 +205,11 @@ error:
 }
 
 
+/**
+ * Gets the raw entry definition from a given file. Output also contains the entity's name.
+ * @param  filename (const char *): The path/name of the source file
+ * @return                (char *): The raw name and body of the entity definition ("name;body")
+ */
 char * getRawEntityTextFromFile (const char * filename)
 {
     // Pointer to the VHDL source file
@@ -197,18 +228,21 @@ char * getRawEntityTextFromFile (const char * filename)
     int reti = 0;
     // Regex match object to capture matches
     regmatch_t rm[3];
-    // Resulting string containing the raw entity text
-    char * entity_body = NULL;
+    // String containing the entity_name text
     char * entity_name = NULL;
+    // String containing the entity_body text
+    char * entity_body = NULL;
+    // Resulting string containing the raw entity text
     char * res;
     // Integer variables to hold the start & end of the
-    // resulting string
+    // resulting strings
     int body_start = 0;
     int body_end = 0;
     int name_start = 0;
     int name_end = 0;
 
 
+    // Try to open the source file passed to the function
     src_file = fopen(filename, "r");
     check(src_file != NULL, "Couldn't open file `%s`.", filename);
 
@@ -230,13 +264,14 @@ char * getRawEntityTextFromFile (const char * filename)
     // Close the file
     fclose(src_file);
 
-    // Look for entity definition in the file
+    // Look for the entity definition in the file
     reti = regcomp(&regex, ENTITY_REGEX, REG_EXTENDED);
     check(reti == 0, "Couldn't compile raw entity regex.");
 
     reti = regexec(&regex, buffer, 3, rm, 0);
     check(reti == 0, "Couldn't find an entity definition in file `%s`.", filename);
 
+    // Get the name_start & name_end points from the match found
     name_start = rm[1].rm_so;
     name_end = rm[1].rm_eo;
     // Get the body_start & body_end points from the match found
@@ -246,40 +281,50 @@ char * getRawEntityTextFromFile (const char * filename)
     regfree(&regex);
 
 
+    // Trim the name match (there's probably spaces around it)
     while (!isLegalPortNameChar(*(buffer + name_start))) name_start++;
     while (!isLegalPortNameChar(*(buffer + name_end - 1))) name_end--;
-    // Trim the match (it starts with 'entity' and ends
+    // Trim thebody  match (it starts with 'entity' and ends
     // with 'end', so any char that's not a letter can
     // be chopped off)
     while (!isalpha(*(buffer + body_start))) body_start++;
     while (!isalpha(*(buffer + body_end - 1))) body_end--;
 
+    // Check if name_start and name_end are correct
+    check(name_end > name_start && name_end > 0 && name_start >= 0,
+          "File `%s` doesn't contain entity, or is wrongly formatted.", filename);
     // Check if body_start and body_end are correct
-    // check(body_end > body_start && body_end > 0 && body_start >= 0,
-          // "File `%s` doesn't contain entity, or is wrongly formatted.", filename);
+    check(body_end > body_start && body_end > 0 && body_start >= 0,
+          "File `%s` doesn't contain entity, or is wrongly formatted.", filename);
 
-    // Allocate memory for the resulting string
+    // Allocate memory for the name string
     entity_name = malloc(sizeof(char) * (name_end - name_start + 2));
     check_mem(entity_name);
+    // Allocate memory for the body string
     entity_body = malloc(sizeof(char) * (body_end - body_start + 2));
     check_mem(entity_body);
-    // Copy the entity definition over
+    // Copy the entity name over
     strncpy(entity_name, buffer + name_start, name_end - name_start + 1);
+    // Copy the entity definition over
     strncpy(entity_body, buffer + body_start, body_end - body_start + 1);
-    // End it with a semicolon to help parse ports later
+    // End name and body with a semicolon to help parsing later
     entity_name[name_end - name_start] = ';';
     entity_body[body_end - body_start] = ';';
-    // Add a null char at the end for safety
+    // Add a null char at the end of both of them for safety
     entity_name[name_end - name_start + 1] = '\0';
     entity_body[body_end - body_start + 1] = '\0';
 
     // Free the buffer holding the file contents
     free(buffer);
 
+    // Allocate memory for the final string
     res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_body) + 1));
+    // Print the name followed by the body in the resulting string
     sprintf(res, "%s%s", entity_name, entity_body);
+    // Add a null char at the end for safety
     res[strlen(entity_name) + strlen(entity_body)] = '\0';
 
+    // Free the name & body strings
     free(entity_name);
     free(entity_body);
 
@@ -291,6 +336,11 @@ error:
 }
 
 
+/**
+ * Generate an Entity object given an entity definition in raw text.
+ * @param  entity_text (const char *): The raw entity definition (formatted as "name;body")
+ * @return                 (Entity *): The Entity object
+ */
 Entity * getEntityFromRawEntityText (const char * entity_text)
 {
     // Regex object for parsing
@@ -307,6 +357,10 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
     char * name = NULL;
     // Comma index to help with parsing port names
     size_t comma_index = 0;
+    // Pointer to the name delimiter
+    char * name_delimiter = NULL;
+    // Integer to hold the length of the entity's name
+    int name_len = 0;
 
     // Create the Entity object
     ent = createEntity();
@@ -314,13 +368,19 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
     // Start at the beginning of entity_text
     cur_text = entity_text;
 
-    char * tmp = strstr(cur_text, ";");
-    int len = tmp - cur_text;
-    ent->name = malloc(sizeof(char) * (len + 1));
-    strncpy(ent->name, cur_text, len);
-    ent->name[len] = '\0';
+    // Get the position of the entity's name delimiter (a semicolon)
+    name_delimiter = strstr(cur_text, ";");
+    // Calculate the length of the entity's name
+    name_len = name_delimiter - cur_text;
+    // Allocate some memory for the entity's name
+    ent->name = malloc(sizeof(char) * (name_len + 1));
+    // Copy the name over
+    strncpy(ent->name, cur_text, name_len);
+    // Add a null char at the end for safety
+    ent->name[name_len] = '\0';
 
-    cur_text += len + 1;
+    // Move the cur_text pointer forwards to skip the name
+    cur_text += name_len + 1;
 
     do {
         // Get entity port with regex
@@ -416,6 +476,11 @@ error:
 }
 
 
+/**
+ * Generates an Entity object given a filename.
+ * @param  filename (const char *): The path/name of the source file
+ * @return              (Entity *): The Entity object
+ */
 Entity * getEntityFromFile (const char * filename)
 {
     // Raw entity text string

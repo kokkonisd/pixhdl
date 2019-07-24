@@ -7,7 +7,7 @@
 /**
  * Convert a direction enum to string.
  * @param  dir (direction enum): The direction to be converted
- * @return (const char *): The string equivalent of the direction
+ * @return       (const char *): The string equivalent of the direction
  */
 const char * directionToString (direction dir);
 
