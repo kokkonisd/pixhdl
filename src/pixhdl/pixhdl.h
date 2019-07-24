@@ -4,6 +4,7 @@
 #include "dbg.h"
 #include "entity.h"
 #include "print_entity.h"
+#include "parser.h"
 
 
 
