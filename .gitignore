@@ -1,2 +1,6 @@
 bin/
 build/
+src/**/*.o
+tests/*
+!tests/*.c
+!tests/*.h
