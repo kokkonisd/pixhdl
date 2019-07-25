@@ -140,8 +140,8 @@ int parseSignalLength (const char * raw_txt, int start, int end)
           "Start and end indices are incorrect.");
 
     // Verify that the length string only contains std_logic or std_logic_vector definitions
-    check(*(raw_txt + start) == 's', "Invalid length string.");
-    check(*(raw_txt + end - 1) == 'c' || *(raw_txt + end - 1) == ')', "Invalid length string.");
+    check(tolower(*(raw_txt + start)) == 's', "Invalid length string.");
+    check(tolower(*(raw_txt + end - 1)) == 'c' || *(raw_txt + end - 1) == ')', "Invalid length string.");
 
     // Allocate memory for the length string
     len_str = malloc(sizeof(char) * (end - start + 1));
@@ -314,8 +314,6 @@ char * getRawEntityTextFromFile (const char * filename)
     entity_name[name_end - name_start + 1] = '\0';
     entity_body[body_end - body_start + 1] = '\0';
 
-    printf("%d, %d\n", body_start, body_end);
-
     // Free the buffer holding the file contents
     free(buffer);
 
@@ -325,8 +323,6 @@ char * getRawEntityTextFromFile (const char * filename)
     sprintf(res, "%s%s", entity_name, entity_body);
     // Add a null char at the end for safety
     res[strlen(entity_name) + strlen(entity_body)] = '\0';
-
-    printf("%s\n", entity_body);
 
     // Free the name & body strings
     free(entity_name);
@@ -459,7 +455,7 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
         regfree(&regex);
 
         // Check if there's another entity port to parse
-        reti = regcomp(&regex, PORT_REGEX, REG_EXTENDED);
+        reti = regcomp(&regex, PORT_REGEX, REG_EXTENDED | REG_ICASE);
         check(reti == 0, "Couldn't compile port regex.");
         // Move the text pointer forwards
         cur_text += rm[3].rm_eo + 1;
