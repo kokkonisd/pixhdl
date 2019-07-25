@@ -6,4 +6,7 @@
 #include "parser.h"
 
 
+int generateSvgFromEntity (Entity * ent, char * filename);
+
+
 #endif

@@ -49,7 +49,8 @@ int main (int argc, char * argv[])
         check(ent, "Couldn't get entity from file `%s`.", argv[i]);
 
         // Print the entity's signals
-        printEntitySignals(ent);
+        // printEntitySignals(ent);
+        generateSvgFromEntity(ent, "test.svg");
 
         // Destroy the entity object
         destroyEntity(ent);
