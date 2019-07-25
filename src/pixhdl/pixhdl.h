@@ -16,7 +16,11 @@ Usage: pixhdl [options] <VHDL files>\n\
 #include "parser.h"
 
 
-
+/**
+ * Prints a help screen containing the available optional arguments.
+ * @return (int): always returns 0
+ */
+int print_help_screen ();
 
 
 #endif
