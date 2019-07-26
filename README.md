@@ -1,6 +1,6 @@
 # pixhdl
 
-![pixhdl logo](pixhdl.png)
+<img src="https://github.com/kokkonisd/pixhdl/blob/master/pixhdl.png" width="500">
 
 A command-line tool that produces graphical representations of entities from VHDL source files.
 
