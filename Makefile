@@ -1,6 +1,6 @@
 CFLAGS = -g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
 LDLIBS = -ldl $(OPTLIBS)
-PREFIX ?= /usr/local
+DESTDIR ?= /usr/local
 
 SOURCES = $(wildcard src/**/*.c src/*.c)
 OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
@@ -10,7 +10,7 @@ TESTS = $(patsubst %.c, %, $(TEST_SRC))
 
 TARGET = build/libpixhdl.a
 SO_TARGET = $(patsubst %.a, %.so, $(TARGET))
-BIN_TARGET = $(patsubst build/%.a, bin/%, $(TARGET))
+BIN_TARGET = $(patsubst build/lib%.a, bin/%, $(TARGET))
 
 # The Target Build
 all: $(TARGET) $(SO_TARGET) $(BIN_TARGET) tests
@@ -53,9 +53,11 @@ clean:
 	rm -rf `find . -name "*.dSYM" -print`
 
 # The Install
-install: all
-	install -d $(DESTDIR)/$(PREFIX)/lib/
-	install $(TARGET) $(DESTDIR)/$(PREFIX)/lib/
+install: $(BIN_TARGET)
+	install $(BIN_TARGET) $(DESTDIR)/bin/
+
+uninstall:
+	rm -rf $(DESTDIR)/bin/$(patsubst bin/% , %, $(BIN_TARGET))
 
 # The Checker
 check:
