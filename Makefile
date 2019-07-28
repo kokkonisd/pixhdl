@@ -8,7 +8,8 @@ OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
 TEST_SRC = $(wildcard tests/*_tests.c)
 TESTS = $(patsubst %.c, %, $(TEST_SRC))
 
-TARGET = build/libpixhdl.a
+RAW_TARGET = pixhdl
+TARGET = build/lib$(RAW_TARGET).a
 SO_TARGET = $(patsubst %.a, %.so, $(TARGET))
 BIN_TARGET = $(patsubst build/lib%.a, bin/%, $(TARGET))
 
@@ -57,7 +58,7 @@ install: $(BIN_TARGET)
 	install $(BIN_TARGET) $(DESTDIR)/bin/
 
 uninstall:
-	rm -rf $(DESTDIR)/bin/$(patsubst bin/% , %, $(BIN_TARGET))
+	rm -rf $(DESTDIR)/bin/$(RAW_TARGET)
 
 # The Checker
 check:
