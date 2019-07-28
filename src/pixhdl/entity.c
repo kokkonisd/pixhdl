@@ -22,7 +22,11 @@ Entity * createEntity ()
     ent->count_in = 0;
     ent->count_out = 0;
     ent->count_inout = 0;
-    ent->max_name_size = 0;
+
+    ent->max_name_size_in = 0;
+    ent->max_name_size_out = 0;
+    ent->max_name_size_inout = 0;
+    ent->max_name_size_global = 0;
 
     // Return the Entity object
     return ent;
@@ -74,6 +78,7 @@ int addSignalToEntity (Entity * ent, const Signal * sig)
     Signal ** signals = NULL;
     // Pointer to count integer (helps generalize initialization)
     unsigned int * count = NULL;
+    size_t * max_size = NULL;
 
     // Choose the right Signals array & counter integer
     // based on the direction of the signal
@@ -81,16 +86,19 @@ int addSignalToEntity (Entity * ent, const Signal * sig)
         case IN:
             signals = &ent->signals_in;
             count = &ent->count_in;
+            max_size = &ent->max_name_size_in;
             break;
 
         case OUT:
             signals = &ent->signals_out;
             count = &ent->count_out;
+            max_size = &ent->max_name_size_out;
             break;
 
         case INOUT:
             signals = &ent->signals_inout;
             count = &ent->count_inout;
+            max_size = &ent->max_name_size_inout;
             break;
 
         default:
@@ -111,8 +119,11 @@ int addSignalToEntity (Entity * ent, const Signal * sig)
     (*count)++;
 
     // Update the maximum name size if needed
-    if (strlen(sig->name) > ent->max_name_size)
-        ent->max_name_size = strlen(sig->name);
+    if (strlen(sig->name) > *max_size)
+        *max_size = strlen(sig->name);
+
+    if (strlen(sig->name) > ent->max_name_size_global)
+        ent->max_name_size_global = strlen(sig->name);
 
     return 0;
 
