@@ -30,7 +30,7 @@ void printEntitySignals (Entity * ent)
     // For-loop counter
     unsigned int i = 0;
     // Counter for the amount of spaces a name can occupy
-    unsigned int spaces = ent->max_name_size > 4 ? ent->max_name_size : 4;
+    unsigned int spaces = ent->max_name_size_global > 4 ? ent->max_name_size_global : 4;
 
     for (i = 0; i < spaces + 40; i++)
         printf("-");

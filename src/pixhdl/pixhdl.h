@@ -14,6 +14,7 @@ Usage: pixhdl [options] <VHDL files>\n\
 #include "entity.h"
 #include "print_entity.h"
 #include "parser.h"
+#include "generate_svg.h"
 
 
 /**
