@@ -7,6 +7,7 @@ Usage: pixhdl [options] <VHDL file>\n\
 \n\
     options:\n\
            -o : specify output filename (can also come after VHDL file argument)\n\
+           -u : check for updates (and update if newer version is available)\n\
            -v : print the version number\n\
            -h : print this help screen"
 
