@@ -31,7 +31,7 @@ int main (int argc, char * argv[])
     if (argc == 1) return print_help_screen();
 
     // Parse optional arguments
-    while ((ra = getopt(argc, argv, ":vho:")) != -1) {
+    while ((ra = getopt(argc, argv, ":vho:u")) != -1) {
         switch (ra) {
             case 'v':
                 // Print version number
@@ -46,6 +46,9 @@ int main (int argc, char * argv[])
             case 'o':
                 out_filename = optarg;
                 break;
+
+            case 'u':
+                return update(VERSION);
 
             case '?':
             default:
