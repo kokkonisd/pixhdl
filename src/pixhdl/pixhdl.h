@@ -1,11 +1,12 @@
 #ifndef __PIXHDL_H__
 #define __PIXHDL_H__
 
-#define VERSION "0.0.1"
+#define VERSION "1.0.0"
 #define HELP_SCREEN_TEXT "\
-Usage: pixhdl [options] <VHDL files>\n\
+Usage: pixhdl [options] <VHDL file>\n\
 \n\
     options:\n\
+           -o : specify output filename (can also come after VHDL file argument)\n\
            -v : print the version number\n\
            -h : print this help screen"
 
