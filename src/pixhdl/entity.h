@@ -23,18 +23,21 @@ typedef struct {
 
 // Define the Entity object
 typedef struct {
-    char * name;              // Name of the entity
+    char * name;                 // Name of the entity
 
-    Signal * signals_in;      // Array of IN signals
-    Signal * signals_out;     // Array of OUT signals
-    Signal * signals_inout;   // Array of INOUT signals
+    Signal * signals_in;         // Array of IN signals
+    Signal * signals_out;        // Array of OUT signals
+    Signal * signals_inout;      // Array of INOUT signals
 
-    unsigned int count_in;    // Length of the signals_in array
-    unsigned int count_out;   // Length of the signals_out array
-    unsigned int count_inout; // Length of the signals_inout array
+    unsigned int count_in;       // Length of the signals_in array
+    unsigned int count_out;      // Length of the signals_out array
+    unsigned int count_inout;    // Length of the signals_inout array
 
-    size_t max_name_size;     // Maximum length of the name of a signal
-                              // in this Entity
+    size_t max_name_size_in;     // Maximum length of the name of a signal
+    size_t max_name_size_out;    // Maximum length of the name of a signal
+    size_t max_name_size_inout;  // Maximum length of the name of a signal
+    size_t max_name_size_global; // Maximum length of the name of a signal
+                                 // in this Entity
 } Entity;
 
 
