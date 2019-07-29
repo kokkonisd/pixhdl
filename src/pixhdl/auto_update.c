@@ -26,11 +26,11 @@ int update (const char * current_version)
         log_info("pixhdl is up to date (v%s).", current_version);
     } else if (strcmp(latest_version, current_version) < 0) {
         // Local version is ahead of latest stable release
-        log_info("Your version of aliases (v%s) is ahead of the latest stable release (v%s).", current_version, latest_version);
+        log_info("Your version of pixhdl (v%s) is ahead of the latest stable release (v%s).", current_version, latest_version);
     } else {
         // Newer stable version found and should be installed
-        log_info("Newer stable version of aliases found: v%s", latest_version);
-        log_info("Downloading and installing version v%s of aliases...", latest_version);
+        log_info("Newer stable version of pixhdl found: v%s", latest_version);
+        log_info("Downloading and installing version v%s of pixhdl...", latest_version);
 
         // Launch the update command
         ret = system(UPDATE_COMMAND);

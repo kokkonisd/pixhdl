@@ -7,7 +7,7 @@
 
 
 #define VERSION_WIDTH 6
-#define LATEST_VERSION "curl -s https://github.com/kokkonisd/pixhdl/releases/latest | grep -Eo \"/tag/(.+)>\" | head -c 9 | tail -c 3"
+#define LATEST_VERSION "curl -s https://github.com/kokkonisd/pixhdl/releases/latest | grep -Eo \"/tag/(.+)>\" | head -c 11 | tail -c 5"
 
 #define UPDATE_COMMAND "TMPDWN=$(curl -s https://api.github.com/repos/kokkonisd/pixhdl/releases/latest | grep \"tag_name\" | awk '{print \"https://github.com/kokkonisd/pixhdl/releases/download/\" substr($2, 2, length($2)-3) \"/pixhdl-\" substr($2, 3, length($2)-4) \".tar.gz\"}') && curl -L -s $TMPDWN -o /tmp/pixhdl_latest.tar.gz && tar xvzf /tmp/pixhdl_latest.tar.gz -C /tmp/ && cd /tmp/pixhdl-* && make clean && make uninstall && make install && cd .. && rm -rf pixhdl-* pixhdl_latest*"
 
