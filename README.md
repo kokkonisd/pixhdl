@@ -36,7 +36,7 @@ $ pixhdl -h
 
 ## how to install pixhdl
 
-In order to install pixhdl, get the [latest release](), decompress it, `cd` into it, then run:
+In order to install pixhdl, get the [latest release](https://github.com/kokkonisd/pixhdl/releases/latest), decompress it, `cd` into it, then run:
 
 ```bash
 $ make
@@ -53,7 +53,7 @@ This command will show the current version of pixhdl installed on your computer.
 
 ## how to uninstall pixhdl
 
-In order to uninstall pixhdl, you have to `cd` into the folder you got from when you [installed](#how-to-install-pixhdl) it. If you no longer have that folder, you can just download the [latest release](), decompress it, and `cd` into that.
+In order to uninstall pixhdl, you have to `cd` into the folder you got from when you [installed](#how-to-install-pixhdl) it. If you no longer have that folder, you can just download the [latest release](https://github.com/kokkonisd/pixhdl/releases/latest), decompress it, and `cd` into that.
 
 Once you're into your `pixhdl/` folder, you can run:
 
