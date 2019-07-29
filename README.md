@@ -4,6 +4,32 @@
 
 A command-line tool that produces graphical representations of entities from VHDL source files.
 
+## example
+
+Source:
+
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+
+entity ALU is
+    port (
+        OP : in std_logic_vector (1 downto 0);
+        A, B : in std_logic_vector (31 downto 0);
+        O : out std_logic_vector (31 downto 0);
+        N : out std_logic
+    );
+end entity;
+
+...
+```
+
+Output:
+
+![ALU SVG output](ALU.svg)
+
 
 ## how to use pixhdl
 
@@ -58,7 +84,7 @@ In order to uninstall pixhdl, you have to `cd` into the folder you got from when
 Once you're into your `pixhdl/` folder, you can run:
 
 ```bash
-$ make uninstall
+$ sudo make uninstall
 ```
 
 That will uninstall pixhdl from your computer if it was previously installed.
