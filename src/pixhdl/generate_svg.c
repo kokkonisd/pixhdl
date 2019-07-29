@@ -63,8 +63,8 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     // The total SVG height is at least equal to the entity rect height plus its stroke width
     svg_height = rect_height + RECTANGLE_STROKE_WIDTH;
     // If there are INOUT signals, we need to add their height too
-    if (ent->count_inout)
-        svg_height += ARROW_WIDTH + (PORT_NAME_FONT_SIZE * 0.55 * (ent->max_name_size_inout + 2));
+    if (ent->count_inout > 0)
+        svg_height += ARROW_LENGTH + (PORT_NAME_FONT_SIZE * 0.55 * (ent->max_name_size_inout + 2));
 
     // Open the output file, we're ready to produce the image
     svg_file = fopen(filename, "w");
@@ -122,7 +122,7 @@ int generateSvgFromEntity (Entity * ent, char * filename)
 
 
         // Draw the signal's length above the slash we drew earlier
-        fprintf(svg_file, LENGTH_TEXT, port_width_left - ARROW_LENGTH / 2,
+        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, port_width_left - ARROW_LENGTH / 2,
                                        cur_pos - 15,
                                        LENGTH_FONT_SIZE,
                                        ent->signals_in[i].length);
@@ -163,12 +163,57 @@ int generateSvgFromEntity (Entity * ent, char * filename)
                                            ent->signals_out[i].name);
 
         // Draw the signal's length above the slash we drew earlier
-        fprintf(svg_file, LENGTH_TEXT, svg_width - port_width_right + ARROW_LENGTH / 2,
+        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, svg_width - port_width_right + ARROW_LENGTH / 2,
                                        cur_pos - 15,
                                        LENGTH_FONT_SIZE,
                                        ent->signals_out[i].length);
 
         // Move the current Y position forward by one step
+        cur_pos += step;
+    }
+
+
+    // Draw the INOUT signals
+    //
+    // We need to establish a step (aka how much space is horizontally allocated to each signal)
+    // as well as a cur_pos, which will tell us where to draw the next signal horizontally.
+    // The step is simply the rectangle's width divided by the number of INOUT signals,
+    // while the initial X position is equal to half a step plus an offset due to the stroke width
+    // of the entity rect.
+    step = rect_width / ent->count_inout;
+    cur_pos = port_width_left + step / 2;
+
+    // Loop over the INOUT signals and draw them
+    for (i = 0; i < ent->count_inout; i++) {
+        // Draw the arrow going in and coming out of the entity rect
+        fprintf(svg_file, DOUBLE_ARROW_LINE, cur_pos,
+                                             svg_height - (ent->max_name_size_inout + 2) * PORT_NAME_FONT_SIZE * 0.55,
+                                             cur_pos,
+                                             rect_height + RECTANGLE_STROKE_WIDTH);
+
+        // Draw a slash to indicate signal length in bits
+        fprintf(svg_file, LENGTH_SLASH, cur_pos - 10,
+                                        rect_height + RECTANGLE_STROKE_WIDTH + ARROW_LENGTH / 2 - 10,
+                                        cur_pos + 10,
+                                        rect_height + RECTANGLE_STROKE_WIDTH + ARROW_LENGTH / 2 + 10);
+
+        // Draw the signal's name
+        fprintf(svg_file, INOUT_SIGNAL_NAME, cur_pos + PORT_NAME_FONT_SIZE * 0.25,
+                                             svg_height - (ent->max_name_size_inout + 1) * PORT_NAME_FONT_SIZE * 0.55,
+                                             PORT_NAME_FONT_SIZE,
+                                             cur_pos + PORT_NAME_FONT_SIZE * 0.25,
+                                             svg_height - (ent->max_name_size_inout + 1) * PORT_NAME_FONT_SIZE * 0.55,
+                                             ent->signals_inout[i].name);
+
+        // Draw the signal's length above the slash we drew earlier
+        fprintf(svg_file, VERTICAL_LENGTH_TEXT, cur_pos - 15,
+                                                rect_height + RECTANGLE_STROKE_WIDTH + ARROW_LENGTH / 2,
+                                                LENGTH_FONT_SIZE,
+                                                cur_pos - 15,
+                                                rect_height + RECTANGLE_STROKE_WIDTH + ARROW_LENGTH / 2,
+                                                ent->signals_inout[i].length);
+
+        // Move the current X position forward by one step
         cur_pos += step;
     }
 
