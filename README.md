@@ -40,7 +40,7 @@ In order to install pixhdl, get the [latest release](https://github.com/kokkonis
 
 ```bash
 $ make
-$ make install
+$ sudo make install
 ```
 
 That will install pixhdl on your computer. You can verify that the installation was successful by running:
