@@ -83,7 +83,7 @@ int generateSvgFromEntity (Entity * ent, char * filename)
                       RECTANGLE_STROKE_WIDTH);
 
     // Draw the entity's name inside the rectangle
-    fprintf(svg_file, "<text text-anchor='middle' x='%.2f' y='%.2f' font-size='%d' fill='black'>%s</text>\n",
+    fprintf(svg_file, "<text text-anchor='middle' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier'>%s</text>\n",
                       port_width_left + rect_width / 2,
                       rect_height / 2 + RECTANGLE_STROKE_WIDTH / 2 + ENTITY_NAME_FONT_SIZE * 0.25,
                       ENTITY_NAME_FONT_SIZE,
