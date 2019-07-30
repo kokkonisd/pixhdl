@@ -46,12 +46,12 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     // Each time we need to account for the maximum port name length times the approximate
     // character width (font_size * 0.55), adding 1 extra character on either side for spacing.
     // To that we also need to add the arrow length.
-    arrow_length_left = max(ARROW_LENGTH, (ent->max_length_size_in + 2) * LENGTH_FONT_SIZE);
-    arrow_length_right = max(ARROW_LENGTH, (ent->max_length_size_out + 2) * LENGTH_FONT_SIZE);
+    arrow_length_left = max(ARROW_LENGTH, (ent->max_length_size_in + 2) * LENGTH_FONT_SIZE) + ARROW_WIDTH;
+    arrow_length_right = max(ARROW_LENGTH, (ent->max_length_size_out + 2) * LENGTH_FONT_SIZE) + ARROW_WIDTH;
     port_width_left = arrow_length_left + (ent->max_name_size_in + 2) * PORT_NAME_FONT_SIZE * 0.55;
     port_width_right = arrow_length_right + (ent->max_name_size_out + 2) * PORT_NAME_FONT_SIZE * 0.55;
     // The port height is simply the width of one arrow head
-    port_width = ARROW_WIDTH + LENGTH_FONT_SIZE;
+    port_width = ARROW_WIDTH * 2 + LENGTH_FONT_SIZE;
 
     // Calculate Entity rectangle width and height
     // The width should be equal to the maximum between two floats:
@@ -75,7 +75,7 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     svg_height = rect_height + RECTANGLE_STROKE_WIDTH;
 
     // If there are INOUT signals, we need to add their height too
-    arrow_length_bottom = max(ARROW_LENGTH, (ent->max_length_size_inout + 2) * LENGTH_FONT_SIZE);
+    arrow_length_bottom = max(ARROW_LENGTH, (ent->max_length_size_inout + 2) * LENGTH_FONT_SIZE) + ARROW_WIDTH;
     if (ent->count_inout > 0)
         svg_height += arrow_length_bottom + (PORT_NAME_FONT_SIZE * 0.55 * (ent->max_name_size_inout + 2));
 
@@ -84,8 +84,6 @@ int generateSvgFromEntity (Entity * ent, char * filename)
 
     // First off, print the SVG header along with the width and height of the image
     fprintf(svg_file, SVG_HEADER, svg_width, svg_height);
-    // Add the <defs> that help us with the arrows
-    fprintf(svg_file, "%s\n", ARROW_DEFINITION);
 
     // Draw the entity rectangle
     fprintf(svg_file, "<rect width='%.2f' height='%.2f' x='%.2f' y='%.2f' fill='none' stroke='black' stroke-width='%d' />\n",
@@ -131,10 +129,20 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     // Loop over the IN signals and draw them
     for (i = 0; i < ent->count_in; i++) {
         // Draw the arrow going in the entity rect
-        fprintf(svg_file, SIMPLE_ARROW_LINE, (ent->max_name_size_in + 2) * PORT_NAME_FONT_SIZE * 0.55,
-                                         cur_pos,
-                                         port_width_left - RECTANGLE_STROKE_WIDTH,
-                                         cur_pos);
+        fprintf(svg_file, SIMPLE_LINE, (ent->max_name_size_in + 2) * PORT_NAME_FONT_SIZE * 0.55,
+                                             cur_pos,
+                                             port_width_left,
+                                             cur_pos);
+
+        // Draw the arrow head
+        fprintf(svg_file, ARROW_HEAD, port_width_left - ARROW_WIDTH,
+                                      cur_pos,
+                                      port_width_left - ARROW_WIDTH * 1.5,
+                                      cur_pos - ARROW_WIDTH / 2,
+                                      port_width_left,
+                                      cur_pos,
+                                      port_width_left - ARROW_WIDTH * 1.5,
+                                      cur_pos + ARROW_WIDTH / 2);
 
         // Draw a slash to indicate signal length in bits
         fprintf(svg_file, LENGTH_SLASH, port_width_left - arrow_length_left / 2 - 10,
@@ -173,10 +181,20 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     // Loop over the OUT signals and draw them
     for (i = 0; i < ent->count_out; i++) {
         // Draw the arrow coming out of the entity rect
-        fprintf(svg_file, SIMPLE_ARROW_LINE, svg_width - port_width_right,
+        fprintf(svg_file, SIMPLE_LINE, svg_width - port_width_right,
                                          cur_pos,
                                          svg_width - (ent->max_name_size_out + 2) * PORT_NAME_FONT_SIZE * 0.55,
                                          cur_pos);
+
+        // Draw the arrow head
+        fprintf(svg_file, ARROW_HEAD, (svg_width - (ent->max_name_size_out + 2) * PORT_NAME_FONT_SIZE * 0.55) - ARROW_WIDTH / 2,
+                                      cur_pos,
+                                      (svg_width - (ent->max_name_size_out + 2) * PORT_NAME_FONT_SIZE * 0.55) - ARROW_WIDTH,
+                                      cur_pos - ARROW_WIDTH / 2,
+                                      (svg_width - (ent->max_name_size_out + 2) * PORT_NAME_FONT_SIZE * 0.55) + ARROW_WIDTH / 2,
+                                      cur_pos,
+                                      (svg_width - (ent->max_name_size_out + 2) * PORT_NAME_FONT_SIZE * 0.55) - ARROW_WIDTH,
+                                      cur_pos + ARROW_WIDTH / 2);
 
         // Draw a slash to indicate signal length in bits
         fprintf(svg_file, LENGTH_SLASH, svg_width - port_width_right + arrow_length_right / 2 - 10,
@@ -214,10 +232,30 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     // Loop over the INOUT signals and draw them
     for (i = 0; i < ent->count_inout; i++) {
         // Draw the arrow going in and coming out of the entity rect
-        fprintf(svg_file, DOUBLE_ARROW_LINE, cur_pos,
-                                             svg_height - (ent->max_name_size_inout + 2) * PORT_NAME_FONT_SIZE * 0.55,
-                                             cur_pos,
-                                             rect_height + RECTANGLE_STROKE_WIDTH);
+        fprintf(svg_file, SIMPLE_LINE, cur_pos,
+                                       svg_height - (ent->max_name_size_inout + 2) * PORT_NAME_FONT_SIZE * 0.55,
+                                       cur_pos,
+                                       rect_height + RECTANGLE_STROKE_WIDTH);
+
+        // Draw the arrow head (entity side)
+        fprintf(svg_file, ARROW_HEAD, cur_pos,
+                                      rect_height + RECTANGLE_STROKE_WIDTH / 2 + ARROW_WIDTH,
+                                      cur_pos - ARROW_WIDTH / 2,
+                                      rect_height + RECTANGLE_STROKE_WIDTH / 2 + ARROW_WIDTH * 1.5,
+                                      cur_pos,
+                                      rect_height + RECTANGLE_STROKE_WIDTH / 2,
+                                      cur_pos + ARROW_WIDTH / 2,
+                                      rect_height + RECTANGLE_STROKE_WIDTH / 2 + ARROW_WIDTH * 1.5);
+
+        // Draw the arrow head (port name side)
+        fprintf(svg_file, ARROW_HEAD, cur_pos,
+                                      svg_height - (ent->max_name_size_inout + 2) * PORT_NAME_FONT_SIZE * 0.55 - ARROW_WIDTH / 2,
+                                      cur_pos - ARROW_WIDTH / 2,
+                                      svg_height - (ent->max_name_size_inout + 2) * PORT_NAME_FONT_SIZE * 0.55 - ARROW_WIDTH,
+                                      cur_pos,
+                                      svg_height - (ent->max_name_size_inout + 2) * PORT_NAME_FONT_SIZE * 0.55 + ARROW_WIDTH / 2,
+                                      cur_pos + ARROW_WIDTH / 2,
+                                      svg_height - (ent->max_name_size_inout + 2) * PORT_NAME_FONT_SIZE * 0.55 - ARROW_WIDTH);
 
         // Draw a slash to indicate signal length in bits
         fprintf(svg_file, LENGTH_SLASH, cur_pos - 10,
