@@ -24,7 +24,11 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     FILE * svg_file = NULL;
     float port_width_left = 0.0;
     float port_width_right = 0.0;
-    float port_height = 0.0;
+    float arrow_length_left = 0.0;
+    float arrow_length_right = 0.0;
+    float arrow_length_bottom = 0.0;
+    float generics_height = 0.0;
+    float port_width = 0.0;
     float rect_width = 0.0;
     float rect_height = 0.0;
     float svg_width = 0.0;
@@ -42,29 +46,38 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     // Each time we need to account for the maximum port name length times the approximate
     // character width (font_size * 0.55), adding 1 extra character on either side for spacing.
     // To that we also need to add the arrow length.
-    port_width_left = ARROW_LENGTH + (ent->max_name_size_in + 2) * PORT_NAME_FONT_SIZE * 0.55;
-    port_width_right = ARROW_LENGTH + (ent->max_name_size_out + 2) * PORT_NAME_FONT_SIZE * 0.55;
+    arrow_length_left = max(ARROW_LENGTH, (ent->max_length_size_in + 2) * LENGTH_FONT_SIZE);
+    arrow_length_right = max(ARROW_LENGTH, (ent->max_length_size_out + 2) * LENGTH_FONT_SIZE);
+    port_width_left = arrow_length_left + (ent->max_name_size_in + 2) * PORT_NAME_FONT_SIZE * 0.55;
+    port_width_right = arrow_length_right + (ent->max_name_size_out + 2) * PORT_NAME_FONT_SIZE * 0.55;
     // The port height is simply the width of one arrow head
-    port_height = ARROW_WIDTH;
+    port_width = ARROW_WIDTH + LENGTH_FONT_SIZE;
 
     // Calculate Entity rectangle width and height
     // The width should be equal to the maximum between two floats:
     //     1. The entity's name width (in pixels, so as before that is font_size * 0.55) plus 2 characters for spacing
     //     2. The width produced by the INOUT channels, if they exist
-    rect_width = max(ENTITY_NAME_FONT_SIZE * (strlen(ent->name) + 2), ARROW_WIDTH * ent->count_inout);
+    rect_width = max(ENTITY_NAME_FONT_SIZE * (strlen(ent->name) + 2), port_width * ent->count_inout);
+    if (ent->count_generics > 0)
+        rect_width += (ent->max_name_size_generics + ent->max_length_size_generics + 2) * PORT_NAME_FONT_SIZE * 0.55;
     // The height of the rectangle is also the maximum between two floats:
     //     1. The maximum between INs and OUTs times the width of one arrow head
     //     2. The entity's name font size (which basically means "enough place for the entity's name")
-    rect_height = max(max(ent->count_in, ent->count_out) * ARROW_WIDTH, ENTITY_NAME_FONT_SIZE);
+    rect_height = max(max(ent->count_in, ent->count_out) * port_width, ENTITY_NAME_FONT_SIZE);
+    generics_height = (ent->count_generics + 1) * PORT_NAME_FONT_SIZE;
+    if (ent->count_generics > 0)
+        rect_height += generics_height;
 
     // The total SVG width is then simply the sum of the two port widths plus the entity rect width
     svg_width = rect_width + port_width_left + port_width_right;
 
     // The total SVG height is at least equal to the entity rect height plus its stroke width
     svg_height = rect_height + RECTANGLE_STROKE_WIDTH;
+
     // If there are INOUT signals, we need to add their height too
+    arrow_length_bottom = max(ARROW_LENGTH, (ent->max_length_size_inout + 2) * LENGTH_FONT_SIZE);
     if (ent->count_inout > 0)
-        svg_height += ARROW_LENGTH + (PORT_NAME_FONT_SIZE * 0.55 * (ent->max_name_size_inout + 2));
+        svg_height += arrow_length_bottom + (PORT_NAME_FONT_SIZE * 0.55 * (ent->max_name_size_inout + 2));
 
     // Open the output file, we're ready to produce the image
     svg_file = fopen(filename, "w");
@@ -85,9 +98,24 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     // Draw the entity's name inside the rectangle
     fprintf(svg_file, "<text text-anchor='middle' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier'>%s</text>\n",
                       port_width_left + rect_width / 2,
-                      rect_height / 2 + RECTANGLE_STROKE_WIDTH / 2 + ENTITY_NAME_FONT_SIZE * 0.25,
+                      rect_height - RECTANGLE_STROKE_WIDTH / 2 - ENTITY_NAME_FONT_SIZE * 0.25,
                       ENTITY_NAME_FONT_SIZE,
                       ent->name);
+
+
+    // Draw the GENERIC inputs
+    for (i = 0; i < ent->count_generics; i++) {
+        fprintf(svg_file, GENERIC_SIGNAL_NAME, port_width_left + RECTANGLE_STROKE_WIDTH + PORT_NAME_FONT_SIZE,
+                                               (float)(RECTANGLE_STROKE_WIDTH + PORT_NAME_FONT_SIZE) * (i + 1),
+                                               PORT_NAME_FONT_SIZE,
+                                               ent->generics[i].name,
+                                               ent->generics[i].length);
+
+        fprintf(svg_file, LENGTH_SLASH, port_width_left,
+                                        (float)(RECTANGLE_STROKE_WIDTH + PORT_NAME_FONT_SIZE) * (i + 1.25),
+                                        port_width_left + rect_width,
+                                        (float)(RECTANGLE_STROKE_WIDTH + PORT_NAME_FONT_SIZE) * (i + 1.25));
+    }
 
 
     // Draw the IN signals
@@ -109,9 +137,9 @@ int generateSvgFromEntity (Entity * ent, char * filename)
                                          cur_pos);
 
         // Draw a slash to indicate signal length in bits
-        fprintf(svg_file, LENGTH_SLASH, port_width_left - ARROW_LENGTH / 2 - 10,
+        fprintf(svg_file, LENGTH_SLASH, port_width_left - arrow_length_left / 2 - 10,
                                         cur_pos + 10,
-                                        port_width_left - ARROW_LENGTH / 2 + 10,
+                                        port_width_left - arrow_length_left / 2 + 10,
                                         cur_pos - 10);
 
         // Draw the signal's name
@@ -122,7 +150,7 @@ int generateSvgFromEntity (Entity * ent, char * filename)
 
 
         // Draw the signal's length above the slash we drew earlier
-        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, port_width_left - ARROW_LENGTH / 2,
+        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, port_width_left - arrow_length_left / 2,
                                        cur_pos - 15,
                                        LENGTH_FONT_SIZE,
                                        ent->signals_in[i].length);
@@ -151,9 +179,9 @@ int generateSvgFromEntity (Entity * ent, char * filename)
                                          cur_pos);
 
         // Draw a slash to indicate signal length in bits
-        fprintf(svg_file, LENGTH_SLASH, svg_width - port_width_right + ARROW_LENGTH / 2 - 10,
+        fprintf(svg_file, LENGTH_SLASH, svg_width - port_width_right + arrow_length_right / 2 - 10,
                                         cur_pos + 10,
-                                        svg_width - port_width_right + ARROW_LENGTH / 2 + 10,
+                                        svg_width - port_width_right + arrow_length_right / 2 + 10,
                                         cur_pos - 10);
 
         // Draw the signal's name
@@ -163,7 +191,7 @@ int generateSvgFromEntity (Entity * ent, char * filename)
                                            ent->signals_out[i].name);
 
         // Draw the signal's length above the slash we drew earlier
-        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, svg_width - port_width_right + ARROW_LENGTH / 2,
+        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, svg_width - port_width_right + arrow_length_right / 2,
                                        cur_pos - 15,
                                        LENGTH_FONT_SIZE,
                                        ent->signals_out[i].length);
@@ -193,9 +221,9 @@ int generateSvgFromEntity (Entity * ent, char * filename)
 
         // Draw a slash to indicate signal length in bits
         fprintf(svg_file, LENGTH_SLASH, cur_pos - 10,
-                                        rect_height + RECTANGLE_STROKE_WIDTH + ARROW_LENGTH / 2 - 10,
+                                        rect_height + RECTANGLE_STROKE_WIDTH + arrow_length_bottom / 2 - 10,
                                         cur_pos + 10,
-                                        rect_height + RECTANGLE_STROKE_WIDTH + ARROW_LENGTH / 2 + 10);
+                                        rect_height + RECTANGLE_STROKE_WIDTH + arrow_length_bottom / 2 + 10);
 
         // Draw the signal's name
         fprintf(svg_file, INOUT_SIGNAL_NAME, cur_pos + PORT_NAME_FONT_SIZE * 0.25,
@@ -207,10 +235,10 @@ int generateSvgFromEntity (Entity * ent, char * filename)
 
         // Draw the signal's length above the slash we drew earlier
         fprintf(svg_file, VERTICAL_LENGTH_TEXT, cur_pos - 15,
-                                                rect_height + RECTANGLE_STROKE_WIDTH + ARROW_LENGTH / 2,
+                                                rect_height + RECTANGLE_STROKE_WIDTH + arrow_length_bottom / 2,
                                                 LENGTH_FONT_SIZE,
                                                 cur_pos - 15,
-                                                rect_height + RECTANGLE_STROKE_WIDTH + ARROW_LENGTH / 2,
+                                                rect_height + RECTANGLE_STROKE_WIDTH + arrow_length_bottom / 2,
                                                 ent->signals_inout[i].length);
 
         // Move the current X position forward by one step
