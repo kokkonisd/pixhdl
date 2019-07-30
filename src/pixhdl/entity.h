@@ -18,12 +18,24 @@ typedef enum {
 typedef struct {
     char * name;         // Name of the signal
     direction dir;       // Direction of the signal
-    unsigned int length; // Length of the signal (in bits)
+    char * length;       // Length of the signal (in bits)
+                         // It's a string because the parser
+                         // will attempt to calculate its integer
+                         // value, but will leave it as-is if it fails
+                         // (for example if it contains generics)
 } Signal;
+
+typedef struct {
+    char * name;
+    char * value;
+} Generic;
 
 // Define the Entity object
 typedef struct {
     char * name;                 // Name of the entity
+
+    Generic * generics;          // Generic inputs
+    unsigned int generics_count; // Length of the generics array
 
     Signal * signals_in;         // Array of IN signals
     Signal * signals_out;        // Array of OUT signals

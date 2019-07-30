@@ -46,7 +46,7 @@ direction parseSignalDirection (const char * raw_txt, int start, int end);
  * @param  end              (int): The ending index for the raw entity text
  * @return                  (int): The resulting length (in bits)
  */
-int parseSignalLength (const char * raw_txt, int start, int end);
+char * parseSignalLength (const char * raw_txt, int start, int end);
 
 /**
  * Gets the raw entry definition from a given file. Output also contains the entity's name.

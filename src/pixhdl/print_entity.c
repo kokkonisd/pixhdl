@@ -56,7 +56,7 @@ void printEntitySignals (Entity * ent)
 
     // Print the IN signals
     for (i = 0; i < ent->count_in; i++)
-        printf("%-8d | %-*s | %-13d | %s\n", i + 1,
+        printf("%-8d | %-*s | %-13s | %s\n", i + 1,
                                              spaces,
                                              ent->signals_in[i].name,
                                              ent->signals_in[i].length,
@@ -69,7 +69,7 @@ void printEntitySignals (Entity * ent)
 
     // Print the OUT signals
     for (i = 0; i < ent->count_out; i++)
-        printf("%-8d | %-*s | %-13d | %s\n", i + 1,
+        printf("%-8d | %-*s | %-13s | %s\n", i + 1,
                                              spaces,
                                              ent->signals_out[i].name,
                                              ent->signals_out[i].length,
@@ -82,7 +82,7 @@ void printEntitySignals (Entity * ent)
 
     // Print the INOUT signals
     for (i = 0; i < ent->count_inout; i++)
-        printf("%-8d | %-*s | %-13d | %s\n", i + 1,
+        printf("%-8d | %-*s | %-13s | %s\n", i + 1,
                                              spaces,
                                              ent->signals_inout[i].name,
                                              ent->signals_inout[i].length,

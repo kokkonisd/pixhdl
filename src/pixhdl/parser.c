@@ -120,10 +120,10 @@ error:
  * @param  end              (int): The ending index for the raw entity text
  * @return                  (int): The resulting length (in bits)
  */
-int parseSignalLength (const char * raw_txt, int start, int end)
+char * parseSignalLength (const char * raw_txt, int start, int end)
 {
     // Resulting signal length (in bits)
-    int length = 0;
+    char * length = NULL;
     char * len_str = NULL;
     regex_t regex;
     int reti = 0;
@@ -184,8 +184,16 @@ int parseSignalLength (const char * raw_txt, int start, int end)
         strncpy(bottom_num, len_str + bottom_match_start, bottom_match_end - bottom_match_start);
         bottom_num[bottom_match_end - bottom_match_start] = '\0';
 
+        int digit_count = 0;
+        int res = atoi(top_num) - atoi(bottom_num) + 1;
+        while (res) {
+            res /= 10;
+            digit_count++;
+        }
         // Length is MSB - LSB + 1
-        length = atoi(top_num) - atoi(bottom_num) + 1;
+        length = malloc(sizeof(char) * (digit_count + 1));
+        sprintf(length, "%d", atoi(top_num) - atoi(bottom_num) + 1);
+        length[digit_count] = '\0';
 
         // Free the temporary length string
         free(top_num);
@@ -193,7 +201,9 @@ int parseSignalLength (const char * raw_txt, int start, int end)
     // Else, the signal is a `std_logic`
     } else {
         // Thus, the length is 1 bit
-        length = 1;
+        length = malloc(sizeof(char) * 2);
+        length[0] = '1';
+        length[1] = '\0';
     }
 
     // Free the length string

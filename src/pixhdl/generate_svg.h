@@ -22,8 +22,8 @@
 #define OUT_SIGNAL_NAME "<text text-anchor='begin' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier'>%s</text>\n"
 #define INOUT_SIGNAL_NAME "<text text-anchor='end' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier' transform='rotate(270 %.2f,%.2f)'>%s</text>\n"
 
-#define HORIZONTAL_LENGTH_TEXT "<text text-anchor='middle' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier'>%d</text>\n"
-#define VERTICAL_LENGTH_TEXT "<text text-anchor='middle' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier' transform='rotate(270 %.2f,%.2f)'>%d</text>\n"
+#define HORIZONTAL_LENGTH_TEXT "<text text-anchor='middle' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier'>%s</text>\n"
+#define VERTICAL_LENGTH_TEXT "<text text-anchor='middle' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier' transform='rotate(270 %.2f,%.2f)'>%s</text>\n"
 #define LENGTH_SLASH "<line x1='%.2f' y1='%.2f' x2='%.2f' y2='%.2f' stroke='black' stroke-width='3' fill='transparent' />\n"
 
 

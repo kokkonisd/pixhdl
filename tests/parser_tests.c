@@ -72,19 +72,23 @@ char * parse_simple_port_directions ()
 
 char * parse_simple_port_lengths ()
 {
-    int length = 0;
+    char * length = NULL;
 
     length = parseSignalLength("std_logic", 0, 9);
-    mu_assert(length == 1, "Incorrect parsing of port length 1.");
+    mu_assert(strcmp(length, "1") == 0, "Incorrect parsing of port length 1.");
+    free(length);
 
     length = parseSignalLength(": std_logic_vector(10 downto 0)", 2, 31);
-    mu_assert(length == 11, "Incorrect parsing of port length 11.");
+    mu_assert(strcmp(length, "11") == 0, "Incorrect parsing of port length 11.");
+    free(length);
 
     length = parseSignalLength("D : inout std_logic", 10, 19);
-    mu_assert(length == 1, "Incorrect parsing of port length 1 (2).");
+    mu_assert(strcmp(length, "1") == 0, "Incorrect parsing of port length 1 (2).");
+    free(length);
 
     length = parseSignalLength("E:in std_logic_vector(3 downto 1);", 5, 33);
-    mu_assert(length == 3, "Incorrect parsing of port length 3.");
+    mu_assert(strcmp(length, "3") == 0, "Incorrect parsing of port length 3.");
+    free(length);
 
     return NULL;
 }
@@ -142,7 +146,7 @@ char * parse_entity_from_raw_entity_text ()
     mu_assert(ent, "First entity wasn't parsed correctly.");
     mu_assert(strcmp(ent->name, "CPU") == 0, "First entity's name is wrong.");
     mu_assert(ent->count_in == 1, "Input signal count is wrong for first entity.");
-    mu_assert(ent->signals_in[0].length == 1, "Input signal length is wrong for first entity.");
+    mu_assert(strcmp(ent->signals_in[0].length, "1") == 0, "Input signal length is wrong for first entity.");
     mu_assert(strcmp(ent->signals_in[0].name, "A") == 0, "Input signal name is wrong for first entity.");
 
     destroyEntity(ent);
@@ -153,7 +157,7 @@ char * parse_entity_from_raw_entity_text ()
     mu_assert(ent, "Second entity wasn't parsed correctly.");
     mu_assert(strcmp(ent->name, "MMU") == 0, "Second entity's name is wrong.");
     mu_assert(ent->count_in == 1, "Input signal count is wrong for second entity.");
-    mu_assert(ent->signals_in[0].length == 6, "Input signal length is wrong for second entity.");
+    mu_assert(strcmp(ent->signals_in[0].length, "6") == 0, "Input signal length is wrong for second entity.");
     mu_assert(strcmp(ent->signals_in[0].name, "B") == 0, "Input signal name is wrong for second entity.");
 
     destroyEntity(ent);
@@ -165,9 +169,9 @@ char * parse_entity_from_raw_entity_text ()
     mu_assert(strcmp(ent->name, "FlipFlop") == 0, "Third entity's name is wrong.");
     mu_assert(ent->count_in == 1, "Input signal count is wrong for third entity.");
     mu_assert(ent->count_out == 1, "Output signal count is wrong for third entity.");
-    mu_assert(ent->signals_in[0].length == 1, "Input signal length is wrong for third entity.");
+    mu_assert(strcmp(ent->signals_in[0].length, "1") == 0, "Input signal length is wrong for third entity.");
     mu_assert(strcmp(ent->signals_in[0].name, "C") == 0, "Input signal name is wrong for third entity.");
-    mu_assert(ent->signals_out[0].length == 4, "Output signal length is wrong for third entity.");
+    mu_assert(strcmp(ent->signals_out[0].length, "4") == 0, "Output signal length is wrong for third entity.");
     mu_assert(strcmp(ent->signals_out[0].name, "D") == 0, "Output signal name is wrong for third entity.");
 
     destroyEntity(ent);
@@ -182,9 +186,9 @@ char * parse_entity_from_file ()
     Entity * ent = NULL;
     size_t i = 0;
     char * input_names[8] = { "OP", "A", "B", "C", "D", "E", "F", "G" };
-    int input_lengths[8] = { 2, 32, 32, 32, 32, 32, 32, 32 };
+    char * input_lengths[8] = { "2", "32", "32", "32", "32", "32", "32", "32" };
     char * output_names[2] = { "O", "N" };
-    int output_lengths[2] = { 32, 1 };
+    char * output_lengths[2] = { "32", "1" };
 
     filename = "tests/vhdl_sources/ALU.vhdl";
     ent = getEntityFromFile(filename);
@@ -196,12 +200,12 @@ char * parse_entity_from_file ()
 
     for (i = 0; i < ent->count_in; i++) {
         mu_assert(strcmp(ent->signals_in[i].name, input_names[i]) == 0, "First entity: an input name is wrong.");
-        mu_assert(ent->signals_in[i].length == input_lengths[i], "First entity: an input length is wrong.");
+        mu_assert(strcmp(ent->signals_in[i].length, input_lengths[i]) == 0, "First entity: an input length is wrong.");
     }
 
     for (i = 0; i < ent->count_out; i++) {
         mu_assert(strcmp(ent->signals_out[i].name, output_names[i]) == 0, "First entity: an output name is wrong.");
-        mu_assert(ent->signals_out[i].length == output_lengths[i], "First entity: an output length is wrong.");
+        mu_assert(strcmp(ent->signals_out[i].length, output_lengths[i]) == 0, "First entity: an output length is wrong.");
     }
 
     destroyEntity(ent);
@@ -217,12 +221,12 @@ char * parse_entity_from_file ()
 
     for (i = 0; i < ent->count_in; i++) {
         mu_assert(strcmp(ent->signals_in[i].name, input_names[i]) == 0, "Second entity: an input name is wrong.");
-        mu_assert(ent->signals_in[i].length == input_lengths[i], "Second entity: an input length is wrong.");
+        mu_assert(strcmp(ent->signals_in[i].length, input_lengths[i]) == 0, "Second entity: an input length is wrong.");
     }
 
     for (i = 0; i < ent->count_out; i++) {
         mu_assert(strcmp(ent->signals_out[i].name, output_names[i]) == 0, "Second entity: an output name is wrong.");
-        mu_assert(ent->signals_out[i].length == output_lengths[i], "Second entity: an output length is wrong.");
+        mu_assert(strcmp(ent->signals_out[i].length, output_lengths[i]) == 0, "Second entity: an output length is wrong.");
     }
 
     destroyEntity(ent);
