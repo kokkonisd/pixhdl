@@ -24,6 +24,8 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     FILE * svg_file = NULL;
     float port_width_left = 0.0;
     float port_width_right = 0.0;
+    float arrow_length_left = 0.0;
+    float arrow_length_right = 0.0;
     float port_height = 0.0;
     float rect_width = 0.0;
     float rect_height = 0.0;
@@ -42,8 +44,10 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     // Each time we need to account for the maximum port name length times the approximate
     // character width (font_size * 0.55), adding 1 extra character on either side for spacing.
     // To that we also need to add the arrow length.
-    port_width_left = ARROW_LENGTH + (ent->max_name_size_in + 2) * PORT_NAME_FONT_SIZE * 0.55;
-    port_width_right = ARROW_LENGTH + (ent->max_name_size_out + 2) * PORT_NAME_FONT_SIZE * 0.55;
+    arrow_length_left = max(ARROW_LENGTH, (ent->max_length_size_in + 2) * LENGTH_FONT_SIZE);
+    arrow_length_right = max(ARROW_LENGTH, (ent->max_length_size_out + 2) * LENGTH_FONT_SIZE);
+    port_width_left = arrow_length_left + (ent->max_name_size_in + 2) * PORT_NAME_FONT_SIZE * 0.55;
+    port_width_right = arrow_length_right + (ent->max_name_size_out + 2) * PORT_NAME_FONT_SIZE * 0.55;
     // The port height is simply the width of one arrow head
     port_height = ARROW_WIDTH;
 
@@ -109,9 +113,9 @@ int generateSvgFromEntity (Entity * ent, char * filename)
                                          cur_pos);
 
         // Draw a slash to indicate signal length in bits
-        fprintf(svg_file, LENGTH_SLASH, port_width_left - ARROW_LENGTH / 2 - 10,
+        fprintf(svg_file, LENGTH_SLASH, port_width_left - arrow_length_left / 2 - 10,
                                         cur_pos + 10,
-                                        port_width_left - ARROW_LENGTH / 2 + 10,
+                                        port_width_left - arrow_length_left / 2 + 10,
                                         cur_pos - 10);
 
         // Draw the signal's name
@@ -122,7 +126,7 @@ int generateSvgFromEntity (Entity * ent, char * filename)
 
 
         // Draw the signal's length above the slash we drew earlier
-        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, port_width_left - ARROW_LENGTH / 2,
+        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, port_width_left - arrow_length_left / 2,
                                        cur_pos - 15,
                                        LENGTH_FONT_SIZE,
                                        ent->signals_in[i].length);
@@ -151,9 +155,9 @@ int generateSvgFromEntity (Entity * ent, char * filename)
                                          cur_pos);
 
         // Draw a slash to indicate signal length in bits
-        fprintf(svg_file, LENGTH_SLASH, svg_width - port_width_right + ARROW_LENGTH / 2 - 10,
+        fprintf(svg_file, LENGTH_SLASH, svg_width - port_width_right + arrow_length_right / 2 - 10,
                                         cur_pos + 10,
-                                        svg_width - port_width_right + ARROW_LENGTH / 2 + 10,
+                                        svg_width - port_width_right + arrow_length_right / 2 + 10,
                                         cur_pos - 10);
 
         // Draw the signal's name
@@ -163,7 +167,7 @@ int generateSvgFromEntity (Entity * ent, char * filename)
                                            ent->signals_out[i].name);
 
         // Draw the signal's length above the slash we drew earlier
-        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, svg_width - port_width_right + ARROW_LENGTH / 2,
+        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, svg_width - port_width_right + arrow_length_right / 2,
                                        cur_pos - 15,
                                        LENGTH_FONT_SIZE,
                                        ent->signals_out[i].length);

@@ -168,7 +168,7 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
     len_str[end - start] = '\0';
 
     // If it's a `std_logic_vector (X downto 0)`
-    if (len_str[0] == 's' && len_str[strlen(len_str) - 1] == ')') {
+    if (tolower(len_str[0]) == 's' && len_str[strlen(len_str) - 1] == ')') {
         // Compile regex to find vector length
         reti = regcomp(&regex, VECTOR_LENGTH_REGEX, REG_EXTENDED);
         check(reti == 0, "Could not compile vector length regex.");
@@ -223,7 +223,7 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
         free(top_num);
         free(bottom_num);
     // Else, the signal is a `std_logic`
-    } else if (strcmp(len_str, "std_logic") == 0) {
+    } else if (strcmp(len_str, "std_logic") == 0 || strcmp(len_str, "STD_LOGIC") == 0) {
         // Thus, the length is 1 bit
         length = malloc(sizeof(char) * 2);
         length[0] = '1';
