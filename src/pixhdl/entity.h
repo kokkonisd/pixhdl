@@ -11,7 +11,8 @@
 typedef enum {
     IN,
     OUT,
-    INOUT
+    INOUT,
+    GENERIC
 } direction;
 
 // Define the Signal object
@@ -25,17 +26,12 @@ typedef struct {
                          // (for example if it contains generics)
 } Signal;
 
-typedef struct {
-    char * name;
-    char * value;
-} Generic;
-
 // Define the Entity object
 typedef struct {
     char * name;                 // Name of the entity
 
-    Generic * generics;          // Generic inputs
-    unsigned int generics_count; // Length of the generics array
+    Signal * generics;           // Generic inputs
+    unsigned int count_generics; // Length of the generics array
 
     Signal * signals_in;         // Array of IN signals
     Signal * signals_out;        // Array of OUT signals
@@ -48,6 +44,7 @@ typedef struct {
     size_t max_name_size_in;     // Maximum length of the name of a signal
     size_t max_name_size_out;    // Maximum length of the name of a signal
     size_t max_name_size_inout;  // Maximum length of the name of a signal
+    size_t max_name_size_generics;
     size_t max_name_size_global; // Maximum length of the name of a signal
                                  // in this Entity
 } Entity;

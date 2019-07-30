@@ -157,9 +157,10 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
     check(end > start && end > 0 && start >= 0,
           "Start and end indices are incorrect.");
 
+    // TODO
     // Verify that the length string only contains std_logic or std_logic_vector definitions
-    check(tolower(*(raw_txt + start)) == 's', "Invalid length string.");
-    check(tolower(*(raw_txt + end - 1)) == 'c' || *(raw_txt + end - 1) == ')', "Invalid length string.");
+    // check(tolower(*(raw_txt + start)) == 's', "Invalid length string.");
+    // check(tolower(*(raw_txt + end - 1)) == 'c' || *(raw_txt + end - 1) == ')', "Invalid length string.");
 
     // Allocate memory for the length string
     len_str = malloc(sizeof(char) * (end - start + 1));
@@ -171,7 +172,7 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
     len_str[end - start] = '\0';
 
     // If it's a `std_logic_vector (X downto 0)`
-    if (len_str[strlen(len_str) - 1] == ')') {
+    if (len_str[0] == 's' && len_str[strlen(len_str) - 1] == ')') {
         // Compile regex to find vector length
         reti = regcomp(&regex, VECTOR_LENGTH_REGEX, REG_EXTENDED);
         check(reti == 0, "Could not compile vector length regex.");
@@ -227,11 +228,15 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
             free(bottom_num);
         }
     // Else, the signal is a `std_logic`
-    } else {
+    } else if (strcmp(len_str, "std_logic") == 0) {
         // Thus, the length is 1 bit
         length = malloc(sizeof(char) * 2);
         length[0] = '1';
         length[1] = '\0';
+    } else {
+        length = malloc(sizeof(char) * (strlen(len_str) + 1));
+        strncpy(length, len_str, strlen(len_str));
+        length[strlen(len_str)] = '\0';
     }
 
     // Free the length string
@@ -394,19 +399,19 @@ char * getRawEntityTextFromFile (const char * filename)
     // If generics are detected
     if (entity_generics) {
         // Allocate memory for the final string
-        res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_generics) + strlen(entity_body) + 1));
+        res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_generics) + strlen(entity_body) + 3));
         // Print the name followed by the body in the resulting string
-        sprintf(res, "%s%s%s", entity_name, entity_generics, entity_body);
+        sprintf(res, "%s*%s@%s", entity_name, entity_generics, entity_body);
         // Add a null char at the end for safety
-        res[strlen(entity_name) + strlen(entity_generics) + strlen(entity_body)] = '\0';
+        res[strlen(entity_name) + strlen(entity_generics) + strlen(entity_body) + 2] = '\0';
     // Otherwise, keep generics out
     } else {
         // Allocate memory for the final string
-        res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_body) + 1));
+        res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_body) + 2));
         // Print the name followed by the body in the resulting string
-        sprintf(res, "%s%s", entity_name, entity_body);
+        sprintf(res, "%s@%s", entity_name, entity_body);
         // Add a null char at the end for safety
-        res[strlen(entity_name) + strlen(entity_body)] = '\0';
+        res[strlen(entity_name) + strlen(entity_body) + 1] = '\0';
     }
 
     // Free the name, body & generics strings
@@ -434,7 +439,7 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
     // Return value for regex object
     int reti = 0;
     // Regex match object to capture matches
-    regmatch_t rm[4];
+    regmatch_t rm[6];
     // Char pointer to move around entity_text
     const char * cur_text = NULL;
     // Entity object to be returned
@@ -447,6 +452,7 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
     char * name_delimiter = NULL;
     // Integer to hold the length of the entity's name
     int name_len = 0;
+    int are_generics_parsed = 0;
 
     // Create the Entity object
     ent = createEntity();
@@ -469,10 +475,19 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
     cur_text += name_len + 1;
 
     do {
+        if (cur_text[0] == '*')
+            are_generics_parsed = 0;
+        else if (cur_text[0] == '@')
+            are_generics_parsed = 1;
+        else
+            cur_text--;
+
+        cur_text++;
+
         // Get entity port with regex
         reti = regcomp(&regex, PORT_REGEX, REG_EXTENDED | REG_ICASE);
         check(reti == 0, "Couldn't compile port regex.");
-        reti = regexec(&regex, cur_text, 4, rm, 0);
+        reti = regexec(&regex, cur_text, 6, rm, 0);
         check(reti == 0, "Couldn't find port regex in entity.");
 
         // Get the name of the entity port
@@ -495,8 +510,15 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
             s.name[comma_index] = '\0';
 
             // Parse the direction and the length of the signal
-            s.dir = parseSignalDirection(cur_text, rm[2].rm_so, rm[2].rm_eo);
-            s.length = parseSignalLength(cur_text, rm[3].rm_so, rm[3].rm_eo);
+            if (are_generics_parsed)
+                s.dir = parseSignalDirection(cur_text, rm[3].rm_so, rm[3].rm_eo);
+            else
+                s.dir = GENERIC;
+
+            if (are_generics_parsed)
+                s.length = parseSignalLength(cur_text, rm[4].rm_so, rm[4].rm_eo);
+            else
+                s.length = parseSignalLength(cur_text, rm[5].rm_so, rm[5].rm_eo);
 
             // Add the signal to the entry
             addSignalToEntity(ent, &s);
@@ -526,8 +548,16 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
                     s.name[comma_index] = '\0';
 
                     // Parse direction & length
-                    s.dir = parseSignalDirection(cur_text, rm[2].rm_so, rm[2].rm_eo);
-                    s.length = parseSignalLength(cur_text, rm[3].rm_so, rm[3].rm_eo);
+                    if (are_generics_parsed)
+                        s.dir = parseSignalDirection(cur_text, rm[3].rm_so, rm[3].rm_eo);
+                    else
+                        s.dir = GENERIC;
+
+                    if (are_generics_parsed)
+                        s.length = parseSignalLength(cur_text, rm[4].rm_so, rm[4].rm_eo);
+                    else
+                        s.length = parseSignalLength(cur_text, rm[5].rm_so, rm[5].rm_eo);
+
                     // Add the signal to the entry
                     addSignalToEntity(ent, &s);
                 }
@@ -544,9 +574,12 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
         reti = regcomp(&regex, PORT_REGEX, REG_EXTENDED | REG_ICASE);
         check(reti == 0, "Couldn't compile port regex.");
         // Move the text pointer forwards
-        cur_text += rm[3].rm_eo + 1;
+        if (are_generics_parsed)
+            cur_text += rm[2].rm_eo + 1;
+        else
+            cur_text += rm[5].rm_eo + 1;
         // Look for another entity port
-        reti = regexec(&regex, cur_text, 4, rm, 0);
+        reti = regexec(&regex, cur_text, 6, rm, 0);
         // Free the regex object
         regfree(&regex);
     // Repeat whiel there are still entity ports left in the entity string

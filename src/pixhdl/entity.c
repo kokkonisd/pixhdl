@@ -29,6 +29,7 @@ Entity * createEntity ()
     ent->max_name_size_in = 0;
     ent->max_name_size_out = 0;
     ent->max_name_size_inout = 0;
+    ent->max_name_size_generics = 0;
     ent->max_name_size_global = 0;
 
     // Return the Entity object
@@ -45,6 +46,13 @@ void destroyEntity (Entity * ent)
     size_t i = 0;
 
     if (ent) {
+        for (i = 0; i < ent->count_generics; i++) {
+            if (ent->generics[i].name)
+                free(ent->generics[i].name);
+            if (ent->generics[i].length)
+                free(ent->generics[i].length);
+        }
+
         for (i = 0; i < ent->count_in; i++) {
             if (ent->signals_in[i].name)
                 free(ent->signals_in[i].name);
@@ -110,6 +118,12 @@ int addSignalToEntity (Entity * ent, const Signal * sig)
             signals = &ent->signals_inout;
             count = &ent->count_inout;
             max_size = &ent->max_name_size_inout;
+            break;
+
+        case GENERIC:
+            signals = &ent->generics;
+            count = &ent->count_generics;
+            max_size = &ent->max_name_size_generics;
             break;
 
         default:

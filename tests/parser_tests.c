@@ -109,7 +109,7 @@ char * parse_raw_text_entity_from_file ()
     char * filename = NULL;
 
     filename = "tests/vhdl_sources/ALU.vhdl";
-    right_entity_text = "ALU;OP : in std_logic_vector (1 downto 0);\n\
+    right_entity_text = "ALU;@OP : in std_logic_vector (1 downto 0);\n\
         A, B, C, D, E, F, G : in std_logic_vector (31 downto 0);\n\
         O : out std_logic_vector (31 downto 0);\n\
         N : out std_logic;";
@@ -121,7 +121,7 @@ char * parse_raw_text_entity_from_file ()
 
 
     filename = "tests/vhdl_sources/ALU_oneline.vhdl";
-    right_entity_text = "ALU;OP:in std_logic_vector (1 downto 0);A,B,C,D,E,F,G:in std_logic_vector (31 downto 0);O:out std_logic_vector (31 downto 0);N:out std_logic;";
+    right_entity_text = "ALU;@OP:in std_logic_vector (1 downto 0);A,B,C,D,E,F,G:in std_logic_vector (31 downto 0);O:out std_logic_vector (31 downto 0);N:out std_logic;";
 
     parsed_entity_text = getRawEntityTextFromFile(filename);
     mu_assert(strcmp(parsed_entity_text, right_entity_text) == 0,
@@ -130,7 +130,7 @@ char * parse_raw_text_entity_from_file ()
 
 
     filename = "tests/vhdl_sources/MUX_generic.vhdl";
-    right_entity_text = "MUX;N : integer range 0 to 32;A, B : in std_logic_vector (N - 1 downto 0);\n\
+    right_entity_text = "MUX;*N : integer range 0 to 32;@A, B : in std_logic_vector (N - 1 downto 0);\n\
         COM : in std_logic;\n\
         Y : out std_logic_vector (N - 1 downto 0);";
 
@@ -148,7 +148,7 @@ char * parse_entity_from_raw_entity_text ()
     char * raw_entity_text = NULL;
     Entity * ent = NULL;
 
-    raw_entity_text = "CPU;A:in std_logic;";
+    raw_entity_text = "CPU;@A:in std_logic;";
     ent = getEntityFromRawEntityText(raw_entity_text);
 
     mu_assert(ent, "First entity wasn't parsed correctly.");
@@ -159,7 +159,7 @@ char * parse_entity_from_raw_entity_text ()
 
     destroyEntity(ent);
 
-    raw_entity_text = "MMU;B:in std_logic_vector(5 downto 0);";
+    raw_entity_text = "MMU;@B:in std_logic_vector(5 downto 0);";
     ent = getEntityFromRawEntityText(raw_entity_text);
 
     mu_assert(ent, "Second entity wasn't parsed correctly.");
@@ -170,10 +170,10 @@ char * parse_entity_from_raw_entity_text ()
 
     destroyEntity(ent);
 
-    raw_entity_text = "FlipFlop;C:in std_logic;D:out std_logic_vector(3 downto 0);";
+    raw_entity_text = "FlipFlop;@C:in std_logic;D:out std_logic_vector(3 downto 0);";
     ent = getEntityFromRawEntityText(raw_entity_text);
 
-    mu_assert(ent, "Second entity wasn't parsed correctly.");
+    mu_assert(ent, "Third entity wasn't parsed correctly.");
     mu_assert(strcmp(ent->name, "FlipFlop") == 0, "Third entity's name is wrong.");
     mu_assert(ent->count_in == 1, "Input signal count is wrong for third entity.");
     mu_assert(ent->count_out == 1, "Output signal count is wrong for third entity.");
@@ -181,6 +181,20 @@ char * parse_entity_from_raw_entity_text ()
     mu_assert(strcmp(ent->signals_in[0].name, "C") == 0, "Input signal name is wrong for third entity.");
     mu_assert(strcmp(ent->signals_out[0].length, "4") == 0, "Output signal length is wrong for third entity.");
     mu_assert(strcmp(ent->signals_out[0].name, "D") == 0, "Output signal name is wrong for third entity.");
+
+    destroyEntity(ent);
+
+    raw_entity_text = "MMU;*E: integer range 0 to 32;@F:in std_logic_vector(5 downto 0);";
+    ent = getEntityFromRawEntityText(raw_entity_text);
+
+    mu_assert(ent, "Fourth entity wasn't parsed correctly.");
+    mu_assert(strcmp(ent->name, "MMU") == 0, "Fourth entity's name is wrong.");
+    mu_assert(ent->count_generics == 1, "Generic input count is wrong for fourth entity.");
+    mu_assert(ent->count_in == 1, "Input signal count is wrong for fourth entity.");
+    mu_assert(strcmp(ent->generics[0].length, "integer range 0 to 32") == 0, "Generic input length is wrong for fourth entity.");
+    mu_assert(strcmp(ent->generics[0].name, "E") == 0, "Generic input name is wrong for fourth entity.");
+    mu_assert(strcmp(ent->signals_in[0].length, "6") == 0, "Input signal length is wrong for fourth entity.");
+    mu_assert(strcmp(ent->signals_in[0].name, "F") == 0, "Input signal name is wrong for fourth entity.");
 
     destroyEntity(ent);
 
