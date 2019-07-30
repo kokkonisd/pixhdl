@@ -116,3 +116,7 @@ $ sudo make uninstall
 ```
 
 That will uninstall pixhdl from your computer if it was previously installed.
+
+## notes
+
+Pixhdl only supports VHDL sources for the moment being. Support for Verilog sources is in the works.
