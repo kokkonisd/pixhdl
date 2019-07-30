@@ -218,11 +218,11 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
             length = malloc(sizeof(char) * (digit_count + 1));
             sprintf(length, "%d", atoi(top_num) - atoi(bottom_num) + 1);
             length[digit_count] = '\0';
-
-            // Free the temporary length string
-            free(top_num);
-            free(bottom_num);
         }
+
+        // Free the temporary length string
+        free(top_num);
+        free(bottom_num);
     // Else, the signal is a `std_logic`
     } else if (strcmp(len_str, "std_logic") == 0) {
         // Thus, the length is 1 bit
