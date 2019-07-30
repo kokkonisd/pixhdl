@@ -1,0 +1,27 @@
+<svg version='1.1' baseProfile='full' width='2653.60' height='488.00' xmlns='http://www.w3.org/2000/svg'>
+<defs id='arrowDefs'>
+<marker id='arrowEnd' fill='black' stroke-linejoin='bevel' viewBox='0 0 8000 8000' refX='250' refY='150' markerUnits='strokeWidth' markerWidth='300' markerHeight='300' orient='auto'><path id='arrowEndPath' stroke='rgb(0, 0, 0)' stroke-width='5' d='M 2 59 L 293 148 L 1 243 L 121 151 Z' /></marker>
+<marker id='arrowStart' fill='black' stroke-linejoin='bevel' viewBox='0 0 8000 8000' refX='50' refY='150' markerUnits='strokeWidth' markerWidth='300' markerHeight='300' orient='auto'><path stroke='rgb(0, 0, 0)' stroke-width='5' d='M 4 147 L 299 60 L 159 148 L 299 251 Z' /></marker>
+</defs>
+
+<rect width='1039.20' height='478.00' x='838.00' y='5.00' fill='none' stroke='black' stroke-width='10' />
+<text text-anchor='middle' x='1357.60' y='458.00' font-size='60' fill='black' font-family='Courier'>MUX</text>
+<text text-anchor='begin' x='904.00' y='66.00' font-size='56' fill='black' font-family='Courier'>N : integer range 0 to 32</text>
+<line x1='838.00' y1='82.50' x2='1877.20' y2='82.50' stroke='black' stroke-width='3' fill='transparent' />
+<line x1='154.00' y1='84.67' x2='828.00' y2='84.67' stroke='black' stroke-width='5' marker-end='url(#arrowEnd)' fill='transparent'/>
+<line x1='486.00' y1='94.67' x2='506.00' y2='74.67' stroke='black' stroke-width='3' fill='transparent' />
+<text text-anchor='end' x='123.20' y='98.67' font-size='56' fill='black' font-family='Courier'>A</text>
+<text text-anchor='middle' x='496.00' y='69.67' font-size='38' fill='black' font-family='Courier'>(N - 1 downto 0)</text>
+<line x1='154.00' y1='244.00' x2='828.00' y2='244.00' stroke='black' stroke-width='5' marker-end='url(#arrowEnd)' fill='transparent'/>
+<line x1='486.00' y1='254.00' x2='506.00' y2='234.00' stroke='black' stroke-width='3' fill='transparent' />
+<text text-anchor='end' x='123.20' y='258.00' font-size='56' fill='black' font-family='Courier'>B</text>
+<text text-anchor='middle' x='496.00' y='229.00' font-size='38' fill='black' font-family='Courier'>(N - 1 downto 0)</text>
+<line x1='154.00' y1='403.33' x2='828.00' y2='403.33' stroke='black' stroke-width='5' marker-end='url(#arrowEnd)' fill='transparent'/>
+<line x1='486.00' y1='413.33' x2='506.00' y2='393.33' stroke='black' stroke-width='3' fill='transparent' />
+<text text-anchor='end' x='123.20' y='417.33' font-size='56' fill='black' font-family='Courier'>COM</text>
+<text text-anchor='middle' x='496.00' y='388.33' font-size='38' fill='black' font-family='Courier'>1</text>
+<line x1='1877.20' y1='244.00' x2='2561.20' y2='244.00' stroke='black' stroke-width='5' marker-end='url(#arrowEnd)' fill='transparent'/>
+<line x1='2209.20' y1='254.00' x2='2229.20' y2='234.00' stroke='black' stroke-width='3' fill='transparent' />
+<text text-anchor='begin' x='2592.00' y='258.00' font-size='56' fill='black' font-family='Courier'>Y</text>
+<text text-anchor='middle' x='2219.20' y='229.00' font-size='38' fill='black' font-family='Courier'>(N - 1 downto 0)</text>
+</svg>

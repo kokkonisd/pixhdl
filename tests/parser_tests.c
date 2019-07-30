@@ -130,7 +130,8 @@ char * parse_raw_text_entity_from_file ()
 
 
     filename = "tests/vhdl_sources/MUX_generic.vhdl";
-    right_entity_text = "MUX;*N : integer range 0 to 32;@A, B : in std_logic_vector (N - 1 downto 0);\n\
+    right_entity_text = "MUX;*N : integer range 0 to 32;\n\
+        M : time 0.2 ns;@A, B : in std_logic_vector (N - 1 downto 0);\n\
         COM : in std_logic;\n\
         Y : out std_logic_vector (N - 1 downto 0);";
 

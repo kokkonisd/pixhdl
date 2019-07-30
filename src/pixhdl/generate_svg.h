@@ -18,6 +18,7 @@
 #define SIMPLE_ARROW_LINE "<line x1='%.2f' y1='%.2f' x2='%.2f' y2='%.2f' stroke='black' stroke-width='5' marker-end='url(#arrowEnd)' fill='transparent'/>\n"
 #define DOUBLE_ARROW_LINE "<line x1='%.2f' y1='%.2f' x2='%.2f' y2='%.2f' stroke='black' stroke-width='5' marker-start='url(#arrowStart)' marker-end='url(#arrowEnd)' fill='transparent'/>\n"
 
+#define GENERIC_SIGNAL_NAME "<text text-anchor='begin' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier'>%s : %s</text>\n"
 #define IN_SIGNAL_NAME "<text text-anchor='end' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier'>%s</text>\n"
 #define OUT_SIGNAL_NAME "<text text-anchor='begin' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier'>%s</text>\n"
 #define INOUT_SIGNAL_NAME "<text text-anchor='end' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier' transform='rotate(270 %.2f,%.2f)'>%s</text>\n"
