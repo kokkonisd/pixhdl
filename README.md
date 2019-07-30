@@ -4,7 +4,9 @@
 
 A command-line tool that produces graphical representations of entities from VHDL source files.
 
-## example
+## examples
+
+### simple entity (ALU)
 
 Source:
 
@@ -29,6 +31,32 @@ end entity;
 Output:
 
 ![ALU SVG output](ALU.svg)
+
+### entity with generic inputs (MUX)
+
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+
+entity MUX is
+    generic (
+        N : integer range 0 to 32
+    );
+    port (
+        A, B : in std_logic_vector (N - 1 downto 0);
+        COM : in std_logic;
+        Y : out std_logic_vector (N - 1 downto 0)
+    );
+end entity;
+
+...
+```
+
+Output:
+
+![MUX SVG output](MUX.svg)
 
 
 ## how to use pixhdl
@@ -89,9 +117,6 @@ $ sudo make uninstall
 
 That will uninstall pixhdl from your computer if it was previously installed.
 
-
 ## notes
 
 Pixhdl only supports VHDL sources for the moment being. Support for Verilog sources is in the works.
-
-Furthermore, only entities not containing `generic` inputs are parseable by pixhdl for the moment being; this will be patched in the next stable release.
