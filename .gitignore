@@ -5,5 +5,6 @@ tests/*
 !tests/*.c
 !tests/*.h
 !tests/*.sh
+!tests/vhdl_sources/
 !tests/vhdl_sources/*.vhd
 !tests/vhdl_sources/*.vhdl
