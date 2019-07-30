@@ -90,6 +90,14 @@ char * parse_simple_port_lengths ()
     mu_assert(strcmp(length, "3") == 0, "Incorrect parsing of port length 3.");
     free(length);
 
+    length = parseSignalLength("F:in std_logic_vector(N - 1 downto 0);", 5, 37);
+    mu_assert(strcmp(length, "(N - 1 downto 0)") == 0, "Incorrect parsing of port length N.");
+    free(length);
+
+    length = parseSignalLength("F:in std_logic_vector(N downto M);", 5, 33);
+    mu_assert(strcmp(length, "(N downto M)") == 0, "Incorrect parsing of port length N - M + 1.");
+    free(length);
+
     return NULL;
 }
 

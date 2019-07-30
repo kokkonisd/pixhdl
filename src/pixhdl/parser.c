@@ -14,6 +14,17 @@ int isLegalPortNameChar (const char portname_char)
 }
 
 
+int containsAlpha (const char * str)
+{
+    size_t i = 0;
+
+    for (i = 0; i < strlen(str); i++)
+        if (isalpha(str[i])) return 1;
+
+    return 0;
+}
+
+
 /**
  * Parses the name of a signal given some raw entity text, a start and an end index.
  * @param  raw_txt (const char *): The raw entity text
@@ -127,13 +138,18 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
     char * len_str = NULL;
     regex_t regex;
     int reti = 0;
-    regmatch_t rm[4];
+    regmatch_t rm[5];
     int top_match_start = 0;
     int top_match_end = 0;
     int bottom_match_start = 0;
     int bottom_match_end = 0;
+    int total_match_start = 0;
+    int total_match_end = 0;
     char * top_num = NULL;
     char * bottom_num = NULL;
+    int digit_count = 0;
+    int int_length = 0;
+
 
     // Check if raw_txt is a valid pointer
     check(raw_txt, "Text pointer is NULL.");
@@ -160,15 +176,18 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
         reti = regcomp(&regex, VECTOR_LENGTH_REGEX, REG_EXTENDED);
         check(reti == 0, "Could not compile vector length regex.");
         // Look for vector length in  the length string
-        reti = regexec(&regex, len_str, 4, rm, 0);
+        reti = regexec(&regex, len_str, 5, rm, 0);
         check(reti == 0, "Vector length not found.");
 
+        // Get total match
+        total_match_start = rm[1].rm_so;
+        total_match_end = rm[1].rm_eo;
         // Get start and end of top (MSB) match
-        top_match_start = rm[1].rm_so;
-        top_match_end = rm[1].rm_eo;
+        top_match_start = rm[2].rm_so;
+        top_match_end = rm[2].rm_eo;
         // Get start and end of bottom (LSB) match
-        bottom_match_start = rm[3].rm_so;
-        bottom_match_end = rm[3].rm_eo;
+        bottom_match_start = rm[4].rm_so;
+        bottom_match_end = rm[4].rm_eo;
         // Free the regex object, we're done using it
         regfree(&regex);
 
@@ -184,20 +203,29 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
         strncpy(bottom_num, len_str + bottom_match_start, bottom_match_end - bottom_match_start);
         bottom_num[bottom_match_end - bottom_match_start] = '\0';
 
-        int digit_count = 0;
-        int res = atoi(top_num) - atoi(bottom_num) + 1;
-        while (res) {
-            res /= 10;
-            digit_count++;
-        }
-        // Length is MSB - LSB + 1
-        length = malloc(sizeof(char) * (digit_count + 1));
-        sprintf(length, "%d", atoi(top_num) - atoi(bottom_num) + 1);
-        length[digit_count] = '\0';
+        // If there are generic variables used in the length
+        if (containsAlpha(top_num) || containsAlpha(bottom_num)) {
+            // Just return the entire length (what's contained between std_logic_vector's parentheses)
+            length = malloc(sizeof(char) * (total_match_end - total_match_start + 1));
+            check_mem(length);
+            strncpy(length, len_str + total_match_start, total_match_end - total_match_start);
+            length[total_match_end - total_match_start] = '\0';
+        } else {
+            digit_count = 0;
+            int_length = atoi(top_num) - atoi(bottom_num) + 1;
+            while (int_length) {
+                int_length /= 10;
+                digit_count++;
+            }
+            // Length is MSB - LSB + 1
+            length = malloc(sizeof(char) * (digit_count + 1));
+            sprintf(length, "%d", atoi(top_num) - atoi(bottom_num) + 1);
+            length[digit_count] = '\0';
 
-        // Free the temporary length string
-        free(top_num);
-        free(bottom_num);
+            // Free the temporary length string
+            free(top_num);
+            free(bottom_num);
+        }
     // Else, the signal is a `std_logic`
     } else {
         // Thus, the length is 1 bit
