@@ -157,10 +157,6 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
     check(end > start && end > 0 && start >= 0,
           "Start and end indices are incorrect.");
 
-    // TODO
-    // Verify that the length string only contains std_logic or std_logic_vector definitions
-    // check(tolower(*(raw_txt + start)) == 's', "Invalid length string.");
-    // check(tolower(*(raw_txt + end - 1)) == 'c' || *(raw_txt + end - 1) == ')', "Invalid length string.");
 
     // Allocate memory for the length string
     len_str = malloc(sizeof(char) * (end - start + 1));
