@@ -208,7 +208,7 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
             strncpy(length, len_str + total_match_start, total_match_end - total_match_start);
             length[total_match_end - total_match_start] = '\0';
         } else {
-            digit_count = 0;
+            digit_count = 1;
             int_length = atoi(top_num) - atoi(bottom_num) + 1;
             while (int_length) {
                 int_length /= 10;
@@ -216,8 +216,7 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
             }
             // Length is MSB - LSB + 1
             length = malloc(sizeof(char) * (digit_count + 1));
-            sprintf(length, "%d", atoi(top_num) - atoi(bottom_num) + 1);
-            length[digit_count] = '\0';
+            snprintf(length, digit_count, "%d", (atoi(top_num) - atoi(bottom_num) + 1));
         }
 
         // Free the temporary length string
@@ -397,17 +396,14 @@ char * getRawEntityTextFromFile (const char * filename)
         // Allocate memory for the final string
         res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_generics) + strlen(entity_body) + 3));
         // Print the name followed by the body in the resulting string
-        sprintf(res, "%s*%s@%s", entity_name, entity_generics, entity_body);
-        // Add a null char at the end for safety
-        res[strlen(entity_name) + strlen(entity_generics) + strlen(entity_body) + 2] = '\0';
+        snprintf(res, (strlen(entity_name) + strlen(entity_generics) + strlen(entity_body) + 3),
+                      "%s*%s@%s", entity_name, entity_generics, entity_body);
     // Otherwise, keep generics out
     } else {
         // Allocate memory for the final string
         res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_body) + 2));
         // Print the name followed by the body in the resulting string
-        sprintf(res, "%s@%s", entity_name, entity_body);
-        // Add a null char at the end for safety
-        res[strlen(entity_name) + strlen(entity_body) + 1] = '\0';
+        snprintf(res, (strlen(entity_name) + strlen(entity_body) + 2), "%s@%s", entity_name, entity_body);
     }
 
     // Free the name, body & generics strings
