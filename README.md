@@ -30,7 +30,7 @@ end entity;
 
 Output:
 
-![ALU SVG output](ALU.svg)
+![ALU SVG output](ALU_example.svg)
 
 ### entity with generic inputs (MUX)
 
@@ -58,7 +58,7 @@ end entity;
 
 Output:
 
-![MUX SVG output](MUX.svg)
+![MUX SVG output](MUX_example.svg)
 
 
 ## how to use pixhdl
