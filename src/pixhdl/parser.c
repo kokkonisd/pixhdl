@@ -227,17 +227,21 @@ char * getRawEntityTextFromFile (const char * filename)
     // Return value for the regex object
     int reti = 0;
     // Regex match object to capture matches
-    regmatch_t rm[3];
+    regmatch_t rm[5];
     // String containing the entity_name text
     char * entity_name = NULL;
     // String containing the entity_body text
     char * entity_body = NULL;
+    // String containing the generics text (if they exist)
+    char * entity_generics = NULL;
     // Resulting string containing the raw entity text
     char * res;
     // Integer variables to hold the start & end of the
     // resulting strings
     int body_start = 0;
     int body_end = 0;
+    int generics_start = 0;
+    int generics_end = 0;
     int name_start = 0;
     int name_end = 0;
 
@@ -268,15 +272,20 @@ char * getRawEntityTextFromFile (const char * filename)
     reti = regcomp(&regex, ENTITY_REGEX, REG_EXTENDED | REG_ICASE);
     check(reti == 0, "Couldn't compile raw entity regex.");
 
-    reti = regexec(&regex, buffer, 3, rm, 0);
+    reti = regexec(&regex, buffer, 5, rm, 0);
     check(reti == 0, "Couldn't find an entity definition in file `%s`.", filename);
 
     // Get the name_start & name_end points from the match found
     name_start = rm[1].rm_so;
     name_end = rm[1].rm_eo;
+    // Get generics if they exist, otherwise leave both generics_* variables at 0
+    if (rm[2].rm_so != -1) {
+        generics_start = rm[3].rm_so;
+        generics_end = rm[3].rm_eo;
+    }
     // Get the body_start & body_end points from the match found
-    body_start = rm[2].rm_so;
-    body_end = rm[2].rm_eo;
+    body_start = rm[4].rm_so;
+    body_end = rm[4].rm_eo;
     // Free the regex object, we don't need it anymore
     regfree(&regex);
 
@@ -289,6 +298,11 @@ char * getRawEntityTextFromFile (const char * filename)
     // be chopped off)
     while (!isalnum(*(buffer + body_start))) body_start++;
     while (isspace(*(buffer + body_end - 1))) body_end--;
+    // If generics exist, trim the space around them
+    if (generics_start && generics_end) {
+        while (!isalnum(*(buffer + generics_start))) generics_start++;
+        while (isspace(*(buffer + generics_end - 1))) generics_end--;
+    }
 
     // Check if name_start and name_end are correct
     check(name_end > name_start && name_end > 0 && name_start >= 0,
@@ -296,6 +310,26 @@ char * getRawEntityTextFromFile (const char * filename)
     // Check if body_start and body_end are correct
     check(body_end > body_start && body_end > 0 && body_start >= 0,
           "File `%s` doesn't contain entity, or is wrongly formatted.", filename);
+
+    // Check if generics_start and generics_end are correct (only if they exist)
+    if (generics_start && generics_end)
+        check(generics_end > generics_start && generics_end > 0 && generics_start >= 0,
+              "File `%s` doesn't contain entity, or is wrongly formatted.", filename);
+
+
+    // If generics are found in the file
+    if (generics_start && generics_end) {
+        // Allocate memory for the generics string
+        entity_generics = malloc(sizeof(char) * (generics_end - generics_start + 2));
+        check_mem(entity_generics);
+
+        // Copy the generics text over
+        strncpy(entity_generics, buffer + generics_start, generics_end - generics_start + 1);
+        // Add a semicolon to the end
+        entity_generics[generics_end - generics_start] = ';';
+        // Add a null char for safety
+        entity_generics[generics_end - generics_start + 1] = '\0';
+    }
 
     // Allocate memory for the name string
     entity_name = malloc(sizeof(char) * (name_end - name_start + 2));
@@ -317,16 +351,28 @@ char * getRawEntityTextFromFile (const char * filename)
     // Free the buffer holding the file contents
     free(buffer);
 
-    // Allocate memory for the final string
-    res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_body) + 1));
-    // Print the name followed by the body in the resulting string
-    sprintf(res, "%s%s", entity_name, entity_body);
-    // Add a null char at the end for safety
-    res[strlen(entity_name) + strlen(entity_body)] = '\0';
+    // If generics are detected
+    if (entity_generics) {
+        // Allocate memory for the final string
+        res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_generics) + strlen(entity_body) + 1));
+        // Print the name followed by the body in the resulting string
+        sprintf(res, "%s%s%s", entity_name, entity_generics, entity_body);
+        // Add a null char at the end for safety
+        res[strlen(entity_name) + strlen(entity_generics) + strlen(entity_body)] = '\0';
+    // Otherwise, keep generics out
+    } else {
+        // Allocate memory for the final string
+        res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_body) + 1));
+        // Print the name followed by the body in the resulting string
+        sprintf(res, "%s%s", entity_name, entity_body);
+        // Add a null char at the end for safety
+        res[strlen(entity_name) + strlen(entity_body)] = '\0';
+    }
 
-    // Free the name & body strings
+    // Free the name, body & generics strings
     free(entity_name);
     free(entity_body);
+    free(entity_generics);
 
     // Return the result
     return res;

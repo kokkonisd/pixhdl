@@ -116,6 +116,17 @@ char * parse_raw_text_entity_from_file ()
               "Raw entity text is wrong for the second file.");
     free(parsed_entity_text);
 
+
+    filename = "tests/vhdl_sources/MUX_generic.vhdl";
+    right_entity_text = "MUX;N : integer range 0 to 32;A, B : in std_logic_vector (N - 1 downto 0);\n\
+        COM : in std_logic;\n\
+        Y : out std_logic_vector (N - 1 downto 0);";
+
+    parsed_entity_text = getRawEntityTextFromFile(filename);
+    mu_assert(strcmp(parsed_entity_text, right_entity_text) == 0,
+              "Raw entity text is wrong for the third file.");
+    free(parsed_entity_text);
+
     return NULL;
 }
 
