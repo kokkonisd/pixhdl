@@ -80,6 +80,7 @@ void destroyEntity (Entity * ent)
                 free(ent->signals_inout[i].length);
         }
 
+        if (ent->generics) free(ent->generics);
         if (ent->signals_in) free(ent->signals_in);
         if (ent->signals_out) free(ent->signals_out);
         if (ent->signals_inout) free(ent->signals_inout);
