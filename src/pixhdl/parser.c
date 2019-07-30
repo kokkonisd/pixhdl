@@ -132,6 +132,8 @@ int parseSignalLength (const char * raw_txt, int start, int end)
     int top_match_end = 0;
     int bottom_match_start = 0;
     int bottom_match_end = 0;
+    char * top_num = NULL;
+    char * bottom_num = NULL;
 
     // Check if raw_txt is a valid pointer
     check(raw_txt, "Text pointer is NULL.");
@@ -171,9 +173,9 @@ int parseSignalLength (const char * raw_txt, int start, int end)
         regfree(&regex);
 
         // Allocate memory for vector length number
-        char * top_num = malloc(sizeof(char) * (top_match_end - top_match_start + 1));
+        top_num = malloc(sizeof(char) * (top_match_end - top_match_start + 1));
         check_mem(top_num);
-        char * bottom_num = malloc(sizeof(char) * (bottom_match_end - bottom_match_start + 1));
+        bottom_num = malloc(sizeof(char) * (bottom_match_end - bottom_match_start + 1));
         check_mem(bottom_num);
 
         // Copy the length top_number over
