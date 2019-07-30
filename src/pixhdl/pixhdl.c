@@ -26,12 +26,13 @@ int main (int argc, char * argv[])
     char * out_filename = NULL;
     char * copy_ptr = NULL;
     int is_filename_allocated = 0;
+    int print_entity = 0;
 
     // If no arguments are given, print the help screen
     if (argc == 1) return print_help_screen();
 
     // Parse optional arguments
-    while ((ra = getopt(argc, argv, ":vho:")) != -1) {
+    while ((ra = getopt(argc, argv, ":vho:up")) != -1) {
         switch (ra) {
             case 'v':
                 // Print version number
@@ -45,6 +46,13 @@ int main (int argc, char * argv[])
 
             case 'o':
                 out_filename = optarg;
+                break;
+
+            case 'u':
+                return update(VERSION);
+
+            case 'p':
+                print_entity = 1;
                 break;
 
             case '?':
@@ -83,6 +91,12 @@ int main (int argc, char * argv[])
     // Try to get entity from file
     ent = getEntityFromFile(argv[optind]);
     check(ent, "Couldn't get entity from file `%s`.", argv[optind]);
+
+    if (print_entity) {
+        printEntitySignals(ent);
+        destroyEntity(ent);
+        return 0;
+    }
 
     // If the filename hasn't been specified, create it
     // by just adding .svg to the end of the input file path
