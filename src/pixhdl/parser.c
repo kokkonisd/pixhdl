@@ -127,7 +127,7 @@ int parseSignalLength (const char * raw_txt, int start, int end)
     char * len_str = NULL;
     regex_t regex;
     int reti = 0;
-    regmatch_t rm[3];
+    regmatch_t rm[4];
     int top_match_start = 0;
     int top_match_end = 0;
     int bottom_match_start = 0;
@@ -160,15 +160,15 @@ int parseSignalLength (const char * raw_txt, int start, int end)
         reti = regcomp(&regex, VECTOR_LENGTH_REGEX, REG_EXTENDED);
         check(reti == 0, "Could not compile vector length regex.");
         // Look for vector length in  the length string
-        reti = regexec(&regex, len_str, 3, rm, 0);
+        reti = regexec(&regex, len_str, 4, rm, 0);
         check(reti == 0, "Vector length not found.");
 
         // Get start and end of top (MSB) match
         top_match_start = rm[1].rm_so;
         top_match_end = rm[1].rm_eo;
         // Get start and end of bottom (LSB) match
-        bottom_match_start = rm[2].rm_so;
-        bottom_match_end = rm[2].rm_eo;
+        bottom_match_start = rm[3].rm_so;
+        bottom_match_end = rm[3].rm_eo;
         // Free the regex object, we're done using it
         regfree(&regex);
 
