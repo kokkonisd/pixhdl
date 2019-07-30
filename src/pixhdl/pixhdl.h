@@ -1,7 +1,7 @@
 #ifndef __PIXHDL_H__
 #define __PIXHDL_H__
 
-#define VERSION "1.1.0"
+#define VERSION "1.0.1"
 #define HELP_SCREEN_TEXT "\
 Usage: pixhdl [options] <VHDL file>\n\
 \n\
