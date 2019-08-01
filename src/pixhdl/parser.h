@@ -22,6 +22,13 @@
 int isLegalPortNameChar (const char portname);
 
 /**
+ * Check if a given string contains any alphabetic characters.
+ * @param  str (char *): The input string to be checked
+ * @return        (int): 1 if the string contains any alphabetic characters, 0 otherwise
+ */
+int containsAlpha (const char * str);
+
+/**
  * Parses the name of a signal given some raw entity text, a start and an end index.
  * @param  raw_txt (const char *): The raw entity text
  * @param  start            (int): The beginning index for the raw entity text

@@ -26,6 +26,17 @@ char * test_legal_port_name_characters ()
 }
 
 
+char * test_alphabetic_length_strings ()
+{
+    mu_assert(containsAlpha("N - 1"), "N is an alphabetic character.");
+    mu_assert(containsAlpha("M"), "M is an alphabetic character.");
+    mu_assert(!containsAlpha("15"), "Neither 1 nor 5 are alphabetic characters.");
+    mu_assert(!containsAlpha("1 - 5"), "Neither 1 nor - nor 5 are alphabetic characters.");
+
+    return NULL;
+}
+
+
 char * parse_simple_port_names ()
 {
     char * name;
@@ -263,6 +274,7 @@ char * all_tests ()
     mu_suite_start();
 
     mu_run_test(test_legal_port_name_characters);
+    mu_run_test(test_alphabetic_length_strings);    
     mu_run_test(parse_simple_port_names);
     mu_run_test(parse_simple_port_directions);
     mu_run_test(parse_simple_port_lengths);
