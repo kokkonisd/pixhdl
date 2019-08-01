@@ -105,7 +105,7 @@ char * parse_simple_port_lengths ()
     mu_assert(strcmp(length, "(N - 1 downto 0)") == 0, "Incorrect parsing of port length N.");
     free(length);
 
-    length = parseSignalLength("F:in std_logic_vector(N downto M);", 5, 33);
+    length = parseSignalLength("G:in std_logic_vector(N downto M);", 5, 33);
     mu_assert(strcmp(length, "(N downto M)") == 0, "Incorrect parsing of port length N - M + 1.");
     free(length);
 
@@ -151,6 +151,18 @@ char * parse_raw_text_entity_from_file ()
               "Raw entity text is wrong for the third file.");
     free(parsed_entity_text);
 
+
+    filename = "tests/vhdl_sources/tick.vhdl";
+    right_entity_text = "tick;@clk, rst : in std_logic;\n\
+        -- div = Fclk / (Fsin * 64) (11 bits max)\n\
+        div : in std_logic_vector (10 downto 0);\n\
+        s : out std_logic;";
+
+    parsed_entity_text = getRawEntityTextFromFile(filename);
+    mu_assert(strcmp(parsed_entity_text, right_entity_text) == 0,
+              "Raw entity text is wrong for the fourth file.");
+    free(parsed_entity_text);
+
     return NULL;
 }
 
@@ -171,6 +183,7 @@ char * parse_entity_from_raw_entity_text ()
 
     destroyEntity(ent);
 
+
     raw_entity_text = "MMU;@B:in std_logic_vector(5 downto 0);";
     ent = getEntityFromRawEntityText(raw_entity_text);
 
@@ -181,6 +194,7 @@ char * parse_entity_from_raw_entity_text ()
     mu_assert(strcmp(ent->signals_in[0].name, "B") == 0, "Input signal name is wrong for second entity.");
 
     destroyEntity(ent);
+
 
     raw_entity_text = "FlipFlop;@C:in std_logic;D:out std_logic_vector(3 downto 0);";
     ent = getEntityFromRawEntityText(raw_entity_text);
@@ -196,6 +210,7 @@ char * parse_entity_from_raw_entity_text ()
 
     destroyEntity(ent);
 
+
     raw_entity_text = "MMU;*E: integer range 0 to 32;@F:in std_logic_vector(5 downto 0);";
     ent = getEntityFromRawEntityText(raw_entity_text);
 
@@ -207,6 +222,29 @@ char * parse_entity_from_raw_entity_text ()
     mu_assert(strcmp(ent->generics[0].name, "E") == 0, "Generic input name is wrong for fourth entity.");
     mu_assert(strcmp(ent->signals_in[0].length, "6") == 0, "Input signal length is wrong for fourth entity.");
     mu_assert(strcmp(ent->signals_in[0].name, "F") == 0, "Input signal name is wrong for fourth entity.");
+
+    destroyEntity(ent);
+
+
+    raw_entity_text = "tick;@clk, rst : in std_logic;\n\
+        -- div = Fclk / (Fsin * 64) (11 bits max)\n\
+        div : in std_logic_vector (10 downto 0);\n\
+        s : out std_logic;";
+    ent = getEntityFromRawEntityText(raw_entity_text);
+
+    mu_assert(ent, "Fifth entity wasn't parsed correctly.");
+    mu_assert(strcmp(ent->name, "tick") == 0, "Fifth entity's name is wrong.");
+    mu_assert(ent->count_generics == 0, "Generic input count is wrong for fifth entity.");
+    mu_assert(ent->count_in == 3, "Input signal count is wrong for fifth entity.");
+    mu_assert(ent->count_out == 1, "Input signal count is wrong for fifth entity.");
+    mu_assert(strcmp(ent->signals_in[0].length, "1") == 0, "First input signal's length is wrong for fifth entity.");
+    mu_assert(strcmp(ent->signals_in[0].name, "clk") == 0, "First input signal's name is wrong for fifth entity.");
+    mu_assert(strcmp(ent->signals_in[1].length, "1") == 0, "Second input signal's length is wrong for fifth entity.");
+    mu_assert(strcmp(ent->signals_in[1].name, "rst") == 0, "Second input signal's name is wrong for fifth entity.");
+    mu_assert(strcmp(ent->signals_in[2].length, "11") == 0, "Third input signal's length is wrong for fifth entity.");
+    mu_assert(strcmp(ent->signals_in[2].name, "div") == 0, "Third input signal's name is wrong for fifth entity.");
+    mu_assert(strcmp(ent->signals_out[0].length, "1") == 0, "First output signal's length is wrong for fifth entity.");
+    mu_assert(strcmp(ent->signals_out[0].name, "s") == 0, "First output signal's name is wrong for fifth entity.");
 
     destroyEntity(ent);
 
@@ -265,6 +303,32 @@ char * parse_entity_from_file ()
 
     destroyEntity(ent);
 
+
+    filename = "tests/vhdl_sources/INOUT.vhdl";
+    ent = getEntityFromFile(filename);
+    mu_assert(ent, "Third entity wasn't parsed correctly.");
+    destroyEntity(ent);
+
+    filename = "tests/vhdl_sources/MUX_generic.vhdl";
+    ent = getEntityFromFile(filename);
+    mu_assert(ent, "Fourth entity wasn't parsed correctly.");
+    destroyEntity(ent);
+
+    filename = "tests/vhdl_sources/W150_Adder.vhd";
+    ent = getEntityFromFile(filename);
+    mu_assert(ent, "Fifth entity wasn't parsed correctly.");
+    destroyEntity(ent);
+
+    filename = "tests/vhdl_sources/a1_poolingLayer.vhd";
+    ent = getEntityFromFile(filename);
+    mu_assert(ent, "Sixth entity wasn't parsed correctly.");
+    destroyEntity(ent);
+
+    filename = "tests/vhdl_sources/tick.vhdl";
+    ent = getEntityFromFile(filename);
+    mu_assert(ent, "Seventh entity wasn't parsed correctly.");
+    destroyEntity(ent);
+
     return NULL;
 }
 
@@ -274,7 +338,7 @@ char * all_tests ()
     mu_suite_start();
 
     mu_run_test(test_legal_port_name_characters);
-    mu_run_test(test_alphabetic_length_strings);    
+    mu_run_test(test_alphabetic_length_strings);
     mu_run_test(parse_simple_port_names);
     mu_run_test(parse_simple_port_directions);
     mu_run_test(parse_simple_port_lengths);
