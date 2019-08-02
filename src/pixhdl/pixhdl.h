@@ -7,7 +7,7 @@ Usage: pixhdl [options] <VHDL file>\n\
 \n\
     options:\n\
            -o, --output  : specify output filename\n\
-           -p, --print   : print the entity in the terminal (doesn't produce an output image file)\n\
+           -p, --print   : print the entity in the terminal\n\
            -u, --update  : check for updates (and update if newer version is available)\n\
            -v, --version : print the version number\n\
            -h, --help    : print this help screen"
