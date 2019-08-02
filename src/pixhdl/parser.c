@@ -14,6 +14,11 @@ int isLegalPortNameChar (const char portname_char)
 }
 
 
+/**
+ * Check if a given string contains any alphabetic characters.
+ * @param  str (char *): The input string to be checked
+ * @return        (int): 1 if the string contains any alphabetic characters, 0 otherwise
+ */
 int containsAlpha (const char * str)
 {
     size_t i = 0;

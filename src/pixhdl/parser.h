@@ -1,7 +1,7 @@
 #ifndef __PARSER_H__
 #define __PARSER_H__
 
-#define ENTITY_REGEX "entity[ \t\r\n\f]+([a-zA-Z0-9_]+)[ \t\r\n\f]+is[ \t\r\n\f]+(generic[ \t\r\n\f]*\\([ \t\r\n\f]*([a-zA-Z0-9:;,_(). \t\r\n\f]+)[ \t\r\n\f]*\\)[ \t\r\n\f]*;)?[ \t\r\n\f]*port[ \t\r\n\f]*\\([ \t\r\n\f]*([a-zA-Z0-9:;,_() \t\r\n\f-]+\\)?)[ \t\r\n\f]*\\)[ \t\r\n\f]*;[ \t\r\n\f]*end[ \t]*(entity|[a-zA-Z0-9_]+)?[ \t]*;[ \t\r\n\f]*architecture"
+#define ENTITY_REGEX "entity[ \t\r\n\f]+([a-zA-Z0-9_]+)[ \t\r\n\f]+is[ \t\r\n\f]+(generic[ \t\r\n\f]*\\([ \t\r\n\f]*(.+)[ \t\r\n\f]*\\)[ \t\r\n\f]*;)?[ \t\r\n\f]*port[ \t\r\n\f]*\\([ \t\r\n\f]*(.+\\)?)[ \t\r\n\f]*\\)[ \t\r\n\f]*;[ \t\r\n\f]*end[ \t]*(entity|[a-zA-Z0-9_]+)?[ \t]*;[ \t\r\n\f]*architecture"
 
 #define PORT_REGEX "([a-zA-Z0-9_, ]+)[ \t\r\n\f]*:[ \t\r\n\f]*((in|out|inout)[ \t\r\n\f]*(std_logic[^;]*)|([a-zA-Z0-9_,. \t-]*));"
 #define VECTOR_LENGTH_REGEX "(\\(([a-zA-Z0-9_ -]+)[ \t\r\n\f]+(down)?to[ \t\r\n\f]+([a-zA-Z0-9_ -]+)\\))"
@@ -20,6 +20,13 @@
  * @return                      (int): 1 if the char is valid, 0 otherwise
  */
 int isLegalPortNameChar (const char portname);
+
+/**
+ * Check if a given string contains any alphabetic characters.
+ * @param  str (char *): The input string to be checked
+ * @return        (int): 1 if the string contains any alphabetic characters, 0 otherwise
+ */
+int containsAlpha (const char * str);
 
 /**
  * Parses the name of a signal given some raw entity text, a start and an end index.
