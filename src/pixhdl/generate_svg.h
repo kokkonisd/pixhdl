@@ -10,6 +10,9 @@
 
 #define SVG_HEADER "<svg version='1.1' baseProfile='full' width='%.2f' height='%.2f' xmlns='http://www.w3.org/2000/svg'>\n"
 
+#define ENTITY_RECTANGLE "<rect width='%.2f' height='%.2f' x='%.2f' y='%.2f' fill='none' stroke='black' stroke-width='%d' />\n"
+#define ENTITY_NAME "<text text-anchor='middle' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier'>%s</text>\n"
+
 #define ARROW_HEAD "<path d='M%.2f %.2f L%.2f %.2f L%.2f %.2f L%.2f %.2f Z'/>\n"
 
 #define SIMPLE_LINE "<line x1='%.2f' y1='%.2f' x2='%.2f' y2='%.2f' stroke='black' stroke-width='5' fill='transparent'/>\n"
@@ -27,6 +30,13 @@
 #include "entity.h"
 #include "parser.h"
 
+
+typedef enum {
+    RIGHT,
+    LEFT,
+    UP,
+    DOWN
+} arrDir;
 
 float max (float a, float b);
 int generateSvgFromEntity (Entity * ent, char * filename);
