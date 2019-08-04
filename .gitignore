@@ -8,3 +8,4 @@ tests/*
 !tests/vhdl_sources/
 !tests/vhdl_sources/*.vhd
 !tests/vhdl_sources/*.vhdl
+docs/
