@@ -13,14 +13,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/**
- * Width (in chars) of the version number, which is in the format of _X.Y.Z_ (for example, 'version 1.2.3').
- */
+/** Width (in chars) of the version number, which is in the format of _X.Y.Z_ (for example, 'version 1.2.3'). */
 #define VERSION_WIDTH 6
 
-/**
- * Command to get the latest version of _pixhdl_ from the _releases_ page of its official GitHub repo.
- */
+/** Command to get the latest version of _pixhdl_ from the _releases_ page of its official GitHub repo. */
 #define LATEST_VERSION "curl -s https://github.com/kokkonisd/pixhdl/releases/latest | grep -Eo \"/tag/(.+)>\" | head -c 11 | tail -c 5"
 
 /**
@@ -45,7 +41,7 @@
  * on the official GitHub repo of _pixhdl_. If a newer version is available, it asks the
  * user for confirmation, then downloads and installs the newer version.
  *
- * @return (int): 1 if successful, 0 otherwise.
+ * @return (`int`): 1 if successful, 0 otherwise.
  */
 int update ();
 

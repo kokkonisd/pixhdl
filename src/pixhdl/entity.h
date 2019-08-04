@@ -86,21 +86,24 @@ typedef struct {
 
 /**
  * Creates an Entity object.
- * @return ent (Entity *): Newly created Entity object.
+ *
+ * @return ent (`Entity *`): Newly created Entity object.
  */
 Entity * createEntity ();
 
 /**
  * Frees the memory of an Entity object.
- * @param ent (Entity *): Entity object to be freed.
+ *
+ * @param ent (`Entity *`): Entity object to be freed.
  */
 void destroyEntity (Entity * ent);
 
 /**
  * Adds a Signal object to an Entity object.
- * @param  ent (Entity *): Entity object to add Signal object to.
- * @param  sig (Signal *): Signal object to be added to Entity object.
- * @return          (int): 0 if successful, 1 if not successful.
+ *
+ * @param  ent (`Entity *`): Entity object to add Signal object to.
+ * @param  sig (`Signal *`): Signal object to be added to Entity object.
+ * @return          (`int`): 0 if successful, 1 if not successful.
  */
 int addSignalToEntity (Entity * ent, const Signal * sig);
 
