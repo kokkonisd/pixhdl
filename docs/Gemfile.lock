@@ -65,6 +65,7 @@ DEPENDENCIES
   jekyll (~> 3.7.4)
   jekyll-feed (~> 0.6)
   pygments.rb
+  rouge
   tzinfo-data
 
 BUNDLED WITH
