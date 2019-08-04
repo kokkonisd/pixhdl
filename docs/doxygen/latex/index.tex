@@ -1,0 +1,144 @@
+
+
+A command-\/line tool that produces graphical representations of entities from V\+H\+DL source files.
+
+\subsection*{examples}
+
+\subsubsection*{simple entity (A\+LU)}
+
+Source\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};}
+\DoxyCodeLine{\textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};}
+\DoxyCodeLine{\textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{entity }ALU \textcolor{keywordflow}{is}}
+\DoxyCodeLine{    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}}
+\DoxyCodeLine{        \textcolor{vhdlchar}{OP} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{keywordtype}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};}
+\DoxyCodeLine{        \textcolor{vhdlchar}{A}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{B} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{keywordtype}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};}
+\DoxyCodeLine{        \textcolor{vhdlchar}{O} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{keywordtype}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdllogic}{}\textcolor{vhdllogic}{31} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};}
+\DoxyCodeLine{        \textcolor{vhdlchar}{N} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{keywordtype}{std\_logic}}
+\DoxyCodeLine{    \textcolor{vhdlchar}{)};}
+\DoxyCodeLine{\textcolor{keywordflow}{end} \textcolor{keywordflow}{entity};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{.}}
+\end{DoxyCode}
+
+
+Output\+:
+
+
+
+\subsubsection*{entity with generic inputs (M\+UX)}
+
+Source\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{vhdlkeyword}{library }\textcolor{keywordflow}{ieee};}
+\DoxyCodeLine{\textcolor{vhdlkeyword}{use }ieee.std\_logic\_1164.\textcolor{keywordflow}{all};}
+\DoxyCodeLine{\textcolor{vhdlkeyword}{use }ieee.numeric\_std.\textcolor{keywordflow}{all};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{entity }MUX \textcolor{keywordflow}{is}}
+\DoxyCodeLine{    \textcolor{keywordflow}{generic} \textcolor{vhdlchar}{(}}
+\DoxyCodeLine{        \textcolor{vhdlchar}{N} \textcolor{vhdlchar}{:} \textcolor{keywordtype}{integer} \textcolor{keywordflow}{range} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0} \textcolor{keywordflow}{to} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{32}}
+\DoxyCodeLine{    \textcolor{vhdlchar}{)};}
+\DoxyCodeLine{    \textcolor{keywordflow}{port} \textcolor{vhdlchar}{(}}
+\DoxyCodeLine{        \textcolor{vhdlchar}{A}\textcolor{vhdlchar}{,} \textcolor{vhdlchar}{B} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{keywordtype}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N} \textcolor{vhdlchar}{-} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)};}
+\DoxyCodeLine{        \textcolor{vhdlchar}{COM} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{in} \textcolor{keywordtype}{std\_logic};}
+\DoxyCodeLine{        \textcolor{vhdlchar}{Y} \textcolor{vhdlchar}{:} \textcolor{keywordflow}{out} \textcolor{keywordtype}{std\_logic\_vector} \textcolor{vhdlchar}{(}\textcolor{vhdlchar}{N} \textcolor{vhdlchar}{-} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{1} \textcolor{keywordflow}{downto} \textcolor{vhdllogic}{}\textcolor{vhdllogic}{0}\textcolor{vhdlchar}{)}}
+\DoxyCodeLine{    \textcolor{vhdlchar}{)};}
+\DoxyCodeLine{\textcolor{keywordflow}{end} \textcolor{keywordflow}{entity};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{.}\textcolor{vhdlchar}{.}}
+\end{DoxyCode}
+
+
+Output\+:
+
+
+
+\subsection*{how to use pixhdl}
+
+Pixhdl takes in a {\ttfamily .vhd}/{\ttfamily .vdhl} source file and generates an S\+VG image as an output.
+
+For example, running
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ pixhdl my\_vhdl\_source.vhdl}
+\end{DoxyCode}
+
+
+will generate a file called {\ttfamily my\+\_\+vhdl\+\_\+source.\+svg} in the same directory as the source file.
+
+If you want to specify where the output file should be created and how it should be called, you can run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ pixhdl my\_vhdl\_source.vhdl -o ~/my\_entity\_diagram.svg}
+\DoxyCodeLine{\$ \# you can also do:}
+\DoxyCodeLine{\$ \# pixhdl -o ~/my\_entity\_diagram.svg my\_vhdl\_source.vhdl}
+\end{DoxyCode}
+
+
+This will generate an image called {\ttfamily my\+\_\+entity\+\_\+diagram.\+svg} in your home directory ({\ttfamily $\sim$/}).
+
+To get an exhaustive list of arguments, you can run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ pixhdl -h}
+\end{DoxyCode}
+
+
+\subsection*{how to install pixhdl}
+
+In order to install pixhdl, get the \href{https://github.com/kokkonisd/pixhdl/releases/latest}{\texttt{ latest release}}, decompress it, {\ttfamily cd} into it, then run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ make}
+\DoxyCodeLine{\$ sudo make install}
+\end{DoxyCode}
+
+
+That will install pixhdl on your computer. You can verify that the installation was successful by running\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ pixhdl -v}
+\end{DoxyCode}
+
+
+This command will show the current version of pixhdl installed on your computer.
+
+\subsection*{how to uninstall pixhdl}
+
+In order to uninstall pixhdl, you have to {\ttfamily cd} into the folder you got from when you \href{\#how-to-install-pixhdl}{\texttt{ installed}} it. If you no longer have that folder, you can just download the \href{https://github.com/kokkonisd/pixhdl/releases/latest}{\texttt{ latest release}}, decompress it, and {\ttfamily cd} into that.
+
+Once you\textquotesingle{}re into your {\ttfamily pixhdl/} folder, you can run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ sudo make uninstall}
+\end{DoxyCode}
+
+
+That will uninstall pixhdl from your computer if it was previously installed.
+
+\subsection*{further documentation}
+
+To read up on more detailed documentation, you can generate the docs with {\ttfamily doxygen}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ doxygen}
+\end{DoxyCode}
+
+
+The docs will be generated in the {\ttfamily docs/} directory. Open the {\ttfamily docs/html/index.\+html} file and read away! 

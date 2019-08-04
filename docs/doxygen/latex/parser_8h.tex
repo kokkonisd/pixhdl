@@ -1,0 +1,223 @@
+\hypertarget{parser_8h}{}\section{src/pixhdl/parser.h File Reference}
+\label{parser_8h}\index{src/pixhdl/parser.h@{src/pixhdl/parser.h}}
+
+
+H\+DL file parser for the {\itshape pixhdl} project.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$regex.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}entity.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{parser_8h_a109435a96cfe368781e814630b69acdd}{E\+N\+T\+I\+T\+Y\+\_\+\+R\+E\+G\+EX}}~\char`\"{}entity\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(\mbox{[}a-\/zA-\/Z0-\/9\+\_\+\mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+is\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(generic\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{}(\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(.+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{})\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$;)?\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$port\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{}(\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(.+\textbackslash{}\textbackslash{})?)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{})\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$;\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$end\mbox{[} \textbackslash{}t\mbox{]}$\ast$(entity$\vert$\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+\mbox{]}+)?\mbox{[} \textbackslash{}t\mbox{]}$\ast$;\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$architecture\char`\"{}
+\item 
+\#define \mbox{\hyperlink{parser_8h_a2ba0f87dd973431ddf3d8f433052ea3e}{P\+O\+R\+T\+\_\+\+R\+E\+G\+EX}}~\char`\"{}(\mbox{[}a-\/zA-\/Z0-\/9\+\_\+, \mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\+:\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$((in$\vert$out$\vert$inout)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(std\+\_\+logic\mbox{[}$^\wedge$;\mbox{]}$\ast$)$\vert$(\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+,. \textbackslash{}t-\/\mbox{]}$\ast$));\char`\"{}
+\item 
+\#define \mbox{\hyperlink{parser_8h_ae374e665c91bc99304282b2660211957}{V\+E\+C\+T\+O\+R\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+G\+EX}}~\char`\"{}(\textbackslash{}\textbackslash{}((\mbox{[}a-\/zA-\/Z0-\/9\+\_\+ -\/\mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(down)?to\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+ -\/\mbox{]}+)\textbackslash{}\textbackslash{}))\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{parser_8h_ace94cf3e9166e9e7ccea35910e571ca8}{is\+Legal\+Port\+Name\+Char}} (const char portname\+\_\+char)
+\item 
+int \mbox{\hyperlink{parser_8h_a0f170f40c6178a8405f90bab9251a411}{contains\+Alpha}} (const char $\ast$str)
+\item 
+char $\ast$ \mbox{\hyperlink{parser_8h_a922a8ff62f60bb41295b5e0e5c55553c}{parse\+Signal\+Name}} (const char $\ast$raw\+\_\+txt, int start, int end)
+\item 
+\mbox{\hyperlink{entity_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}} \mbox{\hyperlink{parser_8h_ab2d567d26a3b6b2feeb0617b29de2e9b}{parse\+Signal\+Direction}} (const char $\ast$raw\+\_\+txt, int start, int end)
+\item 
+char $\ast$ \mbox{\hyperlink{parser_8h_a69104e2ca0884bc61fcf422a5fb1fb29}{parse\+Signal\+Length}} (const char $\ast$raw\+\_\+txt, int start, int end)
+\item 
+char $\ast$ \mbox{\hyperlink{parser_8h_a1107dfae91e80f49cebc688829787a07}{get\+Raw\+Entity\+Text\+From\+File}} (const char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Gets the raw entry definition from a given file. Output also contains the entity\textquotesingle{}s name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_entity}{Entity}} $\ast$ \mbox{\hyperlink{parser_8h_adf60cf70cb4a35bb37eb0826c764b136}{get\+Entity\+From\+Raw\+Entity\+Text}} (const char $\ast$entity\+\_\+text)
+\item 
+\mbox{\hyperlink{struct_entity}{Entity}} $\ast$ \mbox{\hyperlink{parser_8h_a02b959f134b20322a2d8a156c31d0612}{get\+Entity\+From\+File}} (const char $\ast$filename)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+H\+DL file parser for the {\itshape pixhdl} project. 
+
+\begin{DoxyAuthor}{Author}
+Dimitri Kokkonis (\href{https://github.com/kokkonisd}{\texttt{ @kokkonisd}}) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+4 Aug 2019 
+\end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{parser_8h_a109435a96cfe368781e814630b69acdd}\label{parser_8h_a109435a96cfe368781e814630b69acdd}} 
+\index{parser.h@{parser.h}!ENTITY\_REGEX@{ENTITY\_REGEX}}
+\index{ENTITY\_REGEX@{ENTITY\_REGEX}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{ENTITY\_REGEX}{ENTITY\_REGEX}}
+{\footnotesize\ttfamily \#define E\+N\+T\+I\+T\+Y\+\_\+\+R\+E\+G\+EX~\char`\"{}entity\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(\mbox{[}a-\/zA-\/Z0-\/9\+\_\+\mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+is\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(generic\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{}(\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(.+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{})\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$;)?\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$port\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{}(\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(.+\textbackslash{}\textbackslash{})?)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{})\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$;\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$end\mbox{[} \textbackslash{}t\mbox{]}$\ast$(entity$\vert$\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+\mbox{]}+)?\mbox{[} \textbackslash{}t\mbox{]}$\ast$;\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$architecture\char`\"{}}
+
+Regex to match the entity definition of a V\+H\+DL source file. \mbox{\Hypertarget{parser_8h_a2ba0f87dd973431ddf3d8f433052ea3e}\label{parser_8h_a2ba0f87dd973431ddf3d8f433052ea3e}} 
+\index{parser.h@{parser.h}!PORT\_REGEX@{PORT\_REGEX}}
+\index{PORT\_REGEX@{PORT\_REGEX}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{PORT\_REGEX}{PORT\_REGEX}}
+{\footnotesize\ttfamily \#define P\+O\+R\+T\+\_\+\+R\+E\+G\+EX~\char`\"{}(\mbox{[}a-\/zA-\/Z0-\/9\+\_\+, \mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\+:\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$((in$\vert$out$\vert$inout)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(std\+\_\+logic\mbox{[}$^\wedge$;\mbox{]}$\ast$)$\vert$(\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+,. \textbackslash{}t-\/\mbox{]}$\ast$));\char`\"{}}
+
+Regex to match the port definition of a V\+H\+DL source file. \mbox{\Hypertarget{parser_8h_ae374e665c91bc99304282b2660211957}\label{parser_8h_ae374e665c91bc99304282b2660211957}} 
+\index{parser.h@{parser.h}!VECTOR\_LENGTH\_REGEX@{VECTOR\_LENGTH\_REGEX}}
+\index{VECTOR\_LENGTH\_REGEX@{VECTOR\_LENGTH\_REGEX}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{VECTOR\_LENGTH\_REGEX}{VECTOR\_LENGTH\_REGEX}}
+{\footnotesize\ttfamily \#define V\+E\+C\+T\+O\+R\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+G\+EX~\char`\"{}(\textbackslash{}\textbackslash{}((\mbox{[}a-\/zA-\/Z0-\/9\+\_\+ -\/\mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(down)?to\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+ -\/\mbox{]}+)\textbackslash{}\textbackslash{}))\char`\"{}}
+
+Regex to match the vector length definition of a V\+H\+DL source file. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{parser_8h_a0f170f40c6178a8405f90bab9251a411}\label{parser_8h_a0f170f40c6178a8405f90bab9251a411}} 
+\index{parser.h@{parser.h}!containsAlpha@{containsAlpha}}
+\index{containsAlpha@{containsAlpha}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{containsAlpha()}{containsAlpha()}}
+{\footnotesize\ttfamily int contains\+Alpha (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str }\end{DoxyParamCaption})}
+
+Check if a given string contains any alphabetic characters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & ({\ttfamily char $\ast$})\+: The input string to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+({\ttfamily int})\+: 1 if the string contains any alphabetic characters, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parser_8h_a02b959f134b20322a2d8a156c31d0612}\label{parser_8h_a02b959f134b20322a2d8a156c31d0612}} 
+\index{parser.h@{parser.h}!getEntityFromFile@{getEntityFromFile}}
+\index{getEntityFromFile@{getEntityFromFile}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{getEntityFromFile()}{getEntityFromFile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_entity}{Entity}}$\ast$ get\+Entity\+From\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+Generates an \mbox{\hyperlink{struct_entity}{Entity}} object given a filename.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & ({\ttfamily const char $\ast$})\+: The path/name of the source file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+({\ttfamily \mbox{\hyperlink{struct_entity}{Entity}} $\ast$})\+: The \mbox{\hyperlink{struct_entity}{Entity}} object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parser_8h_adf60cf70cb4a35bb37eb0826c764b136}\label{parser_8h_adf60cf70cb4a35bb37eb0826c764b136}} 
+\index{parser.h@{parser.h}!getEntityFromRawEntityText@{getEntityFromRawEntityText}}
+\index{getEntityFromRawEntityText@{getEntityFromRawEntityText}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{getEntityFromRawEntityText()}{getEntityFromRawEntityText()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_entity}{Entity}}$\ast$ get\+Entity\+From\+Raw\+Entity\+Text (\begin{DoxyParamCaption}\item[{const char $\ast$}]{entity\+\_\+text }\end{DoxyParamCaption})}
+
+Generate an \mbox{\hyperlink{struct_entity}{Entity}} object given an entity definition in raw text. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{parser_8h_a1107dfae91e80f49cebc688829787a07}{get\+Raw\+Entity\+Text\+From\+File}}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em entity\+\_\+text} & ({\ttfamily const char $\ast$})\+: The raw entity definition. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+({\ttfamily \mbox{\hyperlink{struct_entity}{Entity}} $\ast$})\+: The \mbox{\hyperlink{struct_entity}{Entity}} object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parser_8h_a1107dfae91e80f49cebc688829787a07}\label{parser_8h_a1107dfae91e80f49cebc688829787a07}} 
+\index{parser.h@{parser.h}!getRawEntityTextFromFile@{getRawEntityTextFromFile}}
+\index{getRawEntityTextFromFile@{getRawEntityTextFromFile}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{getRawEntityTextFromFile()}{getRawEntityTextFromFile()}}
+{\footnotesize\ttfamily char$\ast$ get\+Raw\+Entity\+Text\+From\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Gets the raw entry definition from a given file. Output also contains the entity\textquotesingle{}s name. 
+
+Given an H\+DL source file, it extracts \& returns the name of the entity, its generic inputs (if any) and its port inputs/outputs/throughputs. The entity\textquotesingle{}s name is immediately followed by a {\ttfamily ;} separator. In the case that the entity contains any generic inputs, the first of them is preceded by a {\ttfamily $\ast$} character. The first port of the entity is preceded by a {\ttfamily @} character. The final string returned by the function is formatted as follows\+:
+
+{\ttfamily Entity\+Name;$\ast$\+Generic1\+:value;Generic2\+:value;...;@Port1\+:value;Port2\+:value;...;}
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & ({\ttfamily const char $\ast$})\+: The path/name of the source file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+({\ttfamily char $\ast$})\+: The raw name and body of the entity definition. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parser_8h_ace94cf3e9166e9e7ccea35910e571ca8}\label{parser_8h_ace94cf3e9166e9e7ccea35910e571ca8}} 
+\index{parser.h@{parser.h}!isLegalPortNameChar@{isLegalPortNameChar}}
+\index{isLegalPortNameChar@{isLegalPortNameChar}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{isLegalPortNameChar()}{isLegalPortNameChar()}}
+{\footnotesize\ttfamily int is\+Legal\+Port\+Name\+Char (\begin{DoxyParamCaption}\item[{const char}]{portname\+\_\+char }\end{DoxyParamCaption})}
+
+Check if a given character is a legal port name in V\+H\+DL.
+
+
+\begin{DoxyParams}{Parameters}
+{\em portname\+\_\+char} & ({\ttfamily const char})\+: A portname character. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+({\ttfamily int})\+: 1 if the char is valid, 0 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parser_8h_ab2d567d26a3b6b2feeb0617b29de2e9b}\label{parser_8h_ab2d567d26a3b6b2feeb0617b29de2e9b}} 
+\index{parser.h@{parser.h}!parseSignalDirection@{parseSignalDirection}}
+\index{parseSignalDirection@{parseSignalDirection}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{parseSignalDirection()}{parseSignalDirection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{entity_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}} parse\+Signal\+Direction (\begin{DoxyParamCaption}\item[{const char $\ast$}]{raw\+\_\+txt,  }\item[{int}]{start,  }\item[{int}]{end }\end{DoxyParamCaption})}
+
+Parses the direction of a signal given some raw entity text, a start and an end index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+txt} & ({\ttfamily const char $\ast$})\+: The raw entity text. \\
+\hline
+{\em start} & ({\ttfamily int})\+: The beginning index for the raw entity text. \\
+\hline
+{\em end} & ({\ttfamily int})\+: The ending index for the raw entity text. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+({\ttfamily direction})\+: The resulting direction. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parser_8h_a69104e2ca0884bc61fcf422a5fb1fb29}\label{parser_8h_a69104e2ca0884bc61fcf422a5fb1fb29}} 
+\index{parser.h@{parser.h}!parseSignalLength@{parseSignalLength}}
+\index{parseSignalLength@{parseSignalLength}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{parseSignalLength()}{parseSignalLength()}}
+{\footnotesize\ttfamily char$\ast$ parse\+Signal\+Length (\begin{DoxyParamCaption}\item[{const char $\ast$}]{raw\+\_\+txt,  }\item[{int}]{start,  }\item[{int}]{end }\end{DoxyParamCaption})}
+
+Parses the length of a signal (in bits) given some raw entity text, a start and an end index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+txt} & ({\ttfamily const char $\ast$})\+: The raw entity text. \\
+\hline
+{\em start} & ({\ttfamily int})\+: The beginning index for the raw entity text. \\
+\hline
+{\em end} & ({\ttfamily int})\+: The ending index for the raw entity text. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+({\ttfamily int})\+: The resulting length (in bits). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{parser_8h_a922a8ff62f60bb41295b5e0e5c55553c}\label{parser_8h_a922a8ff62f60bb41295b5e0e5c55553c}} 
+\index{parser.h@{parser.h}!parseSignalName@{parseSignalName}}
+\index{parseSignalName@{parseSignalName}!parser.h@{parser.h}}
+\subsubsection{\texorpdfstring{parseSignalName()}{parseSignalName()}}
+{\footnotesize\ttfamily char$\ast$ parse\+Signal\+Name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{raw\+\_\+txt,  }\item[{int}]{start,  }\item[{int}]{end }\end{DoxyParamCaption})}
+
+Parses the name of a signal given some raw entity text, a start and an end index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+txt} & ({\ttfamily const char $\ast$})\+: The raw entity text. \\
+\hline
+{\em start} & ({\ttfamily int})\+: The beginning index for the raw entity text. \\
+\hline
+{\em end} & ({\ttfamily int})\+: The ending index for the raw entity text. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+({\ttfamily char $\ast$})\+: The resulting signal name. 
+\end{DoxyReturn}
