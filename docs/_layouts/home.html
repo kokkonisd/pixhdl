@@ -20,7 +20,7 @@
         <p class="lead">Generate entity diagrams effortlessly, wether you're working with simple entities...</p>
 
         <div class="row">
-            <div class="col-5 my-auto">
+            <div class="col-5 my-auto code">
 {% highlight vhdl linenos %}
 library ieee;
 use ieee.std_logic_1164.all;
@@ -53,7 +53,7 @@ end entity;
         <p class="lead">... or more abstract, generic ones:</p>
 
         <div class="row">
-            <div class="col-5 my-auto">
+            <div class="col-5 my-auto code">
 {% highlight vhdl linenos %}
 library ieee;
 use ieee.std_logic_1164.all;
@@ -62,12 +62,14 @@ use ieee.numeric_std.all;
 
 entity MUX is
     generic (
-        N : integer range 0 to 32
+        N : integer range 0 to 32;
+        M : time 0.2 ns
     );
     port (
         A, B : in std_logic_vector (N - 1 downto 0);
         COM : in std_logic;
-        Y : out std_logic_vector (N - 1 downto 0)
+        Y : out std_logic_vector (N - 1 downto 0);
+        F : inout std_logic_vector (10 downto 0)
     );
 end entity;
 
@@ -85,6 +87,12 @@ end entity;
         </div>
 
     </div>
+
+    <hr>
+
+    <footer class="text-center">
+        <p>&copy; 2019 Dimitri Kokkonis</p>
+    </footer>
 
 
     <!-- scripts -->

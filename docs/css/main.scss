@@ -3,22 +3,30 @@
 
 @import "monokai";
 
-figure.highlight {
-    padding: 10px;
-    border-radius: 10px;
 
-    pre {
-        margin-bottom: 0px;
-    }
 
-    pre.lineno {
-        color: rgba(white, 0.6);
-        padding-right: 10px;
-        border-right: 1px dashed rgba(white, 0.3);
-    }
+div.code {
+    overflow-x: hidden;
+    transition: all 0.5s ease-out;
 
-    td.code {
-        padding-left: 10px;
+    figure.highlight {
+        padding: 10px;
+        border-radius: 10px;
+
+        pre {
+            margin-bottom: 0px;
+            overflow-x: hidden;
+        }
+
+        pre.lineno {
+            color: rgba(white, 0.6);
+            padding-right: 10px;
+            border-right: 1px dashed rgba(white, 0.3);
+        }
+
+        td.code {
+            padding-left: 10px;
+        }
     }
 }
 
@@ -28,9 +36,11 @@ h2.display-4 {
 
 .arrow {
     font-size: 30pt;
+    transition: all 0.5s ease-out;
 }
 
 .entity {
+    transition: all 0.5s ease-out;
     img {
         width: 100%;
         height: auto;
