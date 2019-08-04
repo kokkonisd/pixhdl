@@ -118,3 +118,14 @@ $ sudo make uninstall
 ```
 
 That will uninstall pixhdl from your computer if it was previously installed.
+
+
+## further documentation
+
+To read up on more detailed documentation, you can generate the docs with `doxygen`:
+
+```bash
+$ doxygen
+```
+
+The docs will be generated in the `docs/` directory. Open the `docs/html/index.html` file and read away!
