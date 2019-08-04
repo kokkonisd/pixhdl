@@ -35,7 +35,6 @@ figure.highlight, .highlighter-rouge {
 
     pre {
         margin-bottom: 0px;
-        overflow-x: hidden;
     }
 
     pre.lineno {
@@ -46,6 +45,14 @@ figure.highlight, .highlighter-rouge {
 
     td.code {
         padding-left: 10px;
+    }
+}
+
+div.resizable-code {
+    figure.highlight {
+        pre {
+            overflow-x: hidden;
+        }
     }
 }
 
