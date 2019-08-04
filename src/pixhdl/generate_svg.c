@@ -293,9 +293,9 @@ int generateSvgFromEntity (Entity * ent, char * filename)
                                       RIGHT);
 
         // Draw a slash to indicate signal length in bits
-        fprintf(svg_file, LENGTH_SLASH, svg_width - port_width_right + arrow_length_right / 2 - 10,
+        fprintf(svg_file, LENGTH_SLASH, port_width_left + rect_width + arrow_length_right / 2 - 10,
                                         cur_pos + 10,
-                                        svg_width - port_width_right + arrow_length_right / 2 + 10,
+                                        port_width_left + rect_width + arrow_length_right / 2 + 10,
                                         cur_pos - 10);
 
         // Draw the signal's name
@@ -305,10 +305,10 @@ int generateSvgFromEntity (Entity * ent, char * filename)
                                            ent->signals_out[i].name);
 
         // Draw the signal's length above the slash we drew earlier
-        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, svg_width - port_width_right + arrow_length_right / 2,
-                                       cur_pos - 15,
-                                       LENGTH_FONT_SIZE,
-                                       ent->signals_out[i].length);
+        fprintf(svg_file, HORIZONTAL_LENGTH_TEXT, port_width_left + rect_width + arrow_length_right / 2,
+                                                  cur_pos - 15,
+                                                  LENGTH_FONT_SIZE,
+                                                  ent->signals_out[i].length);
 
         // Move the current Y position forward by one step
         cur_pos += step;
