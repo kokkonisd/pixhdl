@@ -30,7 +30,7 @@
 #include "entity.h"
 #include "parser.h"
 
-
+// Enum that expresses the direction of an arrow/arrow line
 typedef enum {
     RIGHT,
     LEFT,
@@ -38,7 +38,54 @@ typedef enum {
     DOWN
 } arrDir;
 
+/**
+ * Returns the maximum between two floats.
+ * @param  a (float): First possible maximum
+ * @param  b (float): Second possible maximum
+ * @return   (float): The maximum between a and b
+ */
 float max (float a, float b);
+
+/**
+ * Draws an arrow head into an SVG file (fo) around the point (x, y),
+ * given a direction (LEFT, RIGHT, UP, DOWN).
+ * @param fo  (FILE *): Output SVG file for the arrow head to be written into
+ * @param x    (float): The x coordinate of the point
+ * @param y    (float): The y coordinate of the point
+ * @param dir (arrDir): The direction of the arrow head (LEFT, RIGHT, UP, DOWN)
+ */
+void drawArrowHead (FILE * fo, float x, float y, arrDir dir);
+
+/**
+ * Draws a line with a simple arrow at its end in an SVG file (fo). Only handles
+ * purely horizontal/vertical lines.
+ * @param fo      (FILE *): Output SVG file for the line to be written into
+ * @param start_x  (float): The starting X coordinate of the line
+ * @param start_y  (float): The starting Y coordinate of the line
+ * @param end_x    (float): The ending X coordinate of the line
+ * @param end_y    (float): The ending Y coordinate of the line
+ * @param dir     (arrDir): The direction of the arrow line (LEFT, RIGHT, UP, DOWN)
+ */
+void drawSimpleArrowLine (FILE * fo, float start_x, float start_y, float end_x, float end_y, arrDir dir);
+
+/**
+ * Draws a line with arrows at both its ends in an SVG file (fo). Only handles
+ * purely horizontal/vertical lines.
+ * @param fo      (FILE *): Output SVG file for the line to be written into
+ * @param start_x  (float): The starting X coordinate of the line
+ * @param start_y  (float): The starting Y coordinate of the line
+ * @param end_x    (float): The ending X coordinate of the line
+ * @param end_y    (float): The ending Y coordinate of the line
+ * @param dir     (arrDir): The direction of the arrow line (LEFT, RIGHT, UP, DOWN)
+ */
+void drawDoubleArrowLine (FILE * fo, float start_x, float start_y, float end_x, float end_y, arrDir dir);
+
+/**
+ * Generates an SVG image given an Entity object.
+ * @param  ent      (Entity *): The entity object from which to generate an image
+ * @param  filename   (char *): The name/path of the output image file
+ * @return               (int): 1 if successful, 0 otherwise
+ */
 int generateSvgFromEntity (Entity * ent, char * filename);
 
 
