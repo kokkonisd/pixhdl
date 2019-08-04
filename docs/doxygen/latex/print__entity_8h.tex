@@ -1,0 +1,58 @@
+\hypertarget{print__entity_8h}{}\section{src/pixhdl/print\+\_\+entity.h File Reference}
+\label{print__entity_8h}\index{src/pixhdl/print\_entity.h@{src/pixhdl/print\_entity.h}}
+
+
+In-\/terminal printing operations for the {\itshape pixhdl} project.  
+
+
+{\ttfamily \#include \char`\"{}entity.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{print__entity_8h_a84287ef57bb2305639ce5465d297b3ec}{direction\+To\+String}} (\mbox{\hyperlink{entity_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}} dir)
+\item 
+void \mbox{\hyperlink{print__entity_8h_a7b6944bf415364afaab30ee9e1d505b3}{print\+Entity\+Signals}} (\mbox{\hyperlink{struct_entity}{Entity}} $\ast$ent)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+In-\/terminal printing operations for the {\itshape pixhdl} project. 
+
+\begin{DoxyAuthor}{Author}
+Dimitri Kokkonis (\href{https://github.com/kokkonisd}{\texttt{ @kokkonisd}}) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+4 Aug 2019 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{print__entity_8h_a84287ef57bb2305639ce5465d297b3ec}\label{print__entity_8h_a84287ef57bb2305639ce5465d297b3ec}} 
+\index{print\_entity.h@{print\_entity.h}!directionToString@{directionToString}}
+\index{directionToString@{directionToString}!print\_entity.h@{print\_entity.h}}
+\subsubsection{\texorpdfstring{directionToString()}{directionToString()}}
+{\footnotesize\ttfamily const char$\ast$ direction\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{entity_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}}}]{dir }\end{DoxyParamCaption})}
+
+Convert a direction enum to string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & ({\ttfamily direction})\+: The direction to be converted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+({\ttfamily const char $\ast$})\+: The string equivalent of the direction. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{print__entity_8h_a7b6944bf415364afaab30ee9e1d505b3}\label{print__entity_8h_a7b6944bf415364afaab30ee9e1d505b3}} 
+\index{print\_entity.h@{print\_entity.h}!printEntitySignals@{printEntitySignals}}
+\index{printEntitySignals@{printEntitySignals}!print\_entity.h@{print\_entity.h}}
+\subsubsection{\texorpdfstring{printEntitySignals()}{printEntitySignals()}}
+{\footnotesize\ttfamily void print\+Entity\+Signals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_entity}{Entity}} $\ast$}]{ent }\end{DoxyParamCaption})}
+
+Prints all the signals of an \mbox{\hyperlink{struct_entity}{Entity}} in the following order\+: {\ttfamily IN}, {\ttfamily O\+UT}, {\ttfamily I\+N\+O\+UT}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ent} & ({\ttfamily \mbox{\hyperlink{struct_entity}{Entity}} $\ast$}\`{})\+: The \mbox{\hyperlink{struct_entity}{Entity}} object whose signals are to be printed. \\
+\hline
+\end{DoxyParams}

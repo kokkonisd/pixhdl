@@ -1,0 +1,105 @@
+\hypertarget{entity_8h}{}\section{src/pixhdl/entity.h File Reference}
+\label{entity_8h}\index{src/pixhdl/entity.h@{src/pixhdl/entity.h}}
+
+
+\mbox{\hyperlink{struct_entity}{Entity}} definitions \& basic operations for the {\itshape pixhdl} project.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}dbg.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_signal}{Signal}}
+\begin{DoxyCompactList}\small\item\em Definition of the \mbox{\hyperlink{struct_signal}{Signal}} object. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_entity}{Entity}}
+\begin{DoxyCompactList}\small\item\em Definition of the \mbox{\hyperlink{struct_entity}{Entity}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{entity_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}} \{ {\bfseries IN}, 
+{\bfseries O\+UT}, 
+{\bfseries I\+N\+O\+UT}, 
+{\bfseries G\+E\+N\+E\+R\+IC}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of the possible directions of a signal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_entity}{Entity}} $\ast$ \mbox{\hyperlink{entity_8h_a8f60394549421ebfc21f52826b100c56}{create\+Entity}} ()
+\item 
+void \mbox{\hyperlink{entity_8h_a11a2a1b91a3ba5fca68ff696028ce631}{destroy\+Entity}} (\mbox{\hyperlink{struct_entity}{Entity}} $\ast$ent)
+\item 
+int \mbox{\hyperlink{entity_8h_af96bf0a2c0e64d16f115d1af39281796}{add\+Signal\+To\+Entity}} (\mbox{\hyperlink{struct_entity}{Entity}} $\ast$ent, const \mbox{\hyperlink{struct_signal}{Signal}} $\ast$sig)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{struct_entity}{Entity}} definitions \& basic operations for the {\itshape pixhdl} project. 
+
+\begin{DoxyAuthor}{Author}
+Dimitri Kokkonis (\href{https://github.com/kokkonisd}{\texttt{ @kokkonisd}}) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+4 Aug 2019 
+\end{DoxyDate}
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{entity_8h_a99f26e6ee9fcd62f75203b5402df8098}\label{entity_8h_a99f26e6ee9fcd62f75203b5402df8098}} 
+\index{entity.h@{entity.h}!direction@{direction}}
+\index{direction@{direction}!entity.h@{entity.h}}
+\subsubsection{\texorpdfstring{direction}{direction}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{entity_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}}}
+
+
+
+Enumeration of the possible directions of a signal. 
+
+The possible directions of a signal (port) are IN, O\+UT and I\+N\+O\+UT. However, an entity can also have G\+E\+N\+E\+R\+IC inputs; thinking of G\+E\+N\+E\+R\+IC as an additional direction helps generalize the code (adding a \mbox{\hyperlink{struct_signal}{Signal}} to an \mbox{\hyperlink{struct_entity}{Entity}}, printing an \mbox{\hyperlink{struct_entity}{Entity}} etc). 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{entity_8h_af96bf0a2c0e64d16f115d1af39281796}\label{entity_8h_af96bf0a2c0e64d16f115d1af39281796}} 
+\index{entity.h@{entity.h}!addSignalToEntity@{addSignalToEntity}}
+\index{addSignalToEntity@{addSignalToEntity}!entity.h@{entity.h}}
+\subsubsection{\texorpdfstring{addSignalToEntity()}{addSignalToEntity()}}
+{\footnotesize\ttfamily int add\+Signal\+To\+Entity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_entity}{Entity}} $\ast$}]{ent,  }\item[{const \mbox{\hyperlink{struct_signal}{Signal}} $\ast$}]{sig }\end{DoxyParamCaption})}
+
+Adds a \mbox{\hyperlink{struct_signal}{Signal}} object to an \mbox{\hyperlink{struct_entity}{Entity}} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ent} & ({\ttfamily \mbox{\hyperlink{struct_entity}{Entity}} $\ast$})\+: \mbox{\hyperlink{struct_entity}{Entity}} object to add \mbox{\hyperlink{struct_signal}{Signal}} object to. \\
+\hline
+{\em sig} & ({\ttfamily \mbox{\hyperlink{struct_signal}{Signal}} $\ast$})\+: \mbox{\hyperlink{struct_signal}{Signal}} object to be added to \mbox{\hyperlink{struct_entity}{Entity}} object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+({\ttfamily int})\+: 0 if successful, 1 if not successful. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{entity_8h_a8f60394549421ebfc21f52826b100c56}\label{entity_8h_a8f60394549421ebfc21f52826b100c56}} 
+\index{entity.h@{entity.h}!createEntity@{createEntity}}
+\index{createEntity@{createEntity}!entity.h@{entity.h}}
+\subsubsection{\texorpdfstring{createEntity()}{createEntity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_entity}{Entity}}$\ast$ create\+Entity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates an \mbox{\hyperlink{struct_entity}{Entity}} object.
+
+\begin{DoxyReturn}{Returns}
+ent ({\ttfamily \mbox{\hyperlink{struct_entity}{Entity}} $\ast$})\+: Newly created \mbox{\hyperlink{struct_entity}{Entity}} object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{entity_8h_a11a2a1b91a3ba5fca68ff696028ce631}\label{entity_8h_a11a2a1b91a3ba5fca68ff696028ce631}} 
+\index{entity.h@{entity.h}!destroyEntity@{destroyEntity}}
+\index{destroyEntity@{destroyEntity}!entity.h@{entity.h}}
+\subsubsection{\texorpdfstring{destroyEntity()}{destroyEntity()}}
+{\footnotesize\ttfamily void destroy\+Entity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_entity}{Entity}} $\ast$}]{ent }\end{DoxyParamCaption})}
+
+Frees the memory of an \mbox{\hyperlink{struct_entity}{Entity}} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ent} & ({\ttfamily \mbox{\hyperlink{struct_entity}{Entity}} $\ast$})\+: \mbox{\hyperlink{struct_entity}{Entity}} object to be freed. \\
+\hline
+\end{DoxyParams}

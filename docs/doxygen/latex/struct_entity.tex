@@ -1,0 +1,179 @@
+\hypertarget{struct_entity}{}\section{Entity Struct Reference}
+\label{struct_entity}\index{Entity@{Entity}}
+
+
+Definition of the \mbox{\hyperlink{struct_entity}{Entity}} object.  
+
+
+
+
+{\ttfamily \#include $<$entity.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{struct_entity_a861f653e2ffbe97c0deed7ab85eb7ce6}{name}}
+\item 
+\mbox{\hyperlink{struct_signal}{Signal}} $\ast$ \mbox{\hyperlink{struct_entity_a92738012e3a6611f840cf0eb2813c2e6}{generics}}
+\item 
+\mbox{\hyperlink{struct_signal}{Signal}} $\ast$ \mbox{\hyperlink{struct_entity_a52dafc8055e7c6c1b21520fad2d703b2}{signals\+\_\+in}}
+\item 
+\mbox{\hyperlink{struct_signal}{Signal}} $\ast$ \mbox{\hyperlink{struct_entity_a4b9a333d9fb207c09d9f64e87d986ad6}{signals\+\_\+out}}
+\item 
+\mbox{\hyperlink{struct_signal}{Signal}} $\ast$ \mbox{\hyperlink{struct_entity_a3a7a0540c9a581600cae6cb8880d4175}{signals\+\_\+inout}}
+\item 
+unsigned int \mbox{\hyperlink{struct_entity_a20a2de116010cce381f1127dae0b2218}{count\+\_\+generics}}
+\item 
+unsigned int \mbox{\hyperlink{struct_entity_a92911aaab51c820215510b0546570b64}{count\+\_\+in}}
+\item 
+unsigned int \mbox{\hyperlink{struct_entity_a0cc932f4ed6b00e372488b3a753674ac}{count\+\_\+out}}
+\item 
+unsigned int \mbox{\hyperlink{struct_entity_a54b70a8bdd98d2752f6ff9f261c552fd}{count\+\_\+inout}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_entity_a8b0c53c2f6867fd1c011210e63efcaad}{max\+\_\+name\+\_\+size\+\_\+generics}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_entity_ae224ddbebe0375e2b802c08ca7f15dda}{max\+\_\+name\+\_\+size\+\_\+in}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_entity_ade510913e1937e285e677c2b281cb09e}{max\+\_\+name\+\_\+size\+\_\+out}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_entity_a33a2fca24ecaee57aaf1b2416463e1bd}{max\+\_\+name\+\_\+size\+\_\+inout}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_entity_a5066a9a519892bae3522583614ad4265}{max\+\_\+name\+\_\+size\+\_\+global}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_entity_a9822957e550360cb5cddf1c39bb02f7c}{max\+\_\+length\+\_\+size\+\_\+generics}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_entity_a3dc25f084d7d9f51ec16d4154d8d7153}{max\+\_\+length\+\_\+size\+\_\+in}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_entity_aaac43fe338ec2162eb69ee47920f3363}{max\+\_\+length\+\_\+size\+\_\+out}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_entity_a0833c90ebe1f08cc102e27d9a7ee87ff}{max\+\_\+length\+\_\+size\+\_\+inout}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct_entity_a36ae5682c01accd9d4335055ab0eca05}{max\+\_\+length\+\_\+size\+\_\+global}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Definition of the \mbox{\hyperlink{struct_entity}{Entity}} object. 
+
+An \mbox{\hyperlink{struct_entity}{Entity}} is a collection of input, output, throughput and generic input signals. It also has a name, and -- in order to facilitate later operations such as image generation and printing -- also contains the maximum lengths of both port names and port sizes (for each type of port). 
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{struct_entity_a20a2de116010cce381f1127dae0b2218}\label{struct_entity_a20a2de116010cce381f1127dae0b2218}} 
+\index{Entity@{Entity}!count\_generics@{count\_generics}}
+\index{count\_generics@{count\_generics}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{count\_generics}{count\_generics}}
+{\footnotesize\ttfamily unsigned int Entity\+::count\+\_\+generics}
+
+Length of the {\ttfamily generics} array. \mbox{\Hypertarget{struct_entity_a92911aaab51c820215510b0546570b64}\label{struct_entity_a92911aaab51c820215510b0546570b64}} 
+\index{Entity@{Entity}!count\_in@{count\_in}}
+\index{count\_in@{count\_in}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{count\_in}{count\_in}}
+{\footnotesize\ttfamily unsigned int Entity\+::count\+\_\+in}
+
+Length of the {\ttfamily signals\+\_\+in} array. \mbox{\Hypertarget{struct_entity_a54b70a8bdd98d2752f6ff9f261c552fd}\label{struct_entity_a54b70a8bdd98d2752f6ff9f261c552fd}} 
+\index{Entity@{Entity}!count\_inout@{count\_inout}}
+\index{count\_inout@{count\_inout}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{count\_inout}{count\_inout}}
+{\footnotesize\ttfamily unsigned int Entity\+::count\+\_\+inout}
+
+Length of the {\ttfamily signals\+\_\+inout} array. \mbox{\Hypertarget{struct_entity_a0cc932f4ed6b00e372488b3a753674ac}\label{struct_entity_a0cc932f4ed6b00e372488b3a753674ac}} 
+\index{Entity@{Entity}!count\_out@{count\_out}}
+\index{count\_out@{count\_out}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{count\_out}{count\_out}}
+{\footnotesize\ttfamily unsigned int Entity\+::count\+\_\+out}
+
+Length of the {\ttfamily signals\+\_\+out} array. \mbox{\Hypertarget{struct_entity_a92738012e3a6611f840cf0eb2813c2e6}\label{struct_entity_a92738012e3a6611f840cf0eb2813c2e6}} 
+\index{Entity@{Entity}!generics@{generics}}
+\index{generics@{generics}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{generics}{generics}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_signal}{Signal}}$\ast$ Entity\+::generics}
+
+Generic inputs. \mbox{\Hypertarget{struct_entity_a9822957e550360cb5cddf1c39bb02f7c}\label{struct_entity_a9822957e550360cb5cddf1c39bb02f7c}} 
+\index{Entity@{Entity}!max\_length\_size\_generics@{max\_length\_size\_generics}}
+\index{max\_length\_size\_generics@{max\_length\_size\_generics}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{max\_length\_size\_generics}{max\_length\_size\_generics}}
+{\footnotesize\ttfamily size\+\_\+t Entity\+::max\+\_\+length\+\_\+size\+\_\+generics}
+
+Maximum size of the length of a generic input. \mbox{\Hypertarget{struct_entity_a36ae5682c01accd9d4335055ab0eca05}\label{struct_entity_a36ae5682c01accd9d4335055ab0eca05}} 
+\index{Entity@{Entity}!max\_length\_size\_global@{max\_length\_size\_global}}
+\index{max\_length\_size\_global@{max\_length\_size\_global}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{max\_length\_size\_global}{max\_length\_size\_global}}
+{\footnotesize\ttfamily size\+\_\+t Entity\+::max\+\_\+length\+\_\+size\+\_\+global}
+
+Maximum size of the length of a signal in this \mbox{\hyperlink{struct_entity}{Entity}}. \mbox{\Hypertarget{struct_entity_a3dc25f084d7d9f51ec16d4154d8d7153}\label{struct_entity_a3dc25f084d7d9f51ec16d4154d8d7153}} 
+\index{Entity@{Entity}!max\_length\_size\_in@{max\_length\_size\_in}}
+\index{max\_length\_size\_in@{max\_length\_size\_in}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{max\_length\_size\_in}{max\_length\_size\_in}}
+{\footnotesize\ttfamily size\+\_\+t Entity\+::max\+\_\+length\+\_\+size\+\_\+in}
+
+Maximum size of the length of an IN signal. \mbox{\Hypertarget{struct_entity_a0833c90ebe1f08cc102e27d9a7ee87ff}\label{struct_entity_a0833c90ebe1f08cc102e27d9a7ee87ff}} 
+\index{Entity@{Entity}!max\_length\_size\_inout@{max\_length\_size\_inout}}
+\index{max\_length\_size\_inout@{max\_length\_size\_inout}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{max\_length\_size\_inout}{max\_length\_size\_inout}}
+{\footnotesize\ttfamily size\+\_\+t Entity\+::max\+\_\+length\+\_\+size\+\_\+inout}
+
+Maximum size of the length of an I\+N\+O\+UT signal. \mbox{\Hypertarget{struct_entity_aaac43fe338ec2162eb69ee47920f3363}\label{struct_entity_aaac43fe338ec2162eb69ee47920f3363}} 
+\index{Entity@{Entity}!max\_length\_size\_out@{max\_length\_size\_out}}
+\index{max\_length\_size\_out@{max\_length\_size\_out}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{max\_length\_size\_out}{max\_length\_size\_out}}
+{\footnotesize\ttfamily size\+\_\+t Entity\+::max\+\_\+length\+\_\+size\+\_\+out}
+
+Maximum size of the length of an O\+UT signal. \mbox{\Hypertarget{struct_entity_a8b0c53c2f6867fd1c011210e63efcaad}\label{struct_entity_a8b0c53c2f6867fd1c011210e63efcaad}} 
+\index{Entity@{Entity}!max\_name\_size\_generics@{max\_name\_size\_generics}}
+\index{max\_name\_size\_generics@{max\_name\_size\_generics}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{max\_name\_size\_generics}{max\_name\_size\_generics}}
+{\footnotesize\ttfamily size\+\_\+t Entity\+::max\+\_\+name\+\_\+size\+\_\+generics}
+
+Maximum size of the name of a generic input. \mbox{\Hypertarget{struct_entity_a5066a9a519892bae3522583614ad4265}\label{struct_entity_a5066a9a519892bae3522583614ad4265}} 
+\index{Entity@{Entity}!max\_name\_size\_global@{max\_name\_size\_global}}
+\index{max\_name\_size\_global@{max\_name\_size\_global}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{max\_name\_size\_global}{max\_name\_size\_global}}
+{\footnotesize\ttfamily size\+\_\+t Entity\+::max\+\_\+name\+\_\+size\+\_\+global}
+
+Maximum size of the name of a signal in this \mbox{\hyperlink{struct_entity}{Entity}}. \mbox{\Hypertarget{struct_entity_ae224ddbebe0375e2b802c08ca7f15dda}\label{struct_entity_ae224ddbebe0375e2b802c08ca7f15dda}} 
+\index{Entity@{Entity}!max\_name\_size\_in@{max\_name\_size\_in}}
+\index{max\_name\_size\_in@{max\_name\_size\_in}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{max\_name\_size\_in}{max\_name\_size\_in}}
+{\footnotesize\ttfamily size\+\_\+t Entity\+::max\+\_\+name\+\_\+size\+\_\+in}
+
+Maximum size of the name of an IN signal. \mbox{\Hypertarget{struct_entity_a33a2fca24ecaee57aaf1b2416463e1bd}\label{struct_entity_a33a2fca24ecaee57aaf1b2416463e1bd}} 
+\index{Entity@{Entity}!max\_name\_size\_inout@{max\_name\_size\_inout}}
+\index{max\_name\_size\_inout@{max\_name\_size\_inout}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{max\_name\_size\_inout}{max\_name\_size\_inout}}
+{\footnotesize\ttfamily size\+\_\+t Entity\+::max\+\_\+name\+\_\+size\+\_\+inout}
+
+Maximum size of the name of an I\+N\+O\+UT signal. \mbox{\Hypertarget{struct_entity_ade510913e1937e285e677c2b281cb09e}\label{struct_entity_ade510913e1937e285e677c2b281cb09e}} 
+\index{Entity@{Entity}!max\_name\_size\_out@{max\_name\_size\_out}}
+\index{max\_name\_size\_out@{max\_name\_size\_out}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{max\_name\_size\_out}{max\_name\_size\_out}}
+{\footnotesize\ttfamily size\+\_\+t Entity\+::max\+\_\+name\+\_\+size\+\_\+out}
+
+Maximum size of the name of an O\+UT signal. \mbox{\Hypertarget{struct_entity_a861f653e2ffbe97c0deed7ab85eb7ce6}\label{struct_entity_a861f653e2ffbe97c0deed7ab85eb7ce6}} 
+\index{Entity@{Entity}!name@{name}}
+\index{name@{name}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily char$\ast$ Entity\+::name}
+
+Name of the entity. \mbox{\Hypertarget{struct_entity_a52dafc8055e7c6c1b21520fad2d703b2}\label{struct_entity_a52dafc8055e7c6c1b21520fad2d703b2}} 
+\index{Entity@{Entity}!signals\_in@{signals\_in}}
+\index{signals\_in@{signals\_in}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{signals\_in}{signals\_in}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_signal}{Signal}}$\ast$ Entity\+::signals\+\_\+in}
+
+Array of IN signals. \mbox{\Hypertarget{struct_entity_a3a7a0540c9a581600cae6cb8880d4175}\label{struct_entity_a3a7a0540c9a581600cae6cb8880d4175}} 
+\index{Entity@{Entity}!signals\_inout@{signals\_inout}}
+\index{signals\_inout@{signals\_inout}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{signals\_inout}{signals\_inout}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_signal}{Signal}}$\ast$ Entity\+::signals\+\_\+inout}
+
+Array of I\+N\+O\+UT signals. \mbox{\Hypertarget{struct_entity_a4b9a333d9fb207c09d9f64e87d986ad6}\label{struct_entity_a4b9a333d9fb207c09d9f64e87d986ad6}} 
+\index{Entity@{Entity}!signals\_out@{signals\_out}}
+\index{signals\_out@{signals\_out}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{signals\_out}{signals\_out}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_signal}{Signal}}$\ast$ Entity\+::signals\+\_\+out}
+
+Array of O\+UT signals. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/pixhdl/\mbox{\hyperlink{entity_8h}{entity.\+h}}\end{DoxyCompactItemize}

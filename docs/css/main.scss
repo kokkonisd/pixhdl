@@ -1,0 +1,49 @@
+---
+---
+
+@import "monokai";
+
+figure.highlight {
+    padding: 10px;
+    border-radius: 10px;
+
+    pre {
+        margin-bottom: 0px;
+    }
+
+    pre.lineno {
+        color: rgba(white, 0.6);
+        padding-right: 10px;
+        border-right: 1px dashed rgba(white, 0.3);
+    }
+
+    td.code {
+        padding-left: 10px;
+    }
+}
+
+h2.display-4 {
+    font-size: 20pt;
+}
+
+.arrow {
+    font-size: 30pt;
+}
+
+.entity {
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.row {
+    margin-bottom: 80px;
+}
+
+
+.fork-me {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

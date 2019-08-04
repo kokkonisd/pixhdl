@@ -1,0 +1,85 @@
+\hypertarget{auto__update_8h}{}\section{src/pixhdl/auto\+\_\+update.h File Reference}
+\label{auto__update_8h}\index{src/pixhdl/auto\_update.h@{src/pixhdl/auto\_update.h}}
+
+
+Auto-\/update functionality for the {\itshape pixhdl} project.  
+
+
+{\ttfamily \#include \char`\"{}dbg.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{auto__update_8h_a67c079d70e5c6c35f3a9efd29e3433ff}{V\+E\+R\+S\+I\+O\+N\+\_\+\+W\+I\+D\+TH}}~6
+\item 
+\#define \mbox{\hyperlink{auto__update_8h_a7310f347b1f4510631d0f3aa8256ea60}{L\+A\+T\+E\+S\+T\+\_\+\+V\+E\+R\+S\+I\+ON}}~\char`\"{}curl -\/s https\+://github.\+com/kokkonisd/pixhdl/releases/latest $\vert$ grep -\/Eo \textbackslash{}\char`\"{}/tag/(.+)$>$\textbackslash{}\char`\"{} $\vert$ head -\/c 11 $\vert$ tail -\/c 5\char`\"{}
+\item 
+\#define \mbox{\hyperlink{auto__update_8h_a1cab917ca45eb7be00a4653fd325d2b4}{U\+P\+D\+A\+T\+E\+\_\+\+C\+O\+M\+M\+A\+ND}}~\char`\"{}T\+M\+P\+D\+WN=\$(curl -\/s https\+://api.\+github.\+com/repos/kokkonisd/pixhdl/releases/latest $\vert$ grep \textbackslash{}\char`\"{}tag\+\_\+name\textbackslash{}\char`\"{} $\vert$ awk \textquotesingle{}\{print \textbackslash{}\char`\"{}https\+://github.\+com/kokkonisd/pixhdl/archive/\textbackslash{}\char`\"{} substr(\$2, 2, length(\$2)-\/3) \textbackslash{}\char`\"{}/pixhdl-\/\textbackslash{}\char`\"{} substr(\$2, 3, length(\$2)-\/4) \textbackslash{}\char`\"{}.tar.\+gz\textbackslash{}\char`\"{}\}\textquotesingle{}) \&\& curl -\/L -\/s \$T\+M\+P\+D\+WN -\/o /tmp/pixhdl\+\_\+latest.\+tar.\+gz \&\& tar xvzf /tmp/pixhdl\+\_\+latest.\+tar.\+gz -\/C /tmp/ \&\& cd /tmp/pixhdl-\/$\ast$ \&\& make clean \&\& sudo make uninstall \&\& make \&\& sudo make install \&\& cd .. \&\& rm -\/rf pixhdl-\/$\ast$ pixhdl\+\_\+latest$\ast$\char`\"{}
+\begin{DoxyCompactList}\small\item\em Command to update {\itshape pixhdl} to its latest version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{auto__update_8h_a49ece8cb08e27584142748fa70eea00b}{update}} ()
+\begin{DoxyCompactList}\small\item\em Check for an update and install newer version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Auto-\/update functionality for the {\itshape pixhdl} project. 
+
+\begin{DoxyAuthor}{Author}
+Dimitri Kokkonis (\href{https://github.com/kokkonisd}{\texttt{ @kokkonisd}}) 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+4 Aug 2019 
+\end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{auto__update_8h_a7310f347b1f4510631d0f3aa8256ea60}\label{auto__update_8h_a7310f347b1f4510631d0f3aa8256ea60}} 
+\index{auto\_update.h@{auto\_update.h}!LATEST\_VERSION@{LATEST\_VERSION}}
+\index{LATEST\_VERSION@{LATEST\_VERSION}!auto\_update.h@{auto\_update.h}}
+\subsubsection{\texorpdfstring{LATEST\_VERSION}{LATEST\_VERSION}}
+{\footnotesize\ttfamily \#define L\+A\+T\+E\+S\+T\+\_\+\+V\+E\+R\+S\+I\+ON~\char`\"{}curl -\/s https\+://github.\+com/kokkonisd/pixhdl/releases/latest $\vert$ grep -\/Eo \textbackslash{}\char`\"{}/tag/(.+)$>$\textbackslash{}\char`\"{} $\vert$ head -\/c 11 $\vert$ tail -\/c 5\char`\"{}}
+
+Command to get the latest version of {\itshape pixhdl} from the {\itshape releases} page of its official Git\+Hub repo. \mbox{\Hypertarget{auto__update_8h_a1cab917ca45eb7be00a4653fd325d2b4}\label{auto__update_8h_a1cab917ca45eb7be00a4653fd325d2b4}} 
+\index{auto\_update.h@{auto\_update.h}!UPDATE\_COMMAND@{UPDATE\_COMMAND}}
+\index{UPDATE\_COMMAND@{UPDATE\_COMMAND}!auto\_update.h@{auto\_update.h}}
+\subsubsection{\texorpdfstring{UPDATE\_COMMAND}{UPDATE\_COMMAND}}
+{\footnotesize\ttfamily \#define U\+P\+D\+A\+T\+E\+\_\+\+C\+O\+M\+M\+A\+ND~\char`\"{}T\+M\+P\+D\+WN=\$(curl -\/s https\+://api.\+github.\+com/repos/kokkonisd/pixhdl/releases/latest $\vert$ grep \textbackslash{}\char`\"{}tag\+\_\+name\textbackslash{}\char`\"{} $\vert$ awk \textquotesingle{}\{print \textbackslash{}\char`\"{}https\+://github.\+com/kokkonisd/pixhdl/archive/\textbackslash{}\char`\"{} substr(\$2, 2, length(\$2)-\/3) \textbackslash{}\char`\"{}/pixhdl-\/\textbackslash{}\char`\"{} substr(\$2, 3, length(\$2)-\/4) \textbackslash{}\char`\"{}.tar.\+gz\textbackslash{}\char`\"{}\}\textquotesingle{}) \&\& curl -\/L -\/s \$T\+M\+P\+D\+WN -\/o /tmp/pixhdl\+\_\+latest.\+tar.\+gz \&\& tar xvzf /tmp/pixhdl\+\_\+latest.\+tar.\+gz -\/C /tmp/ \&\& cd /tmp/pixhdl-\/$\ast$ \&\& make clean \&\& sudo make uninstall \&\& make \&\& sudo make install \&\& cd .. \&\& rm -\/rf pixhdl-\/$\ast$ pixhdl\+\_\+latest$\ast$\char`\"{}}
+
+
+
+Command to update {\itshape pixhdl} to its latest version. 
+
+This command gets the latest version of {\itshape pixhdl}, downloads it in {\ttfamily tmp/}, then runs\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ make clean}
+\DoxyCodeLine{\$ sudo make uninstall}
+\DoxyCodeLine{\$ make}
+\DoxyCodeLine{\$ sudo make install}
+\end{DoxyCode}
+ It finally removes the downloaded files, and the installation is complete. \mbox{\Hypertarget{auto__update_8h_a67c079d70e5c6c35f3a9efd29e3433ff}\label{auto__update_8h_a67c079d70e5c6c35f3a9efd29e3433ff}} 
+\index{auto\_update.h@{auto\_update.h}!VERSION\_WIDTH@{VERSION\_WIDTH}}
+\index{VERSION\_WIDTH@{VERSION\_WIDTH}!auto\_update.h@{auto\_update.h}}
+\subsubsection{\texorpdfstring{VERSION\_WIDTH}{VERSION\_WIDTH}}
+{\footnotesize\ttfamily \#define V\+E\+R\+S\+I\+O\+N\+\_\+\+W\+I\+D\+TH~6}
+
+Width (in chars) of the version number, which is in the format of {\itshape X.\+Y.\+Z} (for example, \textquotesingle{}version 1.\+2.\+3\textquotesingle{}). 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{auto__update_8h_a49ece8cb08e27584142748fa70eea00b}\label{auto__update_8h_a49ece8cb08e27584142748fa70eea00b}} 
+\index{auto\_update.h@{auto\_update.h}!update@{update}}
+\index{update@{update}!auto\_update.h@{auto\_update.h}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily int update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Check for an update and install newer version. 
+
+This function compares the current version with the latest version currently available on the official Git\+Hub repo of {\itshape pixhdl}. If a newer version is available, it asks the user for confirmation, then downloads and installs the newer version.
+
+\begin{DoxyReturn}{Returns}
+({\ttfamily int})\+: 1 if successful, 0 otherwise. 
+\end{DoxyReturn}

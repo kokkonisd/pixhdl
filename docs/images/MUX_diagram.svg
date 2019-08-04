@@ -1,0 +1,26 @@
+<svg version='1.1' baseProfile='full' width='2713.60' height='416.00' xmlns='http://www.w3.org/2000/svg'>
+<rect width='1039.20' height='406.00' x='868.00' y='5.00' fill='none' stroke='black' stroke-width='10' />
+<text text-anchor='middle' x='1387.60' y='386.00' font-size='60' fill='black' font-family='Courier'>MUX</text>
+<text text-anchor='begin' x='934.00' y='66.00' font-size='56' fill='black' font-family='Courier'>N : integer range 0 to 32</text>
+<line x1='868.00' y1='82.50' x2='1907.20' y2='82.50' stroke='black' stroke-width='3' fill='transparent' />
+<line x1='154.00' y1='72.67' x2='868.00' y2='72.67' stroke='black' stroke-width='5' fill='transparent'/>
+<path d='M838.00 72.67 L823.00 57.67 L868.00 72.67 L823.00 87.67 Z'/>
+<line x1='501.00' y1='82.67' x2='521.00' y2='62.67' stroke='black' stroke-width='3' fill='transparent' />
+<text text-anchor='end' x='123.20' y='86.67' font-size='56' fill='black' font-family='Courier'>A</text>
+<text text-anchor='middle' x='511.00' y='57.67' font-size='38' fill='black' font-family='Courier'>(N - 1 downto 0)</text>
+<line x1='154.00' y1='208.00' x2='868.00' y2='208.00' stroke='black' stroke-width='5' fill='transparent'/>
+<path d='M838.00 208.00 L823.00 193.00 L868.00 208.00 L823.00 223.00 Z'/>
+<line x1='501.00' y1='218.00' x2='521.00' y2='198.00' stroke='black' stroke-width='3' fill='transparent' />
+<text text-anchor='end' x='123.20' y='222.00' font-size='56' fill='black' font-family='Courier'>B</text>
+<text text-anchor='middle' x='511.00' y='193.00' font-size='38' fill='black' font-family='Courier'>(N - 1 downto 0)</text>
+<line x1='154.00' y1='343.33' x2='868.00' y2='343.33' stroke='black' stroke-width='5' fill='transparent'/>
+<path d='M838.00 343.33 L823.00 328.33 L868.00 343.33 L823.00 358.33 Z'/>
+<line x1='501.00' y1='353.33' x2='521.00' y2='333.33' stroke='black' stroke-width='3' fill='transparent' />
+<text text-anchor='end' x='123.20' y='357.33' font-size='56' fill='black' font-family='Courier'>COM</text>
+<text text-anchor='middle' x='511.00' y='328.33' font-size='38' fill='black' font-family='Courier'>1</text>
+<line x1='1907.20' y1='208.00' x2='2621.20' y2='208.00' stroke='black' stroke-width='5' fill='transparent'/>
+<path d='M2606.20 208.00 L2591.20 193.00 L2636.20 208.00 L2591.20 223.00 Z'/>
+<line x1='2254.20' y1='218.00' x2='2274.20' y2='198.00' stroke='black' stroke-width='3' fill='transparent' />
+<text text-anchor='begin' x='2652.00' y='222.00' font-size='56' fill='black' font-family='Courier'>Y</text>
+<text text-anchor='middle' x='2264.20' y='193.00' font-size='38' fill='black' font-family='Courier'>(N - 1 downto 0)</text>
+</svg>
