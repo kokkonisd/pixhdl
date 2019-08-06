@@ -35,9 +35,9 @@ char $\ast$ \mbox{\hyperlink{parser_8h_a69104e2ca0884bc61fcf422a5fb1fb29}{parse\
 \item 
 char $\ast$ \mbox{\hyperlink{parser_8h_a1107dfae91e80f49cebc688829787a07}{get\+Raw\+Entity\+Text\+From\+File}} (const char $\ast$filename)
 \begin{DoxyCompactList}\small\item\em Gets the raw entry definition from a given file. Output also contains the entity\textquotesingle{}s name. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{struct_entity}{Entity}} $\ast$ \mbox{\hyperlink{parser_8h_adf60cf70cb4a35bb37eb0826c764b136}{get\+Entity\+From\+Raw\+Entity\+Text}} (const char $\ast$entity\+\_\+text)
+\mbox{\hyperlink{struct_entity}{Entity}} $\ast$ \mbox{\hyperlink{parser_8h_a98eda7237f2a4f8679239f8802d55e1d}{get\+Entity\+From\+Raw\+Entity\+Text}} (const char $\ast$entity\+\_\+text, const char $\ast$clock\+\_\+name)
 \item 
-\mbox{\hyperlink{struct_entity}{Entity}} $\ast$ \mbox{\hyperlink{parser_8h_a02b959f134b20322a2d8a156c31d0612}{get\+Entity\+From\+File}} (const char $\ast$filename)
+\mbox{\hyperlink{struct_entity}{Entity}} $\ast$ \mbox{\hyperlink{parser_8h_a172a256a7b9fbe73b4df4c144298b026}{get\+Entity\+From\+File}} (const char $\ast$filename, const char $\ast$clock\+\_\+name)
 \end{DoxyCompactItemize}
 
 
@@ -90,11 +90,11 @@ Check if a given string contains any alphabetic characters.
 \begin{DoxyReturn}{Returns}
 ({\ttfamily int})\+: 1 if the string contains any alphabetic characters, 0 otherwise. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{parser_8h_a02b959f134b20322a2d8a156c31d0612}\label{parser_8h_a02b959f134b20322a2d8a156c31d0612}} 
+\mbox{\Hypertarget{parser_8h_a172a256a7b9fbe73b4df4c144298b026}\label{parser_8h_a172a256a7b9fbe73b4df4c144298b026}} 
 \index{parser.h@{parser.h}!getEntityFromFile@{getEntityFromFile}}
 \index{getEntityFromFile@{getEntityFromFile}!parser.h@{parser.h}}
 \subsubsection{\texorpdfstring{getEntityFromFile()}{getEntityFromFile()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{struct_entity}{Entity}}$\ast$ get\+Entity\+From\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_entity}{Entity}}$\ast$ get\+Entity\+From\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename,  }\item[{const char $\ast$}]{clock\+\_\+name }\end{DoxyParamCaption})}
 
 Generates an \mbox{\hyperlink{struct_entity}{Entity}} object given a filename.
 
@@ -102,15 +102,17 @@ Generates an \mbox{\hyperlink{struct_entity}{Entity}} object given a filename.
 \begin{DoxyParams}{Parameters}
 {\em filename} & ({\ttfamily const char $\ast$})\+: The path/name of the source file. \\
 \hline
+{\em clock\+\_\+name} & ({\ttfamily const char $\ast$})\+: The clock signal\textquotesingle{}s name, as specified by the user. \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 ({\ttfamily \mbox{\hyperlink{struct_entity}{Entity}} $\ast$})\+: The \mbox{\hyperlink{struct_entity}{Entity}} object. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{parser_8h_adf60cf70cb4a35bb37eb0826c764b136}\label{parser_8h_adf60cf70cb4a35bb37eb0826c764b136}} 
+\mbox{\Hypertarget{parser_8h_a98eda7237f2a4f8679239f8802d55e1d}\label{parser_8h_a98eda7237f2a4f8679239f8802d55e1d}} 
 \index{parser.h@{parser.h}!getEntityFromRawEntityText@{getEntityFromRawEntityText}}
 \index{getEntityFromRawEntityText@{getEntityFromRawEntityText}!parser.h@{parser.h}}
 \subsubsection{\texorpdfstring{getEntityFromRawEntityText()}{getEntityFromRawEntityText()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{struct_entity}{Entity}}$\ast$ get\+Entity\+From\+Raw\+Entity\+Text (\begin{DoxyParamCaption}\item[{const char $\ast$}]{entity\+\_\+text }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_entity}{Entity}}$\ast$ get\+Entity\+From\+Raw\+Entity\+Text (\begin{DoxyParamCaption}\item[{const char $\ast$}]{entity\+\_\+text,  }\item[{const char $\ast$}]{clock\+\_\+name }\end{DoxyParamCaption})}
 
 Generate an \mbox{\hyperlink{struct_entity}{Entity}} object given an entity definition in raw text. \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{parser_8h_a1107dfae91e80f49cebc688829787a07}{get\+Raw\+Entity\+Text\+From\+File}}
@@ -118,6 +120,8 @@ Generate an \mbox{\hyperlink{struct_entity}{Entity}} object given an entity defi
 
 \begin{DoxyParams}{Parameters}
 {\em entity\+\_\+text} & ({\ttfamily const char $\ast$})\+: The raw entity definition. \\
+\hline
+{\em clock\+\_\+name} & ({\ttfamily const char $\ast$})\+: The clock signal\textquotesingle{}s name, as specified by the user. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

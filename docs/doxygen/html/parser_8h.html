@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">pixhdl
-   &#160;<span id="projectnumber">v1.1.1</span>
+   &#160;<span id="projectnumber">v1.1.2</span>
    </div>
    <div id="projectbrief">A tool that generates entity diagrams from VHDL files.</div>
   </td>
@@ -110,10 +110,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a1107dfae91e80f49cebc688829787a07"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#a1107dfae91e80f49cebc688829787a07">getRawEntityTextFromFile</a> (const char *filename)</td></tr>
 <tr class="memdesc:a1107dfae91e80f49cebc688829787a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the raw entry definition from a given file. Output also contains the entity's name.  <a href="#a1107dfae91e80f49cebc688829787a07">More...</a><br /></td></tr>
 <tr class="separator:a1107dfae91e80f49cebc688829787a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf60cf70cb4a35bb37eb0826c764b136"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#adf60cf70cb4a35bb37eb0826c764b136">getEntityFromRawEntityText</a> (const char *entity_text)</td></tr>
-<tr class="separator:adf60cf70cb4a35bb37eb0826c764b136"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02b959f134b20322a2d8a156c31d0612"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#a02b959f134b20322a2d8a156c31d0612">getEntityFromFile</a> (const char *filename)</td></tr>
-<tr class="separator:a02b959f134b20322a2d8a156c31d0612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98eda7237f2a4f8679239f8802d55e1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#a98eda7237f2a4f8679239f8802d55e1d">getEntityFromRawEntityText</a> (const char *entity_text, const char *clock_name)</td></tr>
+<tr class="separator:a98eda7237f2a4f8679239f8802d55e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172a256a7b9fbe73b4df4c144298b026"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#a172a256a7b9fbe73b4df4c144298b026">getEntityFromFile</a> (const char *filename, const char *clock_name)</td></tr>
+<tr class="separator:a172a256a7b9fbe73b4df4c144298b026"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>HDL file parser for the <em>pixhdl</em> project. </p>
@@ -192,8 +192,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a02b959f134b20322a2d8a156c31d0612"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02b959f134b20322a2d8a156c31d0612">&#9670;&nbsp;</a></span>getEntityFromFile()</h2>
+<a id="a172a256a7b9fbe73b4df4c144298b026"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a172a256a7b9fbe73b4df4c144298b026">&#9670;&nbsp;</a></span>getEntityFromFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -202,8 +202,18 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_entity.html">Entity</a>* getEntityFromFile </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>clock_name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -211,6 +221,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filename</td><td>(<code>const char *</code>): The path/name of the source file. </td></tr>
+    <tr><td class="paramname">clock_name</td><td>(<code>const char *</code>): The clock signal's name, as specified by the user. </td></tr>
   </table>
   </dd>
 </dl>
@@ -218,8 +229,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="adf60cf70cb4a35bb37eb0826c764b136"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf60cf70cb4a35bb37eb0826c764b136">&#9670;&nbsp;</a></span>getEntityFromRawEntityText()</h2>
+<a id="a98eda7237f2a4f8679239f8802d55e1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98eda7237f2a4f8679239f8802d55e1d">&#9670;&nbsp;</a></span>getEntityFromRawEntityText()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -228,8 +239,18 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_entity.html">Entity</a>* getEntityFromRawEntityText </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>entity_text</em></td><td>)</td>
+          <td class="paramname"><em>entity_text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>clock_name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -237,6 +258,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entity_text</td><td>(<code>const char *</code>): The raw entity definition. </td></tr>
+    <tr><td class="paramname">clock_name</td><td>(<code>const char *</code>): The clock signal's name, as specified by the user. </td></tr>
   </table>
   </dd>
 </dl>

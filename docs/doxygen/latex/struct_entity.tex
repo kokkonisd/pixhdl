@@ -22,6 +22,8 @@ char $\ast$ \mbox{\hyperlink{struct_entity_a861f653e2ffbe97c0deed7ab85eb7ce6}{na
 \item 
 \mbox{\hyperlink{struct_signal}{Signal}} $\ast$ \mbox{\hyperlink{struct_entity_a3a7a0540c9a581600cae6cb8880d4175}{signals\+\_\+inout}}
 \item 
+char $\ast$ \mbox{\hyperlink{struct_entity_a520135e0c9a911b9d09a47697c58b7ad}{clock\+\_\+name}}
+\item 
 unsigned int \mbox{\hyperlink{struct_entity_a20a2de116010cce381f1127dae0b2218}{count\+\_\+generics}}
 \item 
 unsigned int \mbox{\hyperlink{struct_entity_a92911aaab51c820215510b0546570b64}{count\+\_\+in}}
@@ -58,7 +60,13 @@ Definition of the \mbox{\hyperlink{struct_entity}{Entity}} object.
 An \mbox{\hyperlink{struct_entity}{Entity}} is a collection of input, output, throughput and generic input signals. It also has a name, and -- in order to facilitate later operations such as image generation and printing -- also contains the maximum lengths of both port names and port sizes (for each type of port). 
 
 \subsection{Field Documentation}
-\mbox{\Hypertarget{struct_entity_a20a2de116010cce381f1127dae0b2218}\label{struct_entity_a20a2de116010cce381f1127dae0b2218}} 
+\mbox{\Hypertarget{struct_entity_a520135e0c9a911b9d09a47697c58b7ad}\label{struct_entity_a520135e0c9a911b9d09a47697c58b7ad}} 
+\index{Entity@{Entity}!clock\_name@{clock\_name}}
+\index{clock\_name@{clock\_name}!Entity@{Entity}}
+\subsubsection{\texorpdfstring{clock\_name}{clock\_name}}
+{\footnotesize\ttfamily char$\ast$ Entity\+::clock\+\_\+name}
+
+(Optional) Name of the C\+LK input. \mbox{\Hypertarget{struct_entity_a20a2de116010cce381f1127dae0b2218}\label{struct_entity_a20a2de116010cce381f1127dae0b2218}} 
 \index{Entity@{Entity}!count\_generics@{count\_generics}}
 \index{count\_generics@{count\_generics}!Entity@{Entity}}
 \subsubsection{\texorpdfstring{count\_generics}{count\_generics}}

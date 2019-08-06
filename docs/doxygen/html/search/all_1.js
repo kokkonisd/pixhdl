@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['clock_5fname',['clock_name',['../struct_entity.html#a520135e0c9a911b9d09a47697c58b7ad',1,'Entity']]],
   ['containsalpha',['containsAlpha',['../parser_8h.html#a0f170f40c6178a8405f90bab9251a411',1,'parser.c']]],
   ['count_5fgenerics',['count_generics',['../struct_entity.html#a20a2de116010cce381f1127dae0b2218',1,'Entity']]],
   ['count_5fin',['count_in',['../struct_entity.html#a92911aaab51c820215510b0546570b64',1,'Entity']]],
