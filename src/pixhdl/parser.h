@@ -94,16 +94,18 @@ char * getRawEntityTextFromFile (const char * filename);
  * @see getRawEntityTextFromFile
  *
  * @param  entity_text (`const char *`): The raw entity definition.
+ * @param  clock_name  (`const char *`): The clock signal's name, as specified by the user.
  * @return                 (`Entity *`): The Entity object.
  */
-Entity * getEntityFromRawEntityText (const char * entity_text);
+Entity * getEntityFromRawEntityText (const char * entity_text, const char * clock_name);
 
 /**
  * Generates an Entity object given a filename.
  *
- * @param  filename (`const char *`): The path/name of the source file.
- * @return              (`Entity *`): The Entity object.
+ * @param  filename   (`const char *`): The path/name of the source file.
+ * @param  clock_name (`const char *`): The clock signal's name, as specified by the user.
+ * @return                (`Entity *`): The Entity object.
  */
-Entity * getEntityFromFile (const char * filename);
+Entity * getEntityFromFile (const char * filename, const char * clock_name);
 
 #endif

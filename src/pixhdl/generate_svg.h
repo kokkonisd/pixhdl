@@ -35,6 +35,8 @@
 /** A simple line connecting two points. */
 #define SIMPLE_LINE "<line x1='%.2f' y1='%.2f' x2='%.2f' y2='%.2f' stroke='black' stroke-width='5' fill='transparent'/>\n"
 
+#define CLOCK_TRIANGLE "<path d='M%.2f %.2f L%.2f %.2f L%.2f %.2f Z' stroke='black' stroke-width='3' fill='transparent'/>\n"
+
 /** The text for the generic input names. */
 #define GENERIC_SIGNAL_NAME "<text text-anchor='begin' x='%.2f' y='%.2f' font-size='%d' fill='black' font-family='Courier'>%s : %s</text>\n"
 /** The text for the IN signal names. */

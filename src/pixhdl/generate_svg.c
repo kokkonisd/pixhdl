@@ -95,6 +95,14 @@ void drawDoubleArrowLine (FILE * fo, float start_x, float start_y, float end_x, 
 }
 
 
+void drawClockTriangle (FILE * fo, float x, float y, float width)
+{
+    fprintf(fo, CLOCK_TRIANGLE, x,         y - width,
+                                x + width, y - width / 2,
+                                x,         y);
+}
+
+
 int generateSvgFromEntity (Entity * ent, char * filename)
 {
     FILE * svg_file = NULL;
@@ -104,7 +112,7 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     float arrow_length_right = 0.0;
     float arrow_length_bottom = 0.0;
     float generics_height = 0.0;
-    float port_width = 0.0;
+    float port_height = 0.0;
     float rect_width = 0.0;
     float rect_height = 0.0;
     float svg_width = 0.0;
@@ -127,22 +135,29 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     port_width_left = arrow_length_left + (ent->max_name_size_in + 3) * PORT_NAME_FONT_SIZE * 0.55;
     port_width_right = arrow_length_right + (ent->max_name_size_out + 3) * PORT_NAME_FONT_SIZE * 0.55;
     // The port height is simply the width of one arrow head
-    port_width = ARROW_WIDTH * 2 + LENGTH_FONT_SIZE;
+    port_height = ARROW_WIDTH * 2 + LENGTH_FONT_SIZE;
 
     // Calculate Entity rectangle width and height
     // The width should be equal to the maximum between two floats:
     //     1. The entity's name width (in pixels, so as before that is font_size * 0.55) plus 2 characters for spacing
     //     2. The width produced by the INOUT channels, if they exist
-    rect_width = max(ENTITY_NAME_FONT_SIZE * (strlen(ent->name) + 2), port_width * ent->count_inout);
+    rect_width = max(ENTITY_NAME_FONT_SIZE * (strlen(ent->name) + 2), port_height * ent->count_inout);
     if (ent->count_generics > 0)
         rect_width += (ent->max_name_size_generics + ent->max_length_size_generics + 2) * PORT_NAME_FONT_SIZE * 0.55;
     // The height of the rectangle is also the maximum between two floats:
     //     1. The maximum between INs and OUTs times the width of one arrow head
     //     2. The entity's name font size (which basically means "enough place for the entity's name")
-    rect_height = max(max(ent->count_in, ent->count_out) * port_width, ENTITY_NAME_FONT_SIZE);
+    rect_height = max(max(ent->count_in, ent->count_out) * port_height, ENTITY_NAME_FONT_SIZE);
     generics_height = (ent->count_generics + 1) * PORT_NAME_FONT_SIZE;
     if (ent->count_generics > 0)
         rect_height += generics_height;
+
+    // If the user wants a CLK triangle to be draw, take that into account
+    // for the dimensions of the entity rect
+    if (ent->clock_name) {
+        rect_height += port_height;
+        rect_width += port_height;
+    }
 
     // The total SVG width is then simply the sum of the two port widths plus the entity rect width
     svg_width = rect_width + RECTANGLE_STROKE_WIDTH * 2 + port_width_left + port_width_right;
@@ -190,6 +205,17 @@ int generateSvgFromEntity (Entity * ent, char * filename)
     }
 
 
+    // Draw the CLK triangle (if it was specified)
+    if (ent->clock_name) {
+        drawClockTriangle(svg_file,
+                          port_width_left + RECTANGLE_STROKE_WIDTH / 2,
+                          rect_height,
+                          port_height / 2);
+        // Give less space to the rest of the inputs
+        rect_height -= port_height;
+    }
+
+
     // Draw the IN signals
     //
     // We need to establish a step (aka how much space is vertically allocated to each signal)
@@ -231,6 +257,9 @@ int generateSvgFromEntity (Entity * ent, char * filename)
         // Move the current Y position forward by one step
         cur_pos += step;
     }
+
+    // If space was taken away to draw the CLK triangle, give it back
+    if (ent->clock_name) rect_height += port_height;
 
 
     // Draw the OUT signals

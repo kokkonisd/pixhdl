@@ -33,7 +33,7 @@ char * call_generate_with_invalid_entity_and_invalid_filename ()
 
 char * call_generate_with_valid_entity_and_filename ()
 {
-    Entity * ent = getEntityFromFile("tests/vhdl_sources/INOUT.vhdl");
+    Entity * ent = getEntityFromFile("tests/vhdl_sources/INOUT.vhdl", NULL);
 
     int rv = generateSvgFromEntity(ent, "/tmp/pixhdl_test.svg");
     mu_assert(rv == 0, "Generation failed with valid entity and valid filename.");

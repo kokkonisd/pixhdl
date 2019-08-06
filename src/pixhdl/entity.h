@@ -65,6 +65,8 @@ typedef struct {
     Signal * signals_out;            /**< Array of OUT signals.                                  */
     Signal * signals_inout;          /**< Array of INOUT signals.                                */
 
+    char * clock_name;               /**< (Optional) Name of the CLK input.                      */
+
     unsigned int count_generics;     /**< Length of the `generics` array.                        */
     unsigned int count_in;           /**< Length of the `signals_in` array.                      */
     unsigned int count_out;          /**< Length of the `signals_out` array.                     */

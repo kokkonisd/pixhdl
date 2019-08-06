@@ -17,6 +17,9 @@ Entity * createEntity ()
     ent->signals_out = NULL;
     ent->signals_inout = NULL;
 
+    // Initialize CLK name to NULL
+    ent->clock_name = NULL;
+
     // Initialize all the counters to 0
     ent->count_in = 0;
     ent->count_out = 0;

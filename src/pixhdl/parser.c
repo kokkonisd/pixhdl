@@ -388,7 +388,7 @@ error:
 }
 
 
-Entity * getEntityFromRawEntityText (const char * entity_text)
+Entity * getEntityFromRawEntityText (const char * entity_text, const char * clock_name)
 {
     // Regex object for parsing
     regex_t regex;
@@ -476,8 +476,13 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
             else
                 s.length = parseSignalLength(cur_text, rm[5].rm_so, rm[5].rm_eo);
 
-            // Add the signal to the entry
-            addSignalToEntity(ent, &s);
+            if (s.dir == IN && clock_name && strcmp(clock_name, s.name) == 0) {
+                free(s.name);
+                free(s.length);
+            } else {
+                // Add the signal to the entry
+                addSignalToEntity(ent, &s);
+            }
 
             // If there are multiple signals
             if (comma_index != strlen(name)) {
@@ -514,8 +519,13 @@ Entity * getEntityFromRawEntityText (const char * entity_text)
                     else
                         s.length = parseSignalLength(cur_text, rm[5].rm_so, rm[5].rm_eo);
 
-                    // Add the signal to the entry
-                    addSignalToEntity(ent, &s);
+                    if (s.dir == IN && clock_name && strcmp(clock_name, s.name) == 0) {
+                        free(s.name);
+                        free(s.length);
+                    } else {
+                        // Add the signal to the entry
+                        addSignalToEntity(ent, &s);
+                    }
                 }
             }
         // Repeat while there are still commas in the name string
@@ -551,7 +561,7 @@ error:
 }
 
 
-Entity * getEntityFromFile (const char * filename)
+Entity * getEntityFromFile (const char * filename, const char * clock_name)
 {
     // Raw entity text string
     char * raw_entity_text = NULL;
@@ -563,7 +573,7 @@ Entity * getEntityFromFile (const char * filename)
     check(raw_entity_text, "Couldn't find entity in file `%s`.", filename);
 
     // Parse entity from the raw entity text
-    ent = getEntityFromRawEntityText(raw_entity_text);
+    ent = getEntityFromRawEntityText(raw_entity_text, clock_name);
     check(ent, "Couldn't parse entity from file `%s`.", filename);
 
     // Free the raw entity text

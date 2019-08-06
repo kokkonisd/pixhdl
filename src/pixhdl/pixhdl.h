@@ -17,11 +17,12 @@
 Usage: pixhdl [options] <VHDL file>\n\
 \n\
     options:\n\
-           -o, --output  : specify output filename\n\
-           -p, --print   : print the entity in the terminal\n\
-           -u, --update  : check for updates (and update if newer version is available)\n\
-           -v, --version : print the version number\n\
-           -h, --help    : print this help screen"
+           -c, --clock-name : specify the name of the input signal to be considered as CLOCK\n\
+           -o, --output     : specify output filename\n\
+           -p, --print      : print the entity in the terminal\n\
+           -u, --update     : check for updates (and update if newer version is available)\n\
+           -v, --version    : print the version number\n\
+           -h, --help       : print this help screen"
 
 
 #include <stdio.h>

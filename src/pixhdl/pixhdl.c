@@ -19,6 +19,8 @@ int main (int argc, char * argv[])
     char * in_filename = NULL;
     // Output filename
     char * out_filename = NULL;
+    // Clock signal name
+    char * clock_name = NULL;
     // Print entity flag
     int print_entity = 0;
     // Return value for the SVG generator
@@ -27,12 +29,13 @@ int main (int argc, char * argv[])
     Entity * ent = NULL;
     // Long argument structure
     static struct option long_options[] = {
-        { "version", no_argument,       0, 'v' },
-        { "help",    no_argument,       0, 'h' },
-        { "output",  required_argument, 0, 'o' },
-        { "update",  no_argument,       0, 'u' },
-        { "print",   no_argument,       0, 'p' },
-        { 0,         0,                 0, 0   }
+        { "version",    no_argument,       0, 'v' },
+        { "help",       no_argument,       0, 'h' },
+        { "output",     required_argument, 0, 'o' },
+        { "update",     no_argument,       0, 'u' },
+        { "print",      no_argument,       0, 'p' },
+        { "clock-name", required_argument, 0, 'c' },
+        { 0,            0,                 0, 0   }
     };
 
     // If no arguments are specified, show the help screen
@@ -74,6 +77,11 @@ int main (int argc, char * argv[])
                 print_entity = 1;
                 break;
 
+            case 'c':
+                // Set the clock name
+                clock_name = optarg;
+                break;
+
             case '?':
                 // Unknown argument handling
                 log_err("Unknown argument `%s`. Use `pixhdl -h` to get a complete list of valid arguments.",
@@ -100,8 +108,9 @@ int main (int argc, char * argv[])
     optind++;
 
     // Get the entity and check that it has been parsed correctly
-    ent = getEntityFromFile(in_filename);
+    ent = getEntityFromFile(in_filename, clock_name);
     check(ent, "Couldn't get entity from file `%s`.", in_filename);
+    ent->clock_name = clock_name;
 
     // Check that at least one of the following is true:
     //     1. There is still at least one argument to be parsed (which will be the output)
