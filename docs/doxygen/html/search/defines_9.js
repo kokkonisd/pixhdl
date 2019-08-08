@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['simple_5fline',['SIMPLE_LINE',['../generate__svg_8h.html#a63875060d6e634e15be1e39e603f91bf',1,'generate_svg.h']]],
-  ['svg_5fheader',['SVG_HEADER',['../generate__svg_8h.html#a2e600241174c67141be4d93bd0a01626',1,'generate_svg.h']]]
+  ['rectangle_5fstroke_5fwidth',['RECTANGLE_STROKE_WIDTH',['../generate__svg_8h.html#a611275782064611537f8b34f1954e534',1,'generate_svg.h']]]
 ];

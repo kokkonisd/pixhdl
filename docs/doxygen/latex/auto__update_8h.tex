@@ -13,9 +13,9 @@ Auto-\/update functionality for the {\itshape pixhdl} project.
 \item 
 \#define \mbox{\hyperlink{auto__update_8h_a67c079d70e5c6c35f3a9efd29e3433ff}{V\+E\+R\+S\+I\+O\+N\+\_\+\+W\+I\+D\+TH}}~6
 \item 
-\#define \mbox{\hyperlink{auto__update_8h_a7310f347b1f4510631d0f3aa8256ea60}{L\+A\+T\+E\+S\+T\+\_\+\+V\+E\+R\+S\+I\+ON}}~\char`\"{}curl -\/s https\+://github.\+com/kokkonisd/pixhdl/releases/latest $\vert$ grep -\/Eo \textbackslash{}\char`\"{}/tag/(.+)$>$\textbackslash{}\char`\"{} $\vert$ head -\/c 11 $\vert$ tail -\/c 5\char`\"{}
+\#define \mbox{\hyperlink{auto__update_8h_a7310f347b1f4510631d0f3aa8256ea60}{L\+A\+T\+E\+S\+T\+\_\+\+V\+E\+R\+S\+I\+ON}}
 \item 
-\#define \mbox{\hyperlink{auto__update_8h_a1cab917ca45eb7be00a4653fd325d2b4}{U\+P\+D\+A\+T\+E\+\_\+\+C\+O\+M\+M\+A\+ND}}~\char`\"{}T\+M\+P\+D\+WN=\$(curl -\/s https\+://api.\+github.\+com/repos/kokkonisd/pixhdl/releases/latest $\vert$ grep \textbackslash{}\char`\"{}tag\+\_\+name\textbackslash{}\char`\"{} $\vert$ awk \textquotesingle{}\{print \textbackslash{}\char`\"{}https\+://github.\+com/kokkonisd/pixhdl/archive/\textbackslash{}\char`\"{} substr(\$2, 2, length(\$2)-\/3) \textbackslash{}\char`\"{}/pixhdl-\/\textbackslash{}\char`\"{} substr(\$2, 3, length(\$2)-\/4) \textbackslash{}\char`\"{}.tar.\+gz\textbackslash{}\char`\"{}\}\textquotesingle{}) \&\& curl -\/L -\/s \$T\+M\+P\+D\+WN -\/o /tmp/pixhdl\+\_\+latest.\+tar.\+gz \&\& tar xvzf /tmp/pixhdl\+\_\+latest.\+tar.\+gz -\/C /tmp/ \&\& cd /tmp/pixhdl-\/$\ast$ \&\& make clean \&\& sudo make uninstall \&\& make \&\& sudo make install \&\& cd .. \&\& rm -\/rf pixhdl-\/$\ast$ pixhdl\+\_\+latest$\ast$\char`\"{}
+\#define \mbox{\hyperlink{auto__update_8h_a1cab917ca45eb7be00a4653fd325d2b4}{U\+P\+D\+A\+T\+E\+\_\+\+C\+O\+M\+M\+A\+ND}}
 \begin{DoxyCompactList}\small\item\em Command to update {\itshape pixhdl} to its latest version. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -40,14 +40,36 @@ Dimitri Kokkonis (\href{https://github.com/kokkonisd}{\texttt{ @kokkonisd}})
 \index{auto\_update.h@{auto\_update.h}!LATEST\_VERSION@{LATEST\_VERSION}}
 \index{LATEST\_VERSION@{LATEST\_VERSION}!auto\_update.h@{auto\_update.h}}
 \subsubsection{\texorpdfstring{LATEST\_VERSION}{LATEST\_VERSION}}
-{\footnotesize\ttfamily \#define L\+A\+T\+E\+S\+T\+\_\+\+V\+E\+R\+S\+I\+ON~\char`\"{}curl -\/s https\+://github.\+com/kokkonisd/pixhdl/releases/latest $\vert$ grep -\/Eo \textbackslash{}\char`\"{}/tag/(.+)$>$\textbackslash{}\char`\"{} $\vert$ head -\/c 11 $\vert$ tail -\/c 5\char`\"{}}
+{\footnotesize\ttfamily \#define L\+A\+T\+E\+S\+T\+\_\+\+V\+E\+R\+S\+I\+ON}
 
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{stringliteral}{"curl -s "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"https://github.com/kokkonisd/pixhdl/releases/latest "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"| grep -Eo \(\backslash\)"/tag/(.+)>\(\backslash\)" | head -c 11 | tail -c 5"}}
+
+\end{DoxyCode}
 Command to get the latest version of {\itshape pixhdl} from the {\itshape releases} page of its official Git\+Hub repo. \mbox{\Hypertarget{auto__update_8h_a1cab917ca45eb7be00a4653fd325d2b4}\label{auto__update_8h_a1cab917ca45eb7be00a4653fd325d2b4}} 
 \index{auto\_update.h@{auto\_update.h}!UPDATE\_COMMAND@{UPDATE\_COMMAND}}
 \index{UPDATE\_COMMAND@{UPDATE\_COMMAND}!auto\_update.h@{auto\_update.h}}
 \subsubsection{\texorpdfstring{UPDATE\_COMMAND}{UPDATE\_COMMAND}}
-{\footnotesize\ttfamily \#define U\+P\+D\+A\+T\+E\+\_\+\+C\+O\+M\+M\+A\+ND~\char`\"{}T\+M\+P\+D\+WN=\$(curl -\/s https\+://api.\+github.\+com/repos/kokkonisd/pixhdl/releases/latest $\vert$ grep \textbackslash{}\char`\"{}tag\+\_\+name\textbackslash{}\char`\"{} $\vert$ awk \textquotesingle{}\{print \textbackslash{}\char`\"{}https\+://github.\+com/kokkonisd/pixhdl/archive/\textbackslash{}\char`\"{} substr(\$2, 2, length(\$2)-\/3) \textbackslash{}\char`\"{}/pixhdl-\/\textbackslash{}\char`\"{} substr(\$2, 3, length(\$2)-\/4) \textbackslash{}\char`\"{}.tar.\+gz\textbackslash{}\char`\"{}\}\textquotesingle{}) \&\& curl -\/L -\/s \$T\+M\+P\+D\+WN -\/o /tmp/pixhdl\+\_\+latest.\+tar.\+gz \&\& tar xvzf /tmp/pixhdl\+\_\+latest.\+tar.\+gz -\/C /tmp/ \&\& cd /tmp/pixhdl-\/$\ast$ \&\& make clean \&\& sudo make uninstall \&\& make \&\& sudo make install \&\& cd .. \&\& rm -\/rf pixhdl-\/$\ast$ pixhdl\+\_\+latest$\ast$\char`\"{}}
+{\footnotesize\ttfamily \#define U\+P\+D\+A\+T\+E\+\_\+\+C\+O\+M\+M\+A\+ND}
 
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{stringliteral}{"TMPDWN=\$(curl -s "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"https://api.github.com/repos/kokkonisd/pixhdl/"}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"releases/latest | grep \(\backslash\)"tag\_name\(\backslash\)" | awk '\{print "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"\(\backslash\)"https://github.com/kokkonisd/pixhdl/archive/\(\backslash\)" "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"substr(\$2, 2, length(\$2)-3) \(\backslash\)"/pixhdl-\(\backslash\)" "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"substr(\$2, 3, length(\$2)-4) \(\backslash\)".tar.gz\(\backslash\)"\}') \&\& "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"curl -L -s \$TMPDWN -o /tmp/pixhdl\_latest.tar.gz \&\& "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"tar xvzf /tmp/pixhdl\_latest.tar.gz -C /tmp/ \&\& "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"cd /tmp/pixhdl-* \&\& make clean \&\& "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"sudo make uninstall \&\& make \&\& sudo make install \&\& "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"cd .. \&\& rm -rf pixhdl-* pixhdl\_latest*"}}
+
+\end{DoxyCode}
 
 
 Command to update {\itshape pixhdl} to its latest version. 

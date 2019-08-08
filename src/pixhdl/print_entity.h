@@ -21,7 +21,8 @@
 const char * directionToString (direction dir);
 
 /**
- * Prints all the signals of an Entity in the following order: `IN`, `OUT`, `INOUT`.
+ * Prints all the signals of an Entity in the following order: `IN`, `OUT`,
+ * `INOUT`.
  *
  * @param ent (`Entity *``): The Entity object whose signals are to be printed.
  */

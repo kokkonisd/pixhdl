@@ -12,16 +12,21 @@
 /** Current version of _pixhdl_ (in `X.Y.Z` format). */
 #define VERSION "1.1.2"
 
-/** Text for the help screen of _pixhdl_, detailing usage and possible options. */
+/**
+ * Text for the help screen of _pixhdl_, detailing usage and possible options.
+ */
 #define HELP_SCREEN_TEXT "\
 Usage: pixhdl [options] <VHDL file>\n\
 \n\
     options:\n\
-           -c, --clock-name : specify the name of the input signal to be considered as CLOCK\n\
-           -o, --output     : specify output filename\n\
-           -p, --print      : print the entity in the terminal\n\
-           -u, --update     : check for updates (and update if newer version is available)\n\
-           -v, --version    : print the version number\n\
+           -c, --clock-name : specify the name of the input signal to be \
+considered as CLOCK (this will draw a small triangle at the bottom left \
+corner of the entity to indicate that it receives a clock input) \n\
+           -o, --output     : specify output filename \n\
+           -p, --print      : print the entity in the terminal \n\
+           -u, --update     : check for updates (and update if newer version \
+is available) \n\
+           -v, --version    : print the version number \n\
            -h, --help       : print this help screen"
 
 

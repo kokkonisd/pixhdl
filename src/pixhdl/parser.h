@@ -10,13 +10,20 @@
 #define __PARSER_H__
 
 /** Regex to match the entity definition of a VHDL source file. */
-#define ENTITY_REGEX "entity[ \t\r\n\f]+([a-zA-Z0-9_]+)[ \t\r\n\f]+is[ \t\r\n\f]+(generic[ \t\r\n\f]*\\([ \t\r\n\f]*(.+)[ \t\r\n\f]*\\)[ \t\r\n\f]*;)?[ \t\r\n\f]*port[ \t\r\n\f]*\\([ \t\r\n\f]*(.+\\)?)[ \t\r\n\f]*\\)[ \t\r\n\f]*;[ \t\r\n\f]*end[ \t]*(entity|[a-zA-Z0-9_]+)?[ \t]*;[ \t\r\n\f]*architecture"
+#define ENTITY_REGEX "entity[ \t\r\n\f]+([a-zA-Z0-9_]+)[ \t\r\n\f]+is"\
+                     "[ \t\r\n\f]+(generic[ \t\r\n\f]*\\([ \t\r\n\f]*(.+)"\
+                     "[ \t\r\n\f]*\\)[ \t\r\n\f]*;)?[ \t\r\n\f]*port"\
+                     "[ \t\r\n\f]*\\([ \t\r\n\f]*(.+\\)?)[ \t\r\n\f]*\\)"\
+                     "[ \t\r\n\f]*;[ \t\r\n\f]*end[ \t]*"\
+                     "(entity|[a-zA-Z0-9_]+)?[ \t]*;[ \t\r\n\f]*architecture"
 
 /** Regex to match the port definition of a VHDL source file. */
-#define PORT_REGEX "([a-zA-Z0-9_, ]+)[ \t\r\n\f]*:[ \t\r\n\f]*((in|out|inout)[ \t\r\n\f]*(std_logic[^;]*)|([a-zA-Z0-9_,. \t-]*));"
+#define PORT_REGEX "([a-zA-Z0-9_, ]+)[ \t\r\n\f]*:[ \t\r\n\f]*((in|out|inout)"\
+                   "[ \t\r\n\f]*(std_logic[^;]*)|([a-zA-Z0-9_,. \t-]*));"
 
 /** Regex to match the vector length definition of a VHDL source file. */
-#define VECTOR_LENGTH_REGEX "(\\(([a-zA-Z0-9_ -]+)[ \t\r\n\f]+(down)?to[ \t\r\n\f]+([a-zA-Z0-9_ -]+)\\))"
+#define VECTOR_LENGTH_REGEX "(\\(([a-zA-Z0-9_ -]+)[ \t\r\n\f]+(down)?to"\
+                            "[ \t\r\n\f]+([a-zA-Z0-9_ -]+)\\))"
 
 
 #include <stdio.h>
@@ -39,7 +46,8 @@ int isLegalPortNameChar (const char portname_char);
  * Check if a given string contains any alphabetic characters.
  *
  * @param  str (`char *`): The input string to be checked.
- * @return        (`int`): 1 if the string contains any alphabetic characters, 0 otherwise.
+ * @return        (`int`): 1 if the string contains any alphabetic characters,
+ *                         0 otherwise.
  */
 int containsAlpha (const char * str);
 
@@ -47,45 +55,56 @@ int containsAlpha (const char * str);
  * Parses the name of a signal given some raw entity text, a start and an end index.
  *
  * @param  raw_txt (`const char *`): The raw entity text.
- * @param  start            (`int`): The beginning index for the raw entity text.
+ * @param  start            (`int`): The beginning index for the raw entity
+ *                                   text.
  * @param  end              (`int`): The ending index for the raw entity text.
  * @return               (`char *`): The resulting signal name.
  */
 char * parseSignalName (const char * raw_txt, int start, int end);
 
 /**
- * Parses the direction of a signal given some raw entity text, a start and an end index.
+ * Parses the direction of a signal given some raw entity text, a start and an
+ * end index.
  *
  * @param  raw_txt (`const char *`): The raw entity text.
- * @param  start            (`int`): The beginning index for the raw entity text.
+ * @param  start            (`int`): The beginning index for the raw entity
+ *                                   text.
  * @param  end              (`int`): The ending index for the raw entity text.
  * @return            (`direction`): The resulting direction.
  */
 direction parseSignalDirection (const char * raw_txt, int start, int end);
 
 /**
- * Parses the length of a signal (in bits) given some raw entity text, a start and an end index.
+ * Parses the length of a signal (in bits) given some raw entity text, a start
+ * and an end index.
  *
  * @param  raw_txt (`const char *`): The raw entity text.
- * @param  start            (`int`): The beginning index for the raw entity text.
+ * @param  start            (`int`): The beginning index for the raw entity
+ *                                   text.
  * @param  end              (`int`): The ending index for the raw entity text.
  * @return                  (`int`): The resulting length (in bits).
  */
 char * parseSignalLength (const char * raw_txt, int start, int end);
 
 /**
- * @brief Gets the raw entry definition from a given file. Output also contains the entity's name.
+ * @brief Gets the raw entry definition from a given file. Output also contains
+ * the entity's name.
  *
- * Given an HDL source file, it extracts & returns the name of the entity, its generic inputs (if any)
- * and its port inputs/outputs/throughputs. The entity's name is immediately followed by a `;` separator.
- * In the case that the entity contains any generic inputs, the first of them is preceded by a `*` character.
- * The first port of the entity is preceded by a `@` character. The final string returned by the function
- * is formatted as follows:
+ * Given an HDL source file, it extracts & returns the name of the entity, its
+ * generic inputs (if any) and its port inputs/outputs/throughputs. The
+ * entity's name is immediately followed by a `;` separator.
+ * In the case that the entity contains any generic inputs, the first of them
+ * is preceded by a `*` character. The first port of the entity is preceded by
+ * a `@` character. The final string returned by the function is formatted as
+ * follows:
  *
- * `EntityName;*Generic1:value;Generic2:value;...;@Port1:value;Port2:value;...;`
+ * `EntityName;`
+ * `*Generic1:value;Generic2:value;...;`
+ * `@Port1:value;Port2:value;...;`
  *
  * @param  filename (`const char *`): The path/name of the source file.
- * @return                (`char *`): The raw name and body of the entity definition.
+ * @return                (`char *`): The raw name and body of the entity
+ *                                    definition.
  */
 char * getRawEntityTextFromFile (const char * filename);
 
@@ -94,16 +113,19 @@ char * getRawEntityTextFromFile (const char * filename);
  * @see getRawEntityTextFromFile
  *
  * @param  entity_text (`const char *`): The raw entity definition.
- * @param  clock_name  (`const char *`): The clock signal's name, as specified by the user.
+ * @param  clock_name  (`const char *`): The clock signal's name, as specified
+ *                                       by the user.
  * @return                 (`Entity *`): The Entity object.
  */
-Entity * getEntityFromRawEntityText (const char * entity_text, const char * clock_name);
+Entity * getEntityFromRawEntityText (const char * entity_text,
+                                     const char * clock_name);
 
 /**
  * Generates an Entity object given a filename.
  *
  * @param  filename   (`const char *`): The path/name of the source file.
- * @param  clock_name (`const char *`): The clock signal's name, as specified by the user.
+ * @param  clock_name (`const char *`): The clock signal's name, as specified
+ *                                      by the user.
  * @return                (`Entity *`): The Entity object.
  */
 Entity * getEntityFromFile (const char * filename, const char * clock_name);

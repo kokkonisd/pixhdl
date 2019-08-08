@@ -14,11 +14,11 @@ H\+DL file parser for the {\itshape pixhdl} project.
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{parser_8h_a109435a96cfe368781e814630b69acdd}{E\+N\+T\+I\+T\+Y\+\_\+\+R\+E\+G\+EX}}~\char`\"{}entity\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(\mbox{[}a-\/zA-\/Z0-\/9\+\_\+\mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+is\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(generic\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{}(\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(.+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{})\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$;)?\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$port\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{}(\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(.+\textbackslash{}\textbackslash{})?)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{})\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$;\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$end\mbox{[} \textbackslash{}t\mbox{]}$\ast$(entity$\vert$\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+\mbox{]}+)?\mbox{[} \textbackslash{}t\mbox{]}$\ast$;\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$architecture\char`\"{}
+\#define \mbox{\hyperlink{parser_8h_a109435a96cfe368781e814630b69acdd}{E\+N\+T\+I\+T\+Y\+\_\+\+R\+E\+G\+EX}}
 \item 
-\#define \mbox{\hyperlink{parser_8h_a2ba0f87dd973431ddf3d8f433052ea3e}{P\+O\+R\+T\+\_\+\+R\+E\+G\+EX}}~\char`\"{}(\mbox{[}a-\/zA-\/Z0-\/9\+\_\+, \mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\+:\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$((in$\vert$out$\vert$inout)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(std\+\_\+logic\mbox{[}$^\wedge$;\mbox{]}$\ast$)$\vert$(\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+,. \textbackslash{}t-\/\mbox{]}$\ast$));\char`\"{}
+\#define \mbox{\hyperlink{parser_8h_a2ba0f87dd973431ddf3d8f433052ea3e}{P\+O\+R\+T\+\_\+\+R\+E\+G\+EX}}
 \item 
-\#define \mbox{\hyperlink{parser_8h_ae374e665c91bc99304282b2660211957}{V\+E\+C\+T\+O\+R\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+G\+EX}}~\char`\"{}(\textbackslash{}\textbackslash{}((\mbox{[}a-\/zA-\/Z0-\/9\+\_\+ -\/\mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(down)?to\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+ -\/\mbox{]}+)\textbackslash{}\textbackslash{}))\char`\"{}
+\#define \mbox{\hyperlink{parser_8h_ae374e665c91bc99304282b2660211957}{V\+E\+C\+T\+O\+R\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+G\+EX}}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -57,20 +57,42 @@ Dimitri Kokkonis (\href{https://github.com/kokkonisd}{\texttt{ @kokkonisd}})
 \index{parser.h@{parser.h}!ENTITY\_REGEX@{ENTITY\_REGEX}}
 \index{ENTITY\_REGEX@{ENTITY\_REGEX}!parser.h@{parser.h}}
 \subsubsection{\texorpdfstring{ENTITY\_REGEX}{ENTITY\_REGEX}}
-{\footnotesize\ttfamily \#define E\+N\+T\+I\+T\+Y\+\_\+\+R\+E\+G\+EX~\char`\"{}entity\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(\mbox{[}a-\/zA-\/Z0-\/9\+\_\+\mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+is\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(generic\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{}(\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(.+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{})\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$;)?\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$port\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{}(\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(.+\textbackslash{}\textbackslash{})?)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\textbackslash{}\textbackslash{})\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$;\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$end\mbox{[} \textbackslash{}t\mbox{]}$\ast$(entity$\vert$\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+\mbox{]}+)?\mbox{[} \textbackslash{}t\mbox{]}$\ast$;\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$architecture\char`\"{}}
+{\footnotesize\ttfamily \#define E\+N\+T\+I\+T\+Y\+\_\+\+R\+E\+G\+EX}
 
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{stringliteral}{"entity[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]+([a-zA-Z0-9\_]+)[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]+is"}\(\backslash\)}
+\DoxyCodeLine{                     \textcolor{stringliteral}{"[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]+(generic[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*\(\backslash\)\(\backslash\)([ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*(.+)"}\(\backslash\)}
+\DoxyCodeLine{                     \textcolor{stringliteral}{"[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*\(\backslash\)\(\backslash\))[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*;)?[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*port"}\(\backslash\)}
+\DoxyCodeLine{                     \textcolor{stringliteral}{"[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*\(\backslash\)\(\backslash\)([ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*(.+\(\backslash\)\(\backslash\))?)[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*\(\backslash\)\(\backslash\))"}\(\backslash\)}
+\DoxyCodeLine{                     \textcolor{stringliteral}{"[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*;[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*end[ \(\backslash\)t]*"}\(\backslash\)}
+\DoxyCodeLine{                     \textcolor{stringliteral}{"(entity|[a-zA-Z0-9\_]+)?[ \(\backslash\)t]*;[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*architecture"}}
+
+\end{DoxyCode}
 Regex to match the entity definition of a V\+H\+DL source file. \mbox{\Hypertarget{parser_8h_a2ba0f87dd973431ddf3d8f433052ea3e}\label{parser_8h_a2ba0f87dd973431ddf3d8f433052ea3e}} 
 \index{parser.h@{parser.h}!PORT\_REGEX@{PORT\_REGEX}}
 \index{PORT\_REGEX@{PORT\_REGEX}!parser.h@{parser.h}}
 \subsubsection{\texorpdfstring{PORT\_REGEX}{PORT\_REGEX}}
-{\footnotesize\ttfamily \#define P\+O\+R\+T\+\_\+\+R\+E\+G\+EX~\char`\"{}(\mbox{[}a-\/zA-\/Z0-\/9\+\_\+, \mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$\+:\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$((in$\vert$out$\vert$inout)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}$\ast$(std\+\_\+logic\mbox{[}$^\wedge$;\mbox{]}$\ast$)$\vert$(\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+,. \textbackslash{}t-\/\mbox{]}$\ast$));\char`\"{}}
+{\footnotesize\ttfamily \#define P\+O\+R\+T\+\_\+\+R\+E\+G\+EX}
 
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{stringliteral}{"([a-zA-Z0-9\_, ]+)[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*:[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*((in|out|inout)"}\(\backslash\)}
+\DoxyCodeLine{                   \textcolor{stringliteral}{"[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]*(std\_logic[\string^;]*)|([a-zA-Z0-9\_,. \(\backslash\)t-]*));"}}
+
+\end{DoxyCode}
 Regex to match the port definition of a V\+H\+DL source file. \mbox{\Hypertarget{parser_8h_ae374e665c91bc99304282b2660211957}\label{parser_8h_ae374e665c91bc99304282b2660211957}} 
 \index{parser.h@{parser.h}!VECTOR\_LENGTH\_REGEX@{VECTOR\_LENGTH\_REGEX}}
 \index{VECTOR\_LENGTH\_REGEX@{VECTOR\_LENGTH\_REGEX}!parser.h@{parser.h}}
 \subsubsection{\texorpdfstring{VECTOR\_LENGTH\_REGEX}{VECTOR\_LENGTH\_REGEX}}
-{\footnotesize\ttfamily \#define V\+E\+C\+T\+O\+R\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+G\+EX~\char`\"{}(\textbackslash{}\textbackslash{}((\mbox{[}a-\/zA-\/Z0-\/9\+\_\+ -\/\mbox{]}+)\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(down)?to\mbox{[} \textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}f\mbox{]}+(\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+ -\/\mbox{]}+)\textbackslash{}\textbackslash{}))\char`\"{}}
+{\footnotesize\ttfamily \#define V\+E\+C\+T\+O\+R\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+R\+E\+G\+EX}
 
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{stringliteral}{"(\(\backslash\)\(\backslash\)(([a-zA-Z0-9\_ -]+)[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]+(down)?to"}\(\backslash\)}
+\DoxyCodeLine{                            \textcolor{stringliteral}{"[ \(\backslash\)t\(\backslash\)r\(\backslash\)n\(\backslash\)f]+([a-zA-Z0-9\_ -]+)\(\backslash\)\(\backslash\)))"}}
+
+\end{DoxyCode}
 Regex to match the vector length definition of a V\+H\+DL source file. 
 
 \subsection{Function Documentation}
@@ -139,7 +161,7 @@ Gets the raw entry definition from a given file. Output also contains the entity
 
 Given an H\+DL source file, it extracts \& returns the name of the entity, its generic inputs (if any) and its port inputs/outputs/throughputs. The entity\textquotesingle{}s name is immediately followed by a {\ttfamily ;} separator. In the case that the entity contains any generic inputs, the first of them is preceded by a {\ttfamily $\ast$} character. The first port of the entity is preceded by a {\ttfamily @} character. The final string returned by the function is formatted as follows\+:
 
-{\ttfamily Entity\+Name;$\ast$\+Generic1\+:value;Generic2\+:value;...;@Port1\+:value;Port2\+:value;...;}
+{\ttfamily Entity\+Name;} {\ttfamily $\ast$\+Generic1\+:value;Generic2\+:value;...;} {\ttfamily @Port1\+:value;Port2\+:value;...;}
 
 
 \begin{DoxyParams}{Parameters}

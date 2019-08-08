@@ -87,9 +87,9 @@ $(function() {
 Macros</h2></td></tr>
 <tr class="memitem:a67c079d70e5c6c35f3a9efd29e3433ff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="auto__update_8h.html#a67c079d70e5c6c35f3a9efd29e3433ff">VERSION_WIDTH</a>&#160;&#160;&#160;6</td></tr>
 <tr class="separator:a67c079d70e5c6c35f3a9efd29e3433ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7310f347b1f4510631d0f3aa8256ea60"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="auto__update_8h.html#a7310f347b1f4510631d0f3aa8256ea60">LATEST_VERSION</a>&#160;&#160;&#160;&quot;curl -s https://github.com/kokkonisd/pixhdl/releases/latest | grep -Eo \&quot;/tag/(.+)&gt;\&quot; | head -c 11 | tail -c 5&quot;</td></tr>
+<tr class="memitem:a7310f347b1f4510631d0f3aa8256ea60"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="auto__update_8h.html#a7310f347b1f4510631d0f3aa8256ea60">LATEST_VERSION</a></td></tr>
 <tr class="separator:a7310f347b1f4510631d0f3aa8256ea60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cab917ca45eb7be00a4653fd325d2b4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="auto__update_8h.html#a1cab917ca45eb7be00a4653fd325d2b4">UPDATE_COMMAND</a>&#160;&#160;&#160;&quot;TMPDWN=$(curl -s https://api.github.com/repos/kokkonisd/pixhdl/releases/latest | grep \&quot;tag_name\&quot; | awk '{print \&quot;https://github.com/kokkonisd/pixhdl/archive/\&quot; substr($2, 2, length($2)-3) \&quot;/pixhdl-\&quot; substr($2, 3, length($2)-4) \&quot;.tar.gz\&quot;}') &amp;&amp; curl -L -s $TMPDWN -o /tmp/pixhdl_latest.tar.gz &amp;&amp; tar xvzf /tmp/pixhdl_latest.tar.gz -C /tmp/ &amp;&amp; cd /tmp/pixhdl-* &amp;&amp; make clean &amp;&amp; sudo make uninstall &amp;&amp; make &amp;&amp; sudo make install &amp;&amp; cd .. &amp;&amp; rm -rf pixhdl-* pixhdl_latest*&quot;</td></tr>
+<tr class="memitem:a1cab917ca45eb7be00a4653fd325d2b4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="auto__update_8h.html#a1cab917ca45eb7be00a4653fd325d2b4">UPDATE_COMMAND</a></td></tr>
 <tr class="memdesc:a1cab917ca45eb7be00a4653fd325d2b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to update <em>pixhdl</em> to its latest version.  <a href="#a1cab917ca45eb7be00a4653fd325d2b4">More...</a><br /></td></tr>
 <tr class="separator:a1cab917ca45eb7be00a4653fd325d2b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -111,11 +111,11 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define LATEST_VERSION&#160;&#160;&#160;&quot;curl -s https://github.com/kokkonisd/pixhdl/releases/latest | grep -Eo \&quot;/tag/(.+)&gt;\&quot; | head -c 11 | tail -c 5&quot;</td>
+          <td class="memname">#define LATEST_VERSION</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Command to get the latest version of <em>pixhdl</em> from the <em>releases</em> page of its official GitHub repo. </p>
+<b>Value:</b><div class="fragment"><div class="line"><span class="stringliteral">&quot;curl -s &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;https://github.com/kokkonisd/pixhdl/releases/latest &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;| grep -Eo \&quot;/tag/(.+)&gt;\&quot; | head -c 11 | tail -c 5&quot;</span></div></div><!-- fragment --><p>Command to get the latest version of <em>pixhdl</em> from the <em>releases</em> page of its official GitHub repo. </p>
 
 </div>
 </div>
@@ -126,11 +126,11 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UPDATE_COMMAND&#160;&#160;&#160;&quot;TMPDWN=$(curl -s https://api.github.com/repos/kokkonisd/pixhdl/releases/latest | grep \&quot;tag_name\&quot; | awk '{print \&quot;https://github.com/kokkonisd/pixhdl/archive/\&quot; substr($2, 2, length($2)-3) \&quot;/pixhdl-\&quot; substr($2, 3, length($2)-4) \&quot;.tar.gz\&quot;}') &amp;&amp; curl -L -s $TMPDWN -o /tmp/pixhdl_latest.tar.gz &amp;&amp; tar xvzf /tmp/pixhdl_latest.tar.gz -C /tmp/ &amp;&amp; cd /tmp/pixhdl-* &amp;&amp; make clean &amp;&amp; sudo make uninstall &amp;&amp; make &amp;&amp; sudo make install &amp;&amp; cd .. &amp;&amp; rm -rf pixhdl-* pixhdl_latest*&quot;</td>
+          <td class="memname">#define UPDATE_COMMAND</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line"><span class="stringliteral">&quot;TMPDWN=$(curl -s &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;https://api.github.com/repos/kokkonisd/pixhdl/&quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;releases/latest | grep \&quot;tag_name\&quot; | awk &#39;{print &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;\&quot;https://github.com/kokkonisd/pixhdl/archive/\&quot; &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;substr($2, 2, length($2)-3) \&quot;/pixhdl-\&quot; &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;substr($2, 3, length($2)-4) \&quot;.tar.gz\&quot;}&#39;) &amp;&amp; &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;curl -L -s $TMPDWN -o /tmp/pixhdl_latest.tar.gz &amp;&amp; &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;tar xvzf /tmp/pixhdl_latest.tar.gz -C /tmp/ &amp;&amp; &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;cd /tmp/pixhdl-* &amp;&amp; make clean &amp;&amp; &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;sudo make uninstall &amp;&amp; make &amp;&amp; sudo make install &amp;&amp; &quot;</span>\</div><div class="line">                       <span class="stringliteral">&quot;cd .. &amp;&amp; rm -rf pixhdl-* pixhdl_latest*&quot;</span></div></div><!-- fragment -->
 <p>Command to update <em>pixhdl</em> to its latest version. </p>
 <p>This command gets the latest version of <em>pixhdl</em>, downloads it in <code>tmp/</code>, then runs: </p><div class="fragment"><div class="line">$ make clean</div><div class="line">$ sudo make uninstall</div><div class="line">$ make</div><div class="line">$ sudo make install</div></div><!-- fragment --><p> It finally removes the downloaded files, and the installation is complete. </p>
 

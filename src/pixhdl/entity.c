@@ -81,6 +81,7 @@ void destroyEntity (Entity * ent)
         if (ent->signals_inout) free(ent->signals_inout);
 
         if (ent->name) free(ent->name);
+        if (ent->clock_name) free(ent->clock_name);
 
         free(ent);
     }

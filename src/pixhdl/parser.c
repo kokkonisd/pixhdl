@@ -165,21 +165,28 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
         // Allocate memory for vector length number
         top_num = malloc(sizeof(char) * (top_match_end - top_match_start + 1));
         check_mem(top_num);
-        bottom_num = malloc(sizeof(char) * (bottom_match_end - bottom_match_start + 1));
+        bottom_num = malloc(sizeof(char) *
+                            (bottom_match_end - bottom_match_start + 1));
         check_mem(bottom_num);
 
         // Copy the length top_number over
-        strncpy(top_num, len_str + top_match_start, top_match_end - top_match_start);
+        strncpy(top_num, len_str + top_match_start,
+                top_match_end - top_match_start);
         top_num[top_match_end - top_match_start] = '\0';
-        strncpy(bottom_num, len_str + bottom_match_start, bottom_match_end - bottom_match_start);
+        // Copy the length bottom_number over
+        strncpy(bottom_num, len_str + bottom_match_start,
+                bottom_match_end - bottom_match_start);
         bottom_num[bottom_match_end - bottom_match_start] = '\0';
 
         // If there are generic variables used in the length
         if (containsAlpha(top_num) || containsAlpha(bottom_num)) {
-            // Just return the entire length (what's contained between std_logic_vector's parentheses)
-            length = malloc(sizeof(char) * (total_match_end - total_match_start + 1));
+            // Just return the entire length (what's contained between
+            // std_logic_vector's parentheses)
+            length = malloc(sizeof(char) *
+                            (total_match_end - total_match_start + 1));
             check_mem(length);
-            strncpy(length, len_str + total_match_start, total_match_end - total_match_start);
+            strncpy(length, len_str + total_match_start,
+                    total_match_end - total_match_start);
             length[total_match_end - total_match_start] = '\0';
         } else {
             digit_count = 1;
@@ -190,14 +197,16 @@ char * parseSignalLength (const char * raw_txt, int start, int end)
             }
             // Length is MSB - LSB + 1
             length = malloc(sizeof(char) * (digit_count + 1));
-            snprintf(length, digit_count, "%d", (atoi(top_num) - atoi(bottom_num) + 1));
+            snprintf(length, digit_count,
+                     "%d", (atoi(top_num) - atoi(bottom_num) + 1));
         }
 
         // Free the temporary length string
         free(top_num);
         free(bottom_num);
     // Else, the signal is a `std_logic`
-    } else if (strcmp(len_str, "std_logic") == 0 || strcmp(len_str, "STD_LOGIC") == 0) {
+    } else if (strcmp(len_str, "std_logic") == 0 ||
+               strcmp(len_str, "STD_LOGIC") == 0) {
         // Thus, the length is 1 bit
         length = malloc(sizeof(char) * 2);
         length[0] = '1';
@@ -282,12 +291,14 @@ char * getRawEntityTextFromFile (const char * filename)
     check(reti == 0, "Couldn't compile raw entity regex.");
 
     reti = regexec(&regex, buffer, 5, rm, 0);
-    check(reti == 0, "Couldn't find an entity definition in file `%s`.", filename);
+    check(reti == 0, "Couldn't find an entity definition in file `%s`.",
+                     filename);
 
     // Get the name_start & name_end points from the match found
     name_start = rm[1].rm_so;
     name_end = rm[1].rm_eo;
-    // Get generics if they exist, otherwise leave both generics_* variables at 0
+    // Get generics if they exist, otherwise leave both generics_* variables at
+    // zero
     if (rm[2].rm_so != -1) {
         generics_start = rm[3].rm_so;
         generics_end = rm[3].rm_eo;
@@ -315,25 +326,33 @@ char * getRawEntityTextFromFile (const char * filename)
 
     // Check if name_start and name_end are correct
     check(name_end > name_start && name_end > 0 && name_start >= 0,
-          "File `%s` doesn't contain entity, or is wrongly formatted.", filename);
+          "File `%s` doesn't contain entity, or is wrongly formatted.",
+          filename);
     // Check if body_start and body_end are correct
     check(body_end > body_start && body_end > 0 && body_start >= 0,
-          "File `%s` doesn't contain entity, or is wrongly formatted.", filename);
+          "File `%s` doesn't contain entity, or is wrongly formatted.",
+          filename);
 
-    // Check if generics_start and generics_end are correct (only if they exist)
+    // Check if generics_start and generics_end are correct (only if they
+    // exist)
     if (generics_start && generics_end)
-        check(generics_end > generics_start && generics_end > 0 && generics_start >= 0,
-              "File `%s` doesn't contain entity, or is wrongly formatted.", filename);
+        check(generics_end > generics_start &&
+              generics_end > 0 &&
+              generics_start >= 0,
+              "File `%s` doesn't contain entity, or is wrongly formatted.",
+              filename);
 
 
     // If generics are found in the file
     if (generics_start && generics_end) {
         // Allocate memory for the generics string
-        entity_generics = malloc(sizeof(char) * (generics_end - generics_start + 2));
+        entity_generics = malloc(sizeof(char) *
+                                 (generics_end - generics_start + 2));
         check_mem(entity_generics);
 
         // Copy the generics text over
-        strncpy(entity_generics, buffer + generics_start, generics_end - generics_start + 1);
+        strncpy(entity_generics, buffer + generics_start,
+                                 generics_end - generics_start + 1);
         // Add a semicolon to the end
         entity_generics[generics_end - generics_start] = ';';
         // Add a null char for safety
@@ -363,16 +382,22 @@ char * getRawEntityTextFromFile (const char * filename)
     // If generics are detected
     if (entity_generics) {
         // Allocate memory for the final string
-        res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_generics) + strlen(entity_body) + 3));
+        res = malloc(sizeof(char) * (strlen(entity_name) +
+                                     strlen(entity_generics) +
+                                     strlen(entity_body) + 3));
         // Print the name followed by the body in the resulting string
-        snprintf(res, (strlen(entity_name) + strlen(entity_generics) + strlen(entity_body) + 3),
+        snprintf(res, (strlen(entity_name) +
+                       strlen(entity_generics) +
+                       strlen(entity_body) + 3),
                       "%s*%s@%s", entity_name, entity_generics, entity_body);
     // Otherwise, keep generics out
     } else {
         // Allocate memory for the final string
-        res = malloc(sizeof(char) * (strlen(entity_name) + strlen(entity_body) + 2));
+        res = malloc(sizeof(char) *
+                     (strlen(entity_name) + strlen(entity_body) + 2));
         // Print the name followed by the body in the resulting string
-        snprintf(res, (strlen(entity_name) + strlen(entity_body) + 2), "%s@%s", entity_name, entity_body);
+        snprintf(res, (strlen(entity_name) + strlen(entity_body) + 2),
+                      "%s@%s", entity_name, entity_body);
     }
 
     // Free the name, body & generics strings
@@ -388,7 +413,8 @@ error:
 }
 
 
-Entity * getEntityFromRawEntityText (const char * entity_text, const char * clock_name)
+Entity * getEntityFromRawEntityText (const char * entity_text,
+                                     const char * clock_name)
 {
     // Regex object for parsing
     regex_t regex;
@@ -467,22 +493,29 @@ Entity * getEntityFromRawEntityText (const char * entity_text, const char * cloc
 
             // Parse the direction and the length of the signal
             if (are_generics_parsed)
-                s.dir = parseSignalDirection(cur_text, rm[3].rm_so, rm[3].rm_eo);
+                s.dir = parseSignalDirection(cur_text,
+                                             rm[3].rm_so,
+                                             rm[3].rm_eo);
             else
                 s.dir = GENERIC;
 
             // Pass apropriate regex match to signal length parser
             // based on if all generics have been parsed or not
             if (are_generics_parsed)
-                s.length = parseSignalLength(cur_text, rm[4].rm_so, rm[4].rm_eo);
+                s.length = parseSignalLength(cur_text,
+                                             rm[4].rm_so,
+                                             rm[4].rm_eo);
             else
-                s.length = parseSignalLength(cur_text, rm[5].rm_so, rm[5].rm_eo);
+                s.length = parseSignalLength(cur_text,
+                                             rm[5].rm_so,
+                                             rm[5].rm_eo);
 
             // If a clock input has been found (with the same name as the CLK
             // signal name specified by the user)
             if (s.dir == IN && clock_name && strcmp(clock_name, s.name) == 0) {
                 // Allocate the memory needed to copy the clock name over
-                ent->clock_name = malloc((strlen(clock_name) + 1) * sizeof(char));
+                ent->clock_name = malloc((strlen(clock_name) + 1) *
+                                          sizeof(char));
                 check_mem(ent->clock_name);
                 // Copy the clock name over
                 strncpy(ent->clock_name, clock_name, strlen(clock_name) + 1);
@@ -497,8 +530,11 @@ Entity * getEntityFromRawEntityText (const char * entity_text, const char * cloc
 
             // If there are multiple signals
             if (comma_index != strlen(name)) {
-                // Parse the name again, this time starting from the position of the first comma
-                char * new_name = parseSignalName(name, comma_index + 1, strlen(name));
+                // Parse the name again, this time starting from the position
+                // of the first comma
+                char * new_name = parseSignalName(name,
+                                                  comma_index + 1,
+                                                  strlen(name));
                 // Free the old name
                 free(name);
                 // Assign the new char pointer to name
@@ -521,27 +557,37 @@ Entity * getEntityFromRawEntityText (const char * entity_text, const char * cloc
 
                     // Parse direction & length
                     if (are_generics_parsed)
-                        s.dir = parseSignalDirection(cur_text, rm[3].rm_so, rm[3].rm_eo);
+                        s.dir = parseSignalDirection(cur_text,
+                                                     rm[3].rm_so,
+                                                     rm[3].rm_eo);
                     else
                         s.dir = GENERIC;
 
                     // Pass apropriate regex match to signal length parser
                     // based on if all generics have been parsed or not
                     if (are_generics_parsed)
-                        s.length = parseSignalLength(cur_text, rm[4].rm_so, rm[4].rm_eo);
+                        s.length = parseSignalLength(cur_text,
+                                                     rm[4].rm_so,
+                                                     rm[4].rm_eo);
                     else
-                        s.length = parseSignalLength(cur_text, rm[5].rm_so, rm[5].rm_eo);
+                        s.length = parseSignalLength(cur_text,
+                                                     rm[5].rm_so,
+                                                     rm[5].rm_eo);
 
-                    // If a clock input has been found (with the same name as the CLK
-                    // signal name specified by the user)
-                    if (s.dir == IN && clock_name && strcmp(clock_name, s.name) == 0) {
-                        // Allocate the memory needed to copy the clock name over
-                        ent->clock_name = malloc((strlen(clock_name) + 1) * sizeof(char));
+                    // If a clock input has been found (with the same name as
+                    // the CLK signal name specified by the user)
+                    if (s.dir == IN && clock_name &&
+                                       strcmp(clock_name, s.name) == 0) {
+                        // Allocate the memory needed to copy the clock name
+                        // over
+                        ent->clock_name = malloc((strlen(clock_name) + 1) *
+                                                 sizeof(char));
                         check_mem(ent->clock_name);
                         // Copy the clock name over
-                        strncpy(ent->clock_name, clock_name, strlen(clock_name) + 1);
-                        // Free the signal's name and length, we won't be adding it to
-                        // the entity
+                        strncpy(ent->clock_name, clock_name,
+                                                 strlen(clock_name) + 1);
+                        // Free the signal's name and length, we won't be
+                        // adding it to the entity
                         free(s.name);
                         free(s.length);
                     } else {

@@ -88,11 +88,11 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a109435a96cfe368781e814630b69acdd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#a109435a96cfe368781e814630b69acdd">ENTITY_REGEX</a>&#160;&#160;&#160;&quot;entity[ \t\r\n\f]+([a-zA-Z0-9_]+)[ \t\r\n\f]+is[ \t\r\n\f]+(generic[ \t\r\n\f]*\\([ \t\r\n\f]*(.+)[ \t\r\n\f]*\\)[ \t\r\n\f]*;)?[ \t\r\n\f]*port[ \t\r\n\f]*\\([ \t\r\n\f]*(.+\\)?)[ \t\r\n\f]*\\)[ \t\r\n\f]*;[ \t\r\n\f]*end[ \t]*(entity|[a-zA-Z0-9_]+)?[ \t]*;[ \t\r\n\f]*architecture&quot;</td></tr>
+<tr class="memitem:a109435a96cfe368781e814630b69acdd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#a109435a96cfe368781e814630b69acdd">ENTITY_REGEX</a></td></tr>
 <tr class="separator:a109435a96cfe368781e814630b69acdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ba0f87dd973431ddf3d8f433052ea3e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#a2ba0f87dd973431ddf3d8f433052ea3e">PORT_REGEX</a>&#160;&#160;&#160;&quot;([a-zA-Z0-9_, ]+)[ \t\r\n\f]*:[ \t\r\n\f]*((in|out|inout)[ \t\r\n\f]*(std_logic[^;]*)|([a-zA-Z0-9_,. \t-]*));&quot;</td></tr>
+<tr class="memitem:a2ba0f87dd973431ddf3d8f433052ea3e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#a2ba0f87dd973431ddf3d8f433052ea3e">PORT_REGEX</a></td></tr>
 <tr class="separator:a2ba0f87dd973431ddf3d8f433052ea3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae374e665c91bc99304282b2660211957"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#ae374e665c91bc99304282b2660211957">VECTOR_LENGTH_REGEX</a>&#160;&#160;&#160;&quot;(\\(([a-zA-Z0-9_ -]+)[ \t\r\n\f]+(down)?to[ \t\r\n\f]+([a-zA-Z0-9_ -]+)\\))&quot;</td></tr>
+<tr class="memitem:ae374e665c91bc99304282b2660211957"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8h.html#ae374e665c91bc99304282b2660211957">VECTOR_LENGTH_REGEX</a></td></tr>
 <tr class="separator:ae374e665c91bc99304282b2660211957"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -127,11 +127,11 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ENTITY_REGEX&#160;&#160;&#160;&quot;entity[ \t\r\n\f]+([a-zA-Z0-9_]+)[ \t\r\n\f]+is[ \t\r\n\f]+(generic[ \t\r\n\f]*\\([ \t\r\n\f]*(.+)[ \t\r\n\f]*\\)[ \t\r\n\f]*;)?[ \t\r\n\f]*port[ \t\r\n\f]*\\([ \t\r\n\f]*(.+\\)?)[ \t\r\n\f]*\\)[ \t\r\n\f]*;[ \t\r\n\f]*end[ \t]*(entity|[a-zA-Z0-9_]+)?[ \t]*;[ \t\r\n\f]*architecture&quot;</td>
+          <td class="memname">#define ENTITY_REGEX</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Regex to match the entity definition of a VHDL source file. </p>
+<b>Value:</b><div class="fragment"><div class="line"><span class="stringliteral">&quot;entity[ \t\r\n\f]+([a-zA-Z0-9_]+)[ \t\r\n\f]+is&quot;</span>\</div><div class="line">                     <span class="stringliteral">&quot;[ \t\r\n\f]+(generic[ \t\r\n\f]*\\([ \t\r\n\f]*(.+)&quot;</span>\</div><div class="line">                     <span class="stringliteral">&quot;[ \t\r\n\f]*\\)[ \t\r\n\f]*;)?[ \t\r\n\f]*port&quot;</span>\</div><div class="line">                     <span class="stringliteral">&quot;[ \t\r\n\f]*\\([ \t\r\n\f]*(.+\\)?)[ \t\r\n\f]*\\)&quot;</span>\</div><div class="line">                     <span class="stringliteral">&quot;[ \t\r\n\f]*;[ \t\r\n\f]*end[ \t]*&quot;</span>\</div><div class="line">                     <span class="stringliteral">&quot;(entity|[a-zA-Z0-9_]+)?[ \t]*;[ \t\r\n\f]*architecture&quot;</span></div></div><!-- fragment --><p>Regex to match the entity definition of a VHDL source file. </p>
 
 </div>
 </div>
@@ -142,11 +142,11 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PORT_REGEX&#160;&#160;&#160;&quot;([a-zA-Z0-9_, ]+)[ \t\r\n\f]*:[ \t\r\n\f]*((in|out|inout)[ \t\r\n\f]*(std_logic[^;]*)|([a-zA-Z0-9_,. \t-]*));&quot;</td>
+          <td class="memname">#define PORT_REGEX</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Regex to match the port definition of a VHDL source file. </p>
+<b>Value:</b><div class="fragment"><div class="line"><span class="stringliteral">&quot;([a-zA-Z0-9_, ]+)[ \t\r\n\f]*:[ \t\r\n\f]*((in|out|inout)&quot;</span>\</div><div class="line">                   <span class="stringliteral">&quot;[ \t\r\n\f]*(std_logic[^;]*)|([a-zA-Z0-9_,. \t-]*));&quot;</span></div></div><!-- fragment --><p>Regex to match the port definition of a VHDL source file. </p>
 
 </div>
 </div>
@@ -157,11 +157,11 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define VECTOR_LENGTH_REGEX&#160;&#160;&#160;&quot;(\\(([a-zA-Z0-9_ -]+)[ \t\r\n\f]+(down)?to[ \t\r\n\f]+([a-zA-Z0-9_ -]+)\\))&quot;</td>
+          <td class="memname">#define VECTOR_LENGTH_REGEX</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Regex to match the vector length definition of a VHDL source file. </p>
+<b>Value:</b><div class="fragment"><div class="line"><span class="stringliteral">&quot;(\\(([a-zA-Z0-9_ -]+)[ \t\r\n\f]+(down)?to&quot;</span>\</div><div class="line">                            <span class="stringliteral">&quot;[ \t\r\n\f]+([a-zA-Z0-9_ -]+)\\))&quot;</span></div></div><!-- fragment --><p>Regex to match the vector length definition of a VHDL source file. </p>
 
 </div>
 </div>
@@ -284,7 +284,7 @@ Functions</h2></td></tr>
 
 <p>Gets the raw entry definition from a given file. Output also contains the entity's name. </p>
 <p>Given an HDL source file, it extracts &amp; returns the name of the entity, its generic inputs (if any) and its port inputs/outputs/throughputs. The entity's name is immediately followed by a <code>;</code> separator. In the case that the entity contains any generic inputs, the first of them is preceded by a <code>*</code> character. The first port of the entity is preceded by a <code>@</code> character. The final string returned by the function is formatted as follows:</p>
-<p><code>EntityName;*Generic1:value;Generic2:value;...;@Port1:value;Port2:value;...;</code></p>
+<p><code>EntityName;</code> <code>*Generic1:value;Generic2:value;...;</code> <code>@Port1:value;Port2:value;...;</code></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filename</td><td>(<code>const char *</code>): The path/name of the source file. </td></tr>

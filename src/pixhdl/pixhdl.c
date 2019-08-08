@@ -46,7 +46,7 @@ int main (int argc, char * argv[])
         option_index = 0;
 
         // Try to parse next argument
-        c = getopt_long(argc, argv, ":vho:up", long_options, &option_index);
+        c = getopt_long(argc, argv, ":vho:upc:", long_options, &option_index);
 
         // If no arguments are found, parsing is over
         if (c == -1) break;
@@ -84,23 +84,27 @@ int main (int argc, char * argv[])
 
             case '?':
                 // Unknown argument handling
-                log_err("Unknown argument `%s`. Use `pixhdl -h` to get a complete list of valid arguments.",
+                log_err("Unknown argument `%s`. Use `pixhdl -h` to get a "\
+                        "complete list of valid arguments.",
                         optind > 1 ? argv[optind - 1] : argv[1]);
                 return 1;
 
             case ':':
                 // Missing argument handling
-                log_err("Option `-%c/--%s` requires an argument.", (char) optopt, long_options[optind].name);
+                log_err("Option `-%c/--%s` requires an argument.",
+                        (char) optopt, long_options[optind].name);
                 return 1;
 
             default:
                 // Error handling
-                log_err("Couldn't parse arguments. Use `pixhdl -h` to get a complete list of valid arguments.");
+                log_err("Couldn't parse arguments. Use `pixhdl -h` to get a "\
+                        "complete list of valid arguments.");
                 return 1;
         }
     }
 
-    // If no arguments are left, the user hasn't specified any .vhd/.vhdl source files
+    // If no arguments are left, the user hasn't specified any .vhd/.vhdl
+    // source files
     check(optind < argc, "No .vhd/.vhdl sources specified.");
 
     // Capture input filename and move optind forward
@@ -112,21 +116,26 @@ int main (int argc, char * argv[])
     check(ent, "Couldn't get entity from file `%s`.", in_filename);
 
     // Check that at least one of the following is true:
-    //     1. There is still at least one argument to be parsed (which will be the output)
+    //     1. There is still at least one argument to be parsed (which will be
+    //        the output)
     //     2. The output filename has already been specified
-    //     3. The print_entity flag has been set to 1 (so the user doesn't have to specify an output file)
-    check(optind < argc || out_filename || print_entity, "No output SVG file specified.");
+    //     3. The print_entity flag has been set to 1 (so the user doesn't have
+    //        to specify an output file)
+    check(optind < argc || out_filename || print_entity,
+          "No output SVG file specified.");
 
     // If the print_entity flag is set to 1, print the entity
     if (print_entity) printEntitySignals(ent);
 
     // If the output file is set or if there are any arguments left
     if (optind < argc || out_filename) {
-        // The output file has already been set, or if not then the next argument is the output file
+        // The output file has already been set, or if not then the next
+        // argument is the output file
         if (!out_filename) out_filename = argv[optind];
         // Generate SVG and check that the result is correct
         rgen = generateSvgFromEntity(ent, out_filename);
-        check(rgen == 0, "Couldn't generate SVG image for file `%s`.", in_filename);
+        check(rgen == 0, "Couldn't generate SVG image for file `%s`.",
+                         in_filename);
     }
 
     // Destroy the entity object

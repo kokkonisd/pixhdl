@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['update_5fcommand',['UPDATE_COMMAND',['../auto__update_8h.html#a1cab917ca45eb7be00a4653fd325d2b4',1,'auto_update.h']]]
+  ['simple_5fline',['SIMPLE_LINE',['../generate__svg_8h.html#a63875060d6e634e15be1e39e603f91bf',1,'generate_svg.h']]],
+  ['svg_5fheader',['SVG_HEADER',['../generate__svg_8h.html#a2e600241174c67141be4d93bd0a01626',1,'generate_svg.h']]]
 ];
