@@ -110,7 +110,6 @@ int main (int argc, char * argv[])
     // Get the entity and check that it has been parsed correctly
     ent = getEntityFromFile(in_filename, clock_name);
     check(ent, "Couldn't get entity from file `%s`.", in_filename);
-    ent->clock_name = clock_name;
 
     // Check that at least one of the following is true:
     //     1. There is still at least one argument to be parsed (which will be the output)

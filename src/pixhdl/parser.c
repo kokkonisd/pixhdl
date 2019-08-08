@@ -471,12 +471,23 @@ Entity * getEntityFromRawEntityText (const char * entity_text, const char * cloc
             else
                 s.dir = GENERIC;
 
+            // Pass apropriate regex match to signal length parser
+            // based on if all generics have been parsed or not
             if (are_generics_parsed)
                 s.length = parseSignalLength(cur_text, rm[4].rm_so, rm[4].rm_eo);
             else
                 s.length = parseSignalLength(cur_text, rm[5].rm_so, rm[5].rm_eo);
 
+            // If a clock input has been found (with the same name as the CLK
+            // signal name specified by the user)
             if (s.dir == IN && clock_name && strcmp(clock_name, s.name) == 0) {
+                // Allocate the memory needed to copy the clock name over
+                ent->clock_name = malloc((strlen(clock_name) + 1) * sizeof(char));
+                check_mem(ent->clock_name);
+                // Copy the clock name over
+                strncpy(ent->clock_name, clock_name, strlen(clock_name) + 1);
+                // Free the signal's name and length, we won't be adding it to
+                // the entity
                 free(s.name);
                 free(s.length);
             } else {
@@ -514,12 +525,23 @@ Entity * getEntityFromRawEntityText (const char * entity_text, const char * cloc
                     else
                         s.dir = GENERIC;
 
+                    // Pass apropriate regex match to signal length parser
+                    // based on if all generics have been parsed or not
                     if (are_generics_parsed)
                         s.length = parseSignalLength(cur_text, rm[4].rm_so, rm[4].rm_eo);
                     else
                         s.length = parseSignalLength(cur_text, rm[5].rm_so, rm[5].rm_eo);
 
+                    // If a clock input has been found (with the same name as the CLK
+                    // signal name specified by the user)
                     if (s.dir == IN && clock_name && strcmp(clock_name, s.name) == 0) {
+                        // Allocate the memory needed to copy the clock name over
+                        ent->clock_name = malloc((strlen(clock_name) + 1) * sizeof(char));
+                        check_mem(ent->clock_name);
+                        // Copy the clock name over
+                        strncpy(ent->clock_name, clock_name, strlen(clock_name) + 1);
+                        // Free the signal's name and length, we won't be adding it to
+                        // the entity
                         free(s.name);
                         free(s.length);
                     } else {
