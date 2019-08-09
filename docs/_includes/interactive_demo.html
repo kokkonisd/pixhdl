@@ -10,12 +10,12 @@ use ieee.numeric_std.all;
 
 
 entity ALU is
-port (
-OP : in std_logic_vector (1 downto 0);
-A, B : in std_logic_vector (31 downto 0);
-O : out std_logic_vector (31 downto 0);
-N : out std_logic
-);
+    port (
+        OP : in std_logic_vector (1 downto 0);
+        A, B : in std_logic_vector (31 downto 0);
+        O : out std_logic_vector (31 downto 0);
+        N : out std_logic
+    );
 end entity;
 
 ...{% endhighlight %}
@@ -41,12 +41,12 @@ use ieee.numeric_std.all;
 
 
 entity ALU is
-port (
-OP : in std_logic_vector (1 downto 0);
-A, B : in std_logic_vector (31 downto 0);
-O : out std_logic_vector (31 downto 0);
-N : out std_logic
-);
+    port (
+        OP : in std_logic_vector (1 downto 0);
+        A, B : in std_logic_vector (31 downto 0);
+        O : out std_logic_vector (31 downto 0);
+        N : out std_logic
+    );
 end entity;
 
 ...{% endhighlight %}
@@ -74,16 +74,17 @@ use ieee.numeric_std.all;
 
 
 entity MUX is
-generic (
-N : integer range 0 to 32;
-M : time 0.2 ns
-);
-port (
-A, B : in std_logic_vector (N - 1 downto 0);
-COM : in std_logic;
-Y : out std_logic_vector (N - 1 downto 0);
-F : inout std_logic_vector (10 downto 0)
-);
+    generic (
+        N : integer range 0 to 32;
+        M : time 0.2 ns
+    );
+
+    port (
+        A, B : in std_logic_vector (N - 1 downto 0);
+        COM : in std_logic;
+        Y : out std_logic_vector (N - 1 downto 0);
+        F : inout std_logic_vector (10 downto 0)
+    );
 end entity;
 
 ...{% endhighlight %}
@@ -109,16 +110,17 @@ use ieee.numeric_std.all;
 
 
 entity MUX is
-generic (
-N : integer range 0 to 32;
-M : time 0.2 ns
-);
-port (
-A, B : in std_logic_vector (N - 1 downto 0);
-COM : in std_logic;
-Y : out std_logic_vector (N - 1 downto 0);
-F : inout std_logic_vector (10 downto 0)
-);
+    generic (
+        N : integer range 0 to 32;
+        M : time 0.2 ns
+    );
+
+    port (
+        A, B : in std_logic_vector (N - 1 downto 0);
+        COM : in std_logic;
+        Y : out std_logic_vector (N - 1 downto 0);
+        F : inout std_logic_vector (10 downto 0)
+    );
 end entity;
 
 ...{% endhighlight %}
