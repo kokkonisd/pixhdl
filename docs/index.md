@@ -5,7 +5,9 @@ layout: home
 ## Getting started
 
 To get started, first of all you have to install pixhdl.
-After downloading the [latest release](https://github.com/kokkonisd/pixhdl/releases/latest) you can install it as so:
+After downloading the
+[latest release](https://github.com/kokkonisd/pixhdl/releases/latest)
+you can install it as so:
 
 ```bash
 $ tar xvzf pixhdl-X.Y.Z.tar.gz # for example pixhdl-1.1.1.tar.gz
@@ -16,16 +18,20 @@ $ cd ..
 $ rm -rf pixhdl-X.Y.Z/
 ```
 
-After having successfully installed pixhdl, you can now use it from anywhere on your computer.
-Say for example that you want to extract the entity diagram from a file called 'CPU.vhdl', all you have to do is:
+After having successfully installed pixhdl, you can now use it from anywhere
+on your computer.
+Say for example that you want to extract the entity diagram from a file called
+`CPU.vhdl`, all you have to do is:
 
 ```plaintext
 $ pixhdl CPU.vhdl CPU_diagram.svg
 ```
 
-This will produce a file called 'CPU_diagram.svg' that will contain an image of the diagram of the CPU entity.
+This will produce a file called `CPU_diagram.svg` that will contain an image of
+the diagram of the CPU entity.
 
-You can also specify the output explicitly by using the `-o` or `--output` options:
+You can also specify the output explicitly by using the `-o` or `--output`
+options:
 
 ```plaintext
 $ pixhdl --output CPU_diagram.svg CPU.vhdl
@@ -33,7 +39,10 @@ $ pixhdl --output CPU_diagram.svg CPU.vhdl
 
 This will produce the exact same result as before.
 
-If you want, you can also choose to print the entity's signals in the terminal. By adding the `-p` or `--print` options, you don't have to specify an output file (SVG generation is optional). Here is some example output of the print option:
+If you want, you can also choose to print the entity's signals in the terminal.
+By adding the `-p` or `--print` options, you don't have to specify an output
+file (SVG generation is optional). Here is some example output of the print
+option:
 
 ```plaintext
 $ pixhdl -p ALU.vhdl
@@ -52,7 +61,23 @@ Signal # | Name | Value (generics) / Length (bits) | Direction
 ---------------------------------------------------------------
 ```
 
-If you also specify an output file (either implicitly or explicitly, by adding either one of the output options), an SVG output file will be generated as well.
+If you also specify an output file (either implicitly or explicitly, by adding
+either one of the output options), an SVG output file will be generated as
+well.
+
+There is also the possibility of specifying a clock input. Many entities are
+(partially or fully) synchronous, so they accept a clock input. In order to
+simplify the entity diagram, there is a norm that dictates that the clock
+signal can be replaced by a small triangle on the bottom left of the entity
+rectangle. So if you have, for example, an entity with a clock input called
+`CLK`, you can do:
+
+```plaintext
+$ pixhdl myEntity.vhdl myEntityDiagram.svg --clock-name CLK
+```
+
+And that will draw that triangle for you, instead of the traditional input
+signal with an arrow.
 
 If you want to check for updates, you can use the `-u` or `--update` options:
 
@@ -60,7 +85,8 @@ If you want to check for updates, you can use the `-u` or `--update` options:
 $ pixhdl --update
 ```
 
-If a newer version is available, you will be asked if you want to install it. You must then type 'yes' to accept the installation or 'no' to abort it.
+If a newer version is available, you will be asked if you want to install it.
+You must then type 'yes' to accept the installation or 'no' to abort it.
 
 To get a more comprehensive list of commands, run:
 
@@ -72,5 +98,7 @@ $ pixhdl -h
 
 ## About
 
-Pixhdl is a command-line tool that takes VHDL source code as input and produces SVG images as output.
-It is open source, and it is written entirely in C by Dimitri Kokkonis ([@kokkonisd](https://github.com/kokkonisd)).
+Pixhdl is a command-line tool that takes VHDL source code as input and produces
+SVG images as output. It is open source, and it is written entirely in C by
+Dimitri Kokkonis ([@kokkonisd](https://github.com/kokkonisd)).
+
