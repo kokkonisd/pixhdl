@@ -91,8 +91,8 @@ int main (int argc, char * argv[])
 
             case ':':
                 // Missing argument handling
-                log_err("Option `-%c/--%s` requires an argument.",
-                        (char) optopt, long_options[optind].name);
+                log_err("Option `%s` requires an argument.",
+                        argv[optind - 1]);
                 return 1;
 
             default:
