@@ -1,7 +1,7 @@
 # pixhdl
 
-![master build status](https://travis-ci.org/kokkonisd/pixhdl.svg?branch=master)
-![development build status](https://travis-ci.org/kokkonisd/pixhdl.svg?branch=development)
+![master build status](https://img.shields.io/travis/kokkonisd/pixhdl/master.svg?label=master)
+![development build status](https://img.shields.io/travis/kokkonisd/pixhdl/development.svg?label=development)
 
 <img src="https://github.com/kokkonisd/pixhdl/blob/master/pixhdl.png" width="500">
 
