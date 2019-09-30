@@ -38,6 +38,7 @@ build:
 .PHONY: tests
 # Remove -Wextra because it throws an annoying warning on minunit.h
 tests: CFLAGS = -g -O2 -Wall -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
+tests: VALGRIND = /usr/bin/valgrind
 tests: $(TESTS)
 	sh ./tests/runtests.sh
 
