@@ -4,6 +4,7 @@ compiler:
   - gcc
 before_install:
   - sudo apt-get install -y doxygen
+  - sudo apt-get install -y valgrind
 script:
   - make clean all
   - make tests
