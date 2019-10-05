@@ -33,4 +33,7 @@ before_install:
 script:
   - make clean all
   - make tests
+  - if [ "$TRAVIS_OS_NAME" = "linux" ];
+      then valgrind --leak-check=full --error-exitcode=1 tests/entity_tests
+    fi
   - make docs
