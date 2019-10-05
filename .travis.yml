@@ -7,7 +7,7 @@ os:
 matrix:
   include:
     - os: linux
-      env: VALGRIND="$(which valgrind) --leak-check=full --error-exitcode=1"
+      env: VALGRIND="/usr/bin/valgrind --leak-check=full --error-exitcode=1"
       compiler: gcc
     - os: osx
       env: VALGRIND=""
