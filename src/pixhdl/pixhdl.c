@@ -11,7 +11,6 @@ int print_help_screen ()
 
 int main (int argc, char * argv[])
 {
-    char * memleak = malloc(10000);
     // Character value for argument parsing
     int c = 0;
     // Option index for long arguments
