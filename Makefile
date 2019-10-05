@@ -40,7 +40,7 @@ build:
 # Also set optimization to -O0 so that possible leaks are not optimized out of
 # the tests (and we can thus catch them with valgrind)
 tests: CFLAGS = -g -O0 -Wall -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
-tests: VALGRIND = /usr/bin/valgrind --leak-check=full --error-exitcode=1
+# tests: VALGRIND = /usr/bin/valgrind --leak-check=full --error-exitcode=1
 tests: $(TESTS)
 	sh ./tests/runtests.sh
 

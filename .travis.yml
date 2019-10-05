@@ -2,6 +2,8 @@ language: c
 compiler:
   - clang
   - gcc
+env:
+  - VALGRIND="/usr/bin/valgrind --leak-check=full --error-exitcode=1"
 before_install:
   - sudo apt-get install -y doxygen
   - sudo apt-get install -y valgrind
