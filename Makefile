@@ -16,7 +16,7 @@ BIN_TARGET = $(patsubst build/lib%.a, bin/%, $(TARGET))
 # The Target Build
 all: $(TARGET) $(SO_TARGET) $(BIN_TARGET) tests
 
-dev: CFLAGS = -g -Wall -Isrc -Wall -Wextra $(OPTFLAGS)
+dev: CFLAGS := $(filter-out -O2, $(CFLAGS))
 dev: all
 
 $(TARGET): CFLAGS += -fPIC
