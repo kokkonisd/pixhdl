@@ -2,7 +2,7 @@ language: c
 
 os:
   - linux
-  - osx
+  # - osx
 
 compiler:
   - clang
@@ -17,6 +17,7 @@ before_install:
     then sudo apt-get install -y doxygen; fi
 
 script:
+  - echo "$TRAVIS_OS_NAME"
   - make clean all
   - if [ "$TRAVIS_OS_NAME" = "linux" ];
     then env VALGRIND="$(which valgrind) --leak-check=full --error-exitcode=1"
