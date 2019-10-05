@@ -5,7 +5,6 @@
 
 char * create_and_destroy_entity ()
 {
-    char * memleak2 = malloc(100000);
     Entity * ent = createEntity();
     mu_assert(ent, "Entity could not be created.");
 
