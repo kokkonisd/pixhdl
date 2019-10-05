@@ -3,7 +3,6 @@
 
 Entity * createEntity ()
 {
-    char * memleak = malloc(10000);
     // Allocate memory for an entity
     Entity * ent = calloc(1, sizeof(Entity));
 
