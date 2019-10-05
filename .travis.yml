@@ -7,6 +7,6 @@ before_install:
   - sudo apt-get install -y valgrind
 script:
   - make clean all
-  - env VALGRIND="/usr/bin/valgrind --leak-check=full --error-exitcode=1" make
+  - env VALGRIND="$(which valgrind) --leak-check=full --error-exitcode=1" make
     tests
   - make docs
