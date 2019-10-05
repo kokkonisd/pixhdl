@@ -1,3 +1,6 @@
+echo "Valgrind is:"
+echo $VALGRIND
+
 echo "Running unit tests:"
 
 for i in tests/*_tests
