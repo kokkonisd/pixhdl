@@ -10,7 +10,7 @@
 #define __PIXHDL_H__
 
 /** Current version of _pixhdl_ (in `X.Y.Z` format). */
-#define VERSION "1.1.2"
+#define VERSION "1.1.3"
 
 /**
  * Text for the help screen of _pixhdl_, detailing usage and possible options.

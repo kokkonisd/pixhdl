@@ -329,9 +329,13 @@ char * parse_entity_from_file ()
     mu_assert(ent, "Seventh entity wasn't parsed correctly.");
     destroyEntity(ent);
 
+    filename = "tests/vhdl_sources/no_architecture.vhdl";
+    ent = getEntityFromFile(filename, NULL);
+    mu_assert(ent, "No architecture entity wasn't parsed correctly.");
+    destroyEntity(ent);
+
     return NULL;
 }
-
 
 char * all_tests ()
 {
