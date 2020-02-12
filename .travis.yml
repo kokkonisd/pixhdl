@@ -35,3 +35,7 @@ script:
   - make clean dev
   - make clean all
   - make docs
+
+after_failure:
+  - echo "---- FULL LOGS ----"
+  - cat tests/tests.log
