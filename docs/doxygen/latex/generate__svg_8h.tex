@@ -1,4 +1,4 @@
-\hypertarget{generate__svg_8h}{}\section{src/pixhdl/generate\+\_\+svg.h File Reference}
+\hypertarget{generate__svg_8h}{}\doxysection{src/pixhdl/generate\+\_\+svg.h File Reference}
 \label{generate__svg_8h}\index{src/pixhdl/generate\_svg.h@{src/pixhdl/generate\_svg.h}}
 
 
@@ -7,7 +7,7 @@ S\+VG image file generation functionality for the {\itshape pixhdl} project.
 
 {\ttfamily \#include \char`\"{}entity.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
-\subsection*{Macros}
+\doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{generate__svg_8h_afff8bc73d5fed64c6954076bc143b4e3}{E\+N\+T\+I\+T\+Y\+\_\+\+N\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+S\+I\+ZE}}~60
@@ -48,7 +48,7 @@ S\+VG image file generation functionality for the {\itshape pixhdl} project.
 \item 
 \#define \mbox{\hyperlink{generate__svg_8h_a6980d830d7d9bd09d0683d92e63d8989}{L\+E\+N\+G\+T\+H\+\_\+\+S\+L\+A\+SH}}
 \end{DoxyCompactItemize}
-\subsection*{Enumerations}
+\doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{generate__svg_8h_a99202528cfe9ace0ff7c648f9ad52f11}{arr\+Dir}} \{ {\bfseries R\+I\+G\+HT}, 
@@ -57,7 +57,7 @@ enum \mbox{\hyperlink{generate__svg_8h_a99202528cfe9ace0ff7c648f9ad52f11}{arr\+D
 {\bfseries D\+O\+WN}
  \}
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 float \mbox{\hyperlink{generate__svg_8h_ac36750906e883bc6af51fbf3f251eb66}{max}} (float a, float b)
@@ -72,7 +72,7 @@ int \mbox{\hyperlink{generate__svg_8h_a2a3ca00d4d5803503083e59ec23c3622}{generat
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 S\+VG image file generation functionality for the {\itshape pixhdl} project. 
 
 \begin{DoxyAuthor}{Author}
@@ -83,223 +83,223 @@ Dimitri Kokkonis (\href{https://github.com/kokkonisd}{\texttt{ @kokkonisd}})
 \end{DoxyDate}
 
 
-\subsection{Macro Definition Documentation}
+\doxysubsection{Macro Definition Documentation}
 \mbox{\Hypertarget{generate__svg_8h_a1fa40a851c663f4e8073033786f33b9f}\label{generate__svg_8h_a1fa40a851c663f4e8073033786f33b9f}} 
 \index{generate\_svg.h@{generate\_svg.h}!ARROW\_HEAD@{ARROW\_HEAD}}
 \index{ARROW\_HEAD@{ARROW\_HEAD}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{ARROW\_HEAD}{ARROW\_HEAD}}
+\doxysubsubsection{\texorpdfstring{ARROW\_HEAD}{ARROW\_HEAD}}
 {\footnotesize\ttfamily \#define A\+R\+R\+O\+W\+\_\+\+H\+E\+AD}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<path d='M\%.2f \%.2f L\%.2f \%.2f L\%.2f \%.2f "}\(\backslash\)}
+\DoxyCodeLine{                   \textcolor{stringliteral}{"<path d='M\%.2f \%.2f L\%.2f \%.2f L\%.2f \%.2f "}\(\backslash\)}
 \DoxyCodeLine{                   \textcolor{stringliteral}{"L\%.2f \%.2f Z'/>\(\backslash\)n"}}
 
 \end{DoxyCode}
 The arrow head path. \mbox{\Hypertarget{generate__svg_8h_aef7d94c0b40402c28bdf1297262c6034}\label{generate__svg_8h_aef7d94c0b40402c28bdf1297262c6034}} 
 \index{generate\_svg.h@{generate\_svg.h}!ARROW\_LENGTH@{ARROW\_LENGTH}}
 \index{ARROW\_LENGTH@{ARROW\_LENGTH}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{ARROW\_LENGTH}{ARROW\_LENGTH}}
+\doxysubsubsection{\texorpdfstring{ARROW\_LENGTH}{ARROW\_LENGTH}}
 {\footnotesize\ttfamily \#define A\+R\+R\+O\+W\+\_\+\+L\+E\+N\+G\+TH~200}
 
 The length of the arrow lines of the ports. \mbox{\Hypertarget{generate__svg_8h_a7c8019c43e416794492e3ee5633e4f1c}\label{generate__svg_8h_a7c8019c43e416794492e3ee5633e4f1c}} 
 \index{generate\_svg.h@{generate\_svg.h}!ARROW\_WIDTH@{ARROW\_WIDTH}}
 \index{ARROW\_WIDTH@{ARROW\_WIDTH}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{ARROW\_WIDTH}{ARROW\_WIDTH}}
+\doxysubsubsection{\texorpdfstring{ARROW\_WIDTH}{ARROW\_WIDTH}}
 {\footnotesize\ttfamily \#define A\+R\+R\+O\+W\+\_\+\+W\+I\+D\+TH~30}
 
 The width of the arrow heads. \mbox{\Hypertarget{generate__svg_8h_a18ac5db4cb7cef6e025ae723d117af1e}\label{generate__svg_8h_a18ac5db4cb7cef6e025ae723d117af1e}} 
 \index{generate\_svg.h@{generate\_svg.h}!CLOCK\_TRIANGLE@{CLOCK\_TRIANGLE}}
 \index{CLOCK\_TRIANGLE@{CLOCK\_TRIANGLE}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{CLOCK\_TRIANGLE}{CLOCK\_TRIANGLE}}
+\doxysubsubsection{\texorpdfstring{CLOCK\_TRIANGLE}{CLOCK\_TRIANGLE}}
 {\footnotesize\ttfamily \#define C\+L\+O\+C\+K\+\_\+\+T\+R\+I\+A\+N\+G\+LE}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<path d='M\%.2f \%.2f L\%.2f \%.2f L\%.2f \%.2f Z' "}\(\backslash\)}
-\DoxyCodeLine{                       \textcolor{stringliteral}{"stroke='black' stroke-width='3' fill='transparent'/>\(\backslash\)n"}}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"<path d='M\%.2f \%.2f L\%.2f \%.2f L\%.2f \%.2f Z' "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"stroke='black' stroke-\/width='3' fill='transparent'/>\(\backslash\)n"}}
 
 \end{DoxyCode}
 A small triangle (to be placed in the bottom left corner of the entity) that indicates that the entity is -- at least partially -- synchronous, meaning that it has a C\+L\+O\+CK input. \mbox{\Hypertarget{generate__svg_8h_a96c43f6aee42b4fafd6b0069803cb930}\label{generate__svg_8h_a96c43f6aee42b4fafd6b0069803cb930}} 
 \index{generate\_svg.h@{generate\_svg.h}!ENTITY\_NAME@{ENTITY\_NAME}}
 \index{ENTITY\_NAME@{ENTITY\_NAME}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{ENTITY\_NAME}{ENTITY\_NAME}}
+\doxysubsubsection{\texorpdfstring{ENTITY\_NAME}{ENTITY\_NAME}}
 {\footnotesize\ttfamily \#define E\+N\+T\+I\+T\+Y\+\_\+\+N\+A\+ME}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<text text-anchor='middle' x='\%.2f' y='\%.2f' "}\(\backslash\)}
-\DoxyCodeLine{                    \textcolor{stringliteral}{"font-size='\%d' fill='black' font-family='Courier'>"}\(\backslash\)}
+\DoxyCodeLine{                    \textcolor{stringliteral}{"<text text-\/anchor='middle' x='\%.2f' y='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                    \textcolor{stringliteral}{"font-\/size='\%d' fill='black' font-\/family='Courier'>"}\(\backslash\)}
 \DoxyCodeLine{                    \textcolor{stringliteral}{"\%s</text>\(\backslash\)n"}}
 
 \end{DoxyCode}
 The \mbox{\hyperlink{struct_entity}{Entity}} name text. \mbox{\Hypertarget{generate__svg_8h_afff8bc73d5fed64c6954076bc143b4e3}\label{generate__svg_8h_afff8bc73d5fed64c6954076bc143b4e3}} 
 \index{generate\_svg.h@{generate\_svg.h}!ENTITY\_NAME\_FONT\_SIZE@{ENTITY\_NAME\_FONT\_SIZE}}
 \index{ENTITY\_NAME\_FONT\_SIZE@{ENTITY\_NAME\_FONT\_SIZE}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{ENTITY\_NAME\_FONT\_SIZE}{ENTITY\_NAME\_FONT\_SIZE}}
+\doxysubsubsection{\texorpdfstring{ENTITY\_NAME\_FONT\_SIZE}{ENTITY\_NAME\_FONT\_SIZE}}
 {\footnotesize\ttfamily \#define E\+N\+T\+I\+T\+Y\+\_\+\+N\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+S\+I\+ZE~60}
 
 The font size for the \mbox{\hyperlink{struct_entity}{Entity}} name. \mbox{\Hypertarget{generate__svg_8h_a2a5e98d26c493fc6396bf4fadb7f9791}\label{generate__svg_8h_a2a5e98d26c493fc6396bf4fadb7f9791}} 
 \index{generate\_svg.h@{generate\_svg.h}!ENTITY\_RECTANGLE@{ENTITY\_RECTANGLE}}
 \index{ENTITY\_RECTANGLE@{ENTITY\_RECTANGLE}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{ENTITY\_RECTANGLE}{ENTITY\_RECTANGLE}}
+\doxysubsubsection{\texorpdfstring{ENTITY\_RECTANGLE}{ENTITY\_RECTANGLE}}
 {\footnotesize\ttfamily \#define E\+N\+T\+I\+T\+Y\+\_\+\+R\+E\+C\+T\+A\+N\+G\+LE}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<rect width='\%.2f' height='\%.2f' x='\%.2f' y='\%.2f' "}\(\backslash\)}
-\DoxyCodeLine{                         \textcolor{stringliteral}{"fill='none' stroke='black' stroke-width='\%d' />\(\backslash\)n"}}
+\DoxyCodeLine{                         \textcolor{stringliteral}{"<rect width='\%.2f' height='\%.2f' x='\%.2f' y='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                         \textcolor{stringliteral}{"fill='none' stroke='black' stroke-\/width='\%d' />\(\backslash\)n"}}
 
 \end{DoxyCode}
 The \mbox{\hyperlink{struct_entity}{Entity}} rectangle. \mbox{\Hypertarget{generate__svg_8h_a5e95d8830fe85ce46653603e7126eeb2}\label{generate__svg_8h_a5e95d8830fe85ce46653603e7126eeb2}} 
 \index{generate\_svg.h@{generate\_svg.h}!GENERIC\_SIGNAL\_NAME@{GENERIC\_SIGNAL\_NAME}}
 \index{GENERIC\_SIGNAL\_NAME@{GENERIC\_SIGNAL\_NAME}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{GENERIC\_SIGNAL\_NAME}{GENERIC\_SIGNAL\_NAME}}
+\doxysubsubsection{\texorpdfstring{GENERIC\_SIGNAL\_NAME}{GENERIC\_SIGNAL\_NAME}}
 {\footnotesize\ttfamily \#define G\+E\+N\+E\+R\+I\+C\+\_\+\+S\+I\+G\+N\+A\+L\+\_\+\+N\+A\+ME}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<text text-anchor='begin' x='\%.2f' y='\%.2f' "}\(\backslash\)}
-\DoxyCodeLine{                            \textcolor{stringliteral}{"font-size='\%d' fill='black' "}\(\backslash\)}
-\DoxyCodeLine{                            \textcolor{stringliteral}{"font-family='Courier'>\%s : \%s</text>\(\backslash\)n"}}
+\DoxyCodeLine{                            \textcolor{stringliteral}{"<text text-\/anchor='begin' x='\%.2f' y='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                            \textcolor{stringliteral}{"font-\/size='\%d' fill='black' "}\(\backslash\)}
+\DoxyCodeLine{                            \textcolor{stringliteral}{"font-\/family='Courier'>\%s : \%s</text>\(\backslash\)n"}}
 
 \end{DoxyCode}
 The text for the generic input names. \mbox{\Hypertarget{generate__svg_8h_a22c64484df5c34ce7829e0ac40780798}\label{generate__svg_8h_a22c64484df5c34ce7829e0ac40780798}} 
 \index{generate\_svg.h@{generate\_svg.h}!HORIZONTAL\_LENGTH\_TEXT@{HORIZONTAL\_LENGTH\_TEXT}}
 \index{HORIZONTAL\_LENGTH\_TEXT@{HORIZONTAL\_LENGTH\_TEXT}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{HORIZONTAL\_LENGTH\_TEXT}{HORIZONTAL\_LENGTH\_TEXT}}
+\doxysubsubsection{\texorpdfstring{HORIZONTAL\_LENGTH\_TEXT}{HORIZONTAL\_LENGTH\_TEXT}}
 {\footnotesize\ttfamily \#define H\+O\+R\+I\+Z\+O\+N\+T\+A\+L\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+T\+E\+XT}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<text text-anchor='middle' x='\%.2f' y='\%.2f' "}\(\backslash\)}
-\DoxyCodeLine{                               \textcolor{stringliteral}{"font-size='\%d' fill='black' "}\(\backslash\)}
-\DoxyCodeLine{                               \textcolor{stringliteral}{"font-family='Courier'>\%s</text>\(\backslash\)n"}}
+\DoxyCodeLine{                               \textcolor{stringliteral}{"<text text-\/anchor='middle' x='\%.2f' y='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                               \textcolor{stringliteral}{"font-\/size='\%d' fill='black' "}\(\backslash\)}
+\DoxyCodeLine{                               \textcolor{stringliteral}{"font-\/family='Courier'>\%s</text>\(\backslash\)n"}}
 
 \end{DoxyCode}
 The text for the horizontal input/output lengths. \mbox{\Hypertarget{generate__svg_8h_afa6ac98b02845b8ae1d3fd73e161ddba}\label{generate__svg_8h_afa6ac98b02845b8ae1d3fd73e161ddba}} 
 \index{generate\_svg.h@{generate\_svg.h}!IN\_SIGNAL\_NAME@{IN\_SIGNAL\_NAME}}
 \index{IN\_SIGNAL\_NAME@{IN\_SIGNAL\_NAME}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{IN\_SIGNAL\_NAME}{IN\_SIGNAL\_NAME}}
+\doxysubsubsection{\texorpdfstring{IN\_SIGNAL\_NAME}{IN\_SIGNAL\_NAME}}
 {\footnotesize\ttfamily \#define I\+N\+\_\+\+S\+I\+G\+N\+A\+L\+\_\+\+N\+A\+ME}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<text text-anchor='end' x='\%.2f' y='\%.2f' "}\(\backslash\)}
-\DoxyCodeLine{                       \textcolor{stringliteral}{"font-size='\%d' fill='black' font-family='Courier'>"}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"<text text-\/anchor='end' x='\%.2f' y='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                       \textcolor{stringliteral}{"font-\/size='\%d' fill='black' font-\/family='Courier'>"}\(\backslash\)}
 \DoxyCodeLine{                       \textcolor{stringliteral}{"\%s</text>\(\backslash\)n"}}
 
 \end{DoxyCode}
 The text for the IN signal names. \mbox{\Hypertarget{generate__svg_8h_a274d7c83ea0c7464258d2121a6db3e32}\label{generate__svg_8h_a274d7c83ea0c7464258d2121a6db3e32}} 
 \index{generate\_svg.h@{generate\_svg.h}!INOUT\_SIGNAL\_NAME@{INOUT\_SIGNAL\_NAME}}
 \index{INOUT\_SIGNAL\_NAME@{INOUT\_SIGNAL\_NAME}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{INOUT\_SIGNAL\_NAME}{INOUT\_SIGNAL\_NAME}}
+\doxysubsubsection{\texorpdfstring{INOUT\_SIGNAL\_NAME}{INOUT\_SIGNAL\_NAME}}
 {\footnotesize\ttfamily \#define I\+N\+O\+U\+T\+\_\+\+S\+I\+G\+N\+A\+L\+\_\+\+N\+A\+ME}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<text text-anchor='end' x='\%.2f' y='\%.2f' "}\(\backslash\)}
-\DoxyCodeLine{                          \textcolor{stringliteral}{"font-size='\%d' fill='black' font-family='Courier' "}\(\backslash\)}
+\DoxyCodeLine{                          \textcolor{stringliteral}{"<text text-\/anchor='end' x='\%.2f' y='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                          \textcolor{stringliteral}{"font-\/size='\%d' fill='black' font-\/family='Courier' "}\(\backslash\)}
 \DoxyCodeLine{                          \textcolor{stringliteral}{"transform='rotate(270 \%.2f,\%.2f)'>\%s</text>\(\backslash\)n"}}
 
 \end{DoxyCode}
 The text for the I\+N\+O\+UT signal names. \mbox{\Hypertarget{generate__svg_8h_a226398b7db67a0a41a1198265a8ecde7}\label{generate__svg_8h_a226398b7db67a0a41a1198265a8ecde7}} 
 \index{generate\_svg.h@{generate\_svg.h}!LENGTH\_FONT\_SIZE@{LENGTH\_FONT\_SIZE}}
 \index{LENGTH\_FONT\_SIZE@{LENGTH\_FONT\_SIZE}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{LENGTH\_FONT\_SIZE}{LENGTH\_FONT\_SIZE}}
+\doxysubsubsection{\texorpdfstring{LENGTH\_FONT\_SIZE}{LENGTH\_FONT\_SIZE}}
 {\footnotesize\ttfamily \#define L\+E\+N\+G\+T\+H\+\_\+\+F\+O\+N\+T\+\_\+\+S\+I\+ZE~(\mbox{\hyperlink{generate__svg_8h_ae2975fadd4574154868848b70369642d}{P\+O\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+S\+I\+ZE}} -\/ 18)}
 
 The font size for the lengths/values of the signals. \mbox{\Hypertarget{generate__svg_8h_a6980d830d7d9bd09d0683d92e63d8989}\label{generate__svg_8h_a6980d830d7d9bd09d0683d92e63d8989}} 
 \index{generate\_svg.h@{generate\_svg.h}!LENGTH\_SLASH@{LENGTH\_SLASH}}
 \index{LENGTH\_SLASH@{LENGTH\_SLASH}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{LENGTH\_SLASH}{LENGTH\_SLASH}}
+\doxysubsubsection{\texorpdfstring{LENGTH\_SLASH}{LENGTH\_SLASH}}
 {\footnotesize\ttfamily \#define L\+E\+N\+G\+T\+H\+\_\+\+S\+L\+A\+SH}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<line x1='\%.2f' y1='\%.2f' x2='\%.2f' y2='\%.2f' "}\(\backslash\)}
-\DoxyCodeLine{                     \textcolor{stringliteral}{"stroke='black' stroke-width='3' fill='transparent' />\(\backslash\)n"}}
+\DoxyCodeLine{                     \textcolor{stringliteral}{"<line x1='\%.2f' y1='\%.2f' x2='\%.2f' y2='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                     \textcolor{stringliteral}{"stroke='black' stroke-\/width='3' fill='transparent' />\(\backslash\)n"}}
 
 \end{DoxyCode}
 The small line (slash) marking the length of a signal. \mbox{\Hypertarget{generate__svg_8h_ab761d11ddc3d39bac246603fb7da1dd3}\label{generate__svg_8h_ab761d11ddc3d39bac246603fb7da1dd3}} 
 \index{generate\_svg.h@{generate\_svg.h}!OUT\_SIGNAL\_NAME@{OUT\_SIGNAL\_NAME}}
 \index{OUT\_SIGNAL\_NAME@{OUT\_SIGNAL\_NAME}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{OUT\_SIGNAL\_NAME}{OUT\_SIGNAL\_NAME}}
+\doxysubsubsection{\texorpdfstring{OUT\_SIGNAL\_NAME}{OUT\_SIGNAL\_NAME}}
 {\footnotesize\ttfamily \#define O\+U\+T\+\_\+\+S\+I\+G\+N\+A\+L\+\_\+\+N\+A\+ME}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<text text-anchor='begin' x='\%.2f' y='\%.2f' "}\(\backslash\)}
-\DoxyCodeLine{                        \textcolor{stringliteral}{"font-size='\%d' fill='black' font-family='Courier'>"}\(\backslash\)}
+\DoxyCodeLine{                        \textcolor{stringliteral}{"<text text-\/anchor='begin' x='\%.2f' y='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                        \textcolor{stringliteral}{"font-\/size='\%d' fill='black' font-\/family='Courier'>"}\(\backslash\)}
 \DoxyCodeLine{                        \textcolor{stringliteral}{"\%s</text>\(\backslash\)n"}}
 
 \end{DoxyCode}
 The text for the O\+UT signal names. \mbox{\Hypertarget{generate__svg_8h_ae2975fadd4574154868848b70369642d}\label{generate__svg_8h_ae2975fadd4574154868848b70369642d}} 
 \index{generate\_svg.h@{generate\_svg.h}!PORT\_NAME\_FONT\_SIZE@{PORT\_NAME\_FONT\_SIZE}}
 \index{PORT\_NAME\_FONT\_SIZE@{PORT\_NAME\_FONT\_SIZE}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{PORT\_NAME\_FONT\_SIZE}{PORT\_NAME\_FONT\_SIZE}}
+\doxysubsubsection{\texorpdfstring{PORT\_NAME\_FONT\_SIZE}{PORT\_NAME\_FONT\_SIZE}}
 {\footnotesize\ttfamily \#define P\+O\+R\+T\+\_\+\+N\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+S\+I\+ZE~(\mbox{\hyperlink{generate__svg_8h_afff8bc73d5fed64c6954076bc143b4e3}{E\+N\+T\+I\+T\+Y\+\_\+\+N\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+S\+I\+ZE}} -\/ 4)}
 
 The font size for the \mbox{\hyperlink{struct_signal}{Signal}} names. \mbox{\Hypertarget{generate__svg_8h_a611275782064611537f8b34f1954e534}\label{generate__svg_8h_a611275782064611537f8b34f1954e534}} 
 \index{generate\_svg.h@{generate\_svg.h}!RECTANGLE\_STROKE\_WIDTH@{RECTANGLE\_STROKE\_WIDTH}}
 \index{RECTANGLE\_STROKE\_WIDTH@{RECTANGLE\_STROKE\_WIDTH}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{RECTANGLE\_STROKE\_WIDTH}{RECTANGLE\_STROKE\_WIDTH}}
+\doxysubsubsection{\texorpdfstring{RECTANGLE\_STROKE\_WIDTH}{RECTANGLE\_STROKE\_WIDTH}}
 {\footnotesize\ttfamily \#define R\+E\+C\+T\+A\+N\+G\+L\+E\+\_\+\+S\+T\+R\+O\+K\+E\+\_\+\+W\+I\+D\+TH~10}
 
 The stroke width of the \mbox{\hyperlink{struct_entity}{Entity}} rectangle. \mbox{\Hypertarget{generate__svg_8h_a63875060d6e634e15be1e39e603f91bf}\label{generate__svg_8h_a63875060d6e634e15be1e39e603f91bf}} 
 \index{generate\_svg.h@{generate\_svg.h}!SIMPLE\_LINE@{SIMPLE\_LINE}}
 \index{SIMPLE\_LINE@{SIMPLE\_LINE}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{SIMPLE\_LINE}{SIMPLE\_LINE}}
+\doxysubsubsection{\texorpdfstring{SIMPLE\_LINE}{SIMPLE\_LINE}}
 {\footnotesize\ttfamily \#define S\+I\+M\+P\+L\+E\+\_\+\+L\+I\+NE}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<line x1='\%.2f' y1='\%.2f' x2='\%.2f' y2='\%.2f' "}\(\backslash\)}
-\DoxyCodeLine{                    \textcolor{stringliteral}{"stroke='black' stroke-width='5' fill='transparent'/>\(\backslash\)n"}}
+\DoxyCodeLine{                    \textcolor{stringliteral}{"<line x1='\%.2f' y1='\%.2f' x2='\%.2f' y2='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                    \textcolor{stringliteral}{"stroke='black' stroke-\/width='5' fill='transparent'/>\(\backslash\)n"}}
 
 \end{DoxyCode}
 A simple line connecting two points. \mbox{\Hypertarget{generate__svg_8h_a2e600241174c67141be4d93bd0a01626}\label{generate__svg_8h_a2e600241174c67141be4d93bd0a01626}} 
 \index{generate\_svg.h@{generate\_svg.h}!SVG\_HEADER@{SVG\_HEADER}}
 \index{SVG\_HEADER@{SVG\_HEADER}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{SVG\_HEADER}{SVG\_HEADER}}
+\doxysubsubsection{\texorpdfstring{SVG\_HEADER}{SVG\_HEADER}}
 {\footnotesize\ttfamily \#define S\+V\+G\+\_\+\+H\+E\+A\+D\+ER}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<svg version='1.1' baseProfile='full' width='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                   \textcolor{stringliteral}{"<svg version='1.1' baseProfile='full' width='\%.2f' "}\(\backslash\)}
 \DoxyCodeLine{                   \textcolor{stringliteral}{"height='\%.2f' xmlns='http://www.w3.org/2000/svg'>\(\backslash\)n"}}
 
 \end{DoxyCode}
 The header of the S\+VG output file. \mbox{\Hypertarget{generate__svg_8h_af27851619e25c72aa6ac5a75073d1c58}\label{generate__svg_8h_af27851619e25c72aa6ac5a75073d1c58}} 
 \index{generate\_svg.h@{generate\_svg.h}!VERTICAL\_LENGTH\_TEXT@{VERTICAL\_LENGTH\_TEXT}}
 \index{VERTICAL\_LENGTH\_TEXT@{VERTICAL\_LENGTH\_TEXT}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{VERTICAL\_LENGTH\_TEXT}{VERTICAL\_LENGTH\_TEXT}}
+\doxysubsubsection{\texorpdfstring{VERTICAL\_LENGTH\_TEXT}{VERTICAL\_LENGTH\_TEXT}}
 {\footnotesize\ttfamily \#define V\+E\+R\+T\+I\+C\+A\+L\+\_\+\+L\+E\+N\+G\+T\+H\+\_\+\+T\+E\+XT}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{stringliteral}{"<text text-anchor='middle' x='\%.2f' y='\%.2f' "}\(\backslash\)}
-\DoxyCodeLine{                             \textcolor{stringliteral}{"font-size='\%d' fill='black' "}\(\backslash\)}
-\DoxyCodeLine{                             \textcolor{stringliteral}{"font-family='Courier' "}\(\backslash\)}
+\DoxyCodeLine{                             \textcolor{stringliteral}{"<text text-\/anchor='middle' x='\%.2f' y='\%.2f' "}\(\backslash\)}
+\DoxyCodeLine{                             \textcolor{stringliteral}{"font-\/size='\%d' fill='black' "}\(\backslash\)}
+\DoxyCodeLine{                             \textcolor{stringliteral}{"font-\/family='Courier' "}\(\backslash\)}
 \DoxyCodeLine{                             \textcolor{stringliteral}{"transform='rotate(270 \%.2f,\%.2f)'>\%s</text>\(\backslash\)n"}}
 
 \end{DoxyCode}
 The text for the vertical throughput lengths. 
 
-\subsection{Enumeration Type Documentation}
+\doxysubsection{Enumeration Type Documentation}
 \mbox{\Hypertarget{generate__svg_8h_a99202528cfe9ace0ff7c648f9ad52f11}\label{generate__svg_8h_a99202528cfe9ace0ff7c648f9ad52f11}} 
 \index{generate\_svg.h@{generate\_svg.h}!arrDir@{arrDir}}
 \index{arrDir@{arrDir}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{arrDir}{arrDir}}
+\doxysubsubsection{\texorpdfstring{arrDir}{arrDir}}
 {\footnotesize\ttfamily enum \mbox{\hyperlink{generate__svg_8h_a99202528cfe9ace0ff7c648f9ad52f11}{arr\+Dir}}}
 
 Enumeration of the possible directions of an arrow line/arrow head ({\ttfamily L\+E\+FT}, {\ttfamily R\+I\+G\+HT}, {\ttfamily UP}, {\ttfamily D\+O\+WN}). 
 
-\subsection{Function Documentation}
+\doxysubsection{Function Documentation}
 \mbox{\Hypertarget{generate__svg_8h_ae7f2c4e2eccff2baf5fab87f6b2ca152}\label{generate__svg_8h_ae7f2c4e2eccff2baf5fab87f6b2ca152}} 
 \index{generate\_svg.h@{generate\_svg.h}!drawArrowHead@{drawArrowHead}}
 \index{drawArrowHead@{drawArrowHead}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{drawArrowHead()}{drawArrowHead()}}
+\doxysubsubsection{\texorpdfstring{drawArrowHead()}{drawArrowHead()}}
 {\footnotesize\ttfamily void draw\+Arrow\+Head (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fo,  }\item[{float}]{x,  }\item[{float}]{y,  }\item[{\mbox{\hyperlink{generate__svg_8h_a99202528cfe9ace0ff7c648f9ad52f11}{arr\+Dir}}}]{dir }\end{DoxyParamCaption})}
 
 Draws an arrow head into an S\+VG file (fo) around the point (x, y), given a direction ({\ttfamily L\+E\+FT}, {\ttfamily R\+I\+G\+HT}, {\ttfamily UP}, {\ttfamily D\+O\+WN}).
@@ -318,7 +318,7 @@ Draws an arrow head into an S\+VG file (fo) around the point (x, y), given a dir
 \mbox{\Hypertarget{generate__svg_8h_a8bfe734b7fa2d9d8de815fa61f86a2a9}\label{generate__svg_8h_a8bfe734b7fa2d9d8de815fa61f86a2a9}} 
 \index{generate\_svg.h@{generate\_svg.h}!drawDoubleArrowLine@{drawDoubleArrowLine}}
 \index{drawDoubleArrowLine@{drawDoubleArrowLine}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{drawDoubleArrowLine()}{drawDoubleArrowLine()}}
+\doxysubsubsection{\texorpdfstring{drawDoubleArrowLine()}{drawDoubleArrowLine()}}
 {\footnotesize\ttfamily void draw\+Double\+Arrow\+Line (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fo,  }\item[{float}]{start\+\_\+x,  }\item[{float}]{start\+\_\+y,  }\item[{float}]{end\+\_\+x,  }\item[{float}]{end\+\_\+y,  }\item[{\mbox{\hyperlink{generate__svg_8h_a99202528cfe9ace0ff7c648f9ad52f11}{arr\+Dir}}}]{dir }\end{DoxyParamCaption})}
 
 Draws a line with arrows at both its ends in an S\+VG file (fo). Only handles purely horizontal/vertical lines.
@@ -341,7 +341,7 @@ Draws a line with arrows at both its ends in an S\+VG file (fo). Only handles pu
 \mbox{\Hypertarget{generate__svg_8h_ac13fe006cc3a76bab4c5af2c07b5c8a2}\label{generate__svg_8h_ac13fe006cc3a76bab4c5af2c07b5c8a2}} 
 \index{generate\_svg.h@{generate\_svg.h}!drawSimpleArrowLine@{drawSimpleArrowLine}}
 \index{drawSimpleArrowLine@{drawSimpleArrowLine}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{drawSimpleArrowLine()}{drawSimpleArrowLine()}}
+\doxysubsubsection{\texorpdfstring{drawSimpleArrowLine()}{drawSimpleArrowLine()}}
 {\footnotesize\ttfamily void draw\+Simple\+Arrow\+Line (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fo,  }\item[{float}]{start\+\_\+x,  }\item[{float}]{start\+\_\+y,  }\item[{float}]{end\+\_\+x,  }\item[{float}]{end\+\_\+y,  }\item[{\mbox{\hyperlink{generate__svg_8h_a99202528cfe9ace0ff7c648f9ad52f11}{arr\+Dir}}}]{dir }\end{DoxyParamCaption})}
 
 Draws a line with a simple arrow at its end in an S\+VG file (fo). Only handles purely horizontal/vertical lines.
@@ -364,7 +364,7 @@ Draws a line with a simple arrow at its end in an S\+VG file (fo). Only handles 
 \mbox{\Hypertarget{generate__svg_8h_a2a3ca00d4d5803503083e59ec23c3622}\label{generate__svg_8h_a2a3ca00d4d5803503083e59ec23c3622}} 
 \index{generate\_svg.h@{generate\_svg.h}!generateSvgFromEntity@{generateSvgFromEntity}}
 \index{generateSvgFromEntity@{generateSvgFromEntity}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{generateSvgFromEntity()}{generateSvgFromEntity()}}
+\doxysubsubsection{\texorpdfstring{generateSvgFromEntity()}{generateSvgFromEntity()}}
 {\footnotesize\ttfamily int generate\+Svg\+From\+Entity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_entity}{Entity}} $\ast$}]{ent,  }\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
 
 Generates an S\+VG image given an \mbox{\hyperlink{struct_entity}{Entity}} object.
@@ -382,7 +382,7 @@ Generates an S\+VG image given an \mbox{\hyperlink{struct_entity}{Entity}} objec
 \mbox{\Hypertarget{generate__svg_8h_ac36750906e883bc6af51fbf3f251eb66}\label{generate__svg_8h_ac36750906e883bc6af51fbf3f251eb66}} 
 \index{generate\_svg.h@{generate\_svg.h}!max@{max}}
 \index{max@{max}!generate\_svg.h@{generate\_svg.h}}
-\subsubsection{\texorpdfstring{max()}{max()}}
+\doxysubsubsection{\texorpdfstring{max()}{max()}}
 {\footnotesize\ttfamily float max (\begin{DoxyParamCaption}\item[{float}]{a,  }\item[{float}]{b }\end{DoxyParamCaption})}
 
 Returns the maximum between two floats.

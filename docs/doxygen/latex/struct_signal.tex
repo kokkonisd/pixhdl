@@ -1,4 +1,4 @@
-\hypertarget{struct_signal}{}\section{Signal Struct Reference}
+\hypertarget{struct_signal}{}\doxysection{Signal Struct Reference}
 \label{struct_signal}\index{Signal@{Signal}}
 
 
@@ -9,7 +9,7 @@ Definition of the \mbox{\hyperlink{struct_signal}{Signal}} object.
 
 {\ttfamily \#include $<$entity.\+h$>$}
 
-\subsection*{Data Fields}
+\doxysubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
 char $\ast$ \mbox{\hyperlink{struct_signal_aa56a667fa506981792ae32a5320217f3}{name}}
@@ -20,28 +20,28 @@ char $\ast$ \mbox{\hyperlink{struct_signal_a64c670733f0f14bc0733ef85ce26c210}{le
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
+\doxysubsection{Detailed Description}
 Definition of the \mbox{\hyperlink{struct_signal}{Signal}} object. 
 
 A \mbox{\hyperlink{struct_signal}{Signal}} is simply an input/output/throughput of an \mbox{\hyperlink{struct_entity}{Entity}}. It can be a port (IN, O\+UT, I\+N\+O\+UT) or a generic input (G\+E\+N\+E\+R\+IC). It has a name, a direction and a length (or value, in the case of generic inputs). 
 
-\subsection{Field Documentation}
+\doxysubsection{Field Documentation}
 \mbox{\Hypertarget{struct_signal_ad1a7815aca8678de29388b9306c0d106}\label{struct_signal_ad1a7815aca8678de29388b9306c0d106}} 
 \index{Signal@{Signal}!dir@{dir}}
 \index{dir@{dir}!Signal@{Signal}}
-\subsubsection{\texorpdfstring{dir}{dir}}
+\doxysubsubsection{\texorpdfstring{dir}{dir}}
 {\footnotesize\ttfamily \mbox{\hyperlink{entity_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}} Signal\+::dir}
 
 Direction of the signal. \mbox{\Hypertarget{struct_signal_a64c670733f0f14bc0733ef85ce26c210}\label{struct_signal_a64c670733f0f14bc0733ef85ce26c210}} 
 \index{Signal@{Signal}!length@{length}}
 \index{length@{length}!Signal@{Signal}}
-\subsubsection{\texorpdfstring{length}{length}}
+\doxysubsubsection{\texorpdfstring{length}{length}}
 {\footnotesize\ttfamily char$\ast$ Signal\+::length}
 
 Length of the signal (in bits). It\textquotesingle{}s a string because the parser will attempt to calculate its integer value, but will leave it as-\/is if it fails (for example if it contains generics). \mbox{\Hypertarget{struct_signal_aa56a667fa506981792ae32a5320217f3}\label{struct_signal_aa56a667fa506981792ae32a5320217f3}} 
 \index{Signal@{Signal}!name@{name}}
 \index{name@{name}!Signal@{Signal}}
-\subsubsection{\texorpdfstring{name}{name}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
 {\footnotesize\ttfamily char$\ast$ Signal\+::name}
 
 Name of the signal. 
