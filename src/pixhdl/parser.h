@@ -11,11 +11,12 @@
 
 /** Regex to match the entity definition of a VHDL source file. */
 #define ENTITY_REGEX "entity[ \t\r\n\f]+([a-zA-Z0-9_]+)[ \t\r\n\f]+is"\
-                     "[ \t\r\n\f]+(generic[ \t\r\n\f]*\\([ \t\r\n\f]*(.+)"\
-                     "[ \t\r\n\f]*\\)[ \t\r\n\f]*;)?[ \t\r\n\f]*port"\
-                     "[ \t\r\n\f]*\\([ \t\r\n\f]*(.+\\)?)[ \t\r\n\f]*\\)"\
-                     "[ \t\r\n\f]*;[ \t\r\n\f]*end[ \t]*"\
-                     "(entity|[a-zA-Z0-9_]+)?[ \t]*;"
+                     "[ \t\r\n\f]+(generic[ \t\r\n\f]*\\([ \t\r\n\f]*"\
+                     "([ \t\r\n\fa-zA-Z0-9,:.;_()=*\\/-]*)\\)[ \t\r\n\f]*;)?"\
+                     "[ \t\r\n\f]*port[ \t\r\n\f]*\\([ \t\r\n\f]*[ \t\r\n\f]*"\
+                     "([ \t\r\n\fa-zA-Z0-9,:.;_()=*\\/-]*)\\)[ \t\r\n\f]*;"\
+                     "[ \t\r\n\f]*end[ \t\r\n\f]*(entity|[a-zA-Z0-9_]+)?"\
+                     "[ \t\r\n\f]*;"
 
 /** Regex to match the port definition of a VHDL source file. */
 #define PORT_REGEX "([a-zA-Z0-9_, ]+)[ \t\r\n\f]*:[ \t\r\n\f]*((in|out|inout)"\
