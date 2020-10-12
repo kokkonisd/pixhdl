@@ -23,8 +23,8 @@
                    "[ \t\r\n\f]*(std_logic[^;]*)|([a-zA-Z0-9_,. \t-]*));"
 
 /** Regex to match the vector length definition of a VHDL source file. */
-#define VECTOR_LENGTH_REGEX "(\\(([a-zA-Z0-9_ -]+)[ \t\r\n\f]+(down)?to"\
-                            "[ \t\r\n\f]+([a-zA-Z0-9_ -]+)\\))"
+#define VECTOR_LENGTH_REGEX "(\\(([a-zA-Z0-9()_ -]+)[ \t\r\n\f]+(down)?to"\
+                            "[ \t\r\n\f]+([a-zA-Z0-9()_ -]+)\\))"
 
 
 #include <stdio.h>
