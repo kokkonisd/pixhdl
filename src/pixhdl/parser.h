@@ -16,6 +16,7 @@
                      "[ \t\r\n\f]*port[ \t\r\n\f]*\\([ \t\r\n\f]*[ \t\r\n\f]*"\
                      "([ \t\r\n\fa-zA-Z0-9,:.;_()=*\\/-]*)\\)[ \t\r\n\f]*;"\
                      "[ \t\r\n\f]*end[ \t\r\n\f]*(entity|[a-zA-Z0-9_]+)?"\
+                     "[ \t\r\n\f]*([a-zA-Z0-9_]+)?"\
                      "[ \t\r\n\f]*;"
 
 /** Regex to match the port definition of a VHDL source file. */
