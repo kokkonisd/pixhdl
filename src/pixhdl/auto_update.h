@@ -63,7 +63,7 @@
  *
  * @return (`int`): 1 if successful, 0 otherwise.
  */
-int update ();
+int update (const char * current_version);
 
 
 #endif
